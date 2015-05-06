@@ -6,6 +6,7 @@ import java.awt.*;	//grafika
 //test1
 //class MyScreen;
 
+
 public class Frame extends JFrame {
     private static String title = "Kuchenne Rewolucje";
     private static Dimension size = new Dimension (1000, 650);
@@ -13,7 +14,7 @@ public class Frame extends JFrame {
     public Frame() {		//constr.
         setTitle(title);    //tytul
         setSize(size);      //rozmiar
-        setResizable(true);	//zmiana rozmiaru okienka-ustawiona na true. //TODO zmienic pozniej na TRUE poniewaz moze powodowac problemy.
+        setResizable(false);	//zmiana rozmiaru okienka-ustawiona na true.
         setLocationRelativeTo(null);	//null- okienko wyskakuje na srodku ekranu
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -21,7 +22,7 @@ public class Frame extends JFrame {
     }
 
     private void init() {
-        //setLayout(new GridLayout(1, 1, 0, 0));
+        //setLayout(new FlowLayout());
         MyScreen screen = new MyScreen();
         add(screen);
 
@@ -30,7 +31,9 @@ public class Frame extends JFrame {
 
 
     public static void main(String[] args) {
-        new Frame();
+        Frame frame = new Frame();
+
+
     }
 
 }
