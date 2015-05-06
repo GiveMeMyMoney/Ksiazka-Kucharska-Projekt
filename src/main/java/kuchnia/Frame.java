@@ -3,7 +3,7 @@ package kuchnia;
 import com.sun.xml.internal.bind.v2.TODO;
 import javax.swing.*;
 import java.awt.*;	//grafika
-//test1
+//testtest
 //class MyScreen;
 
 
