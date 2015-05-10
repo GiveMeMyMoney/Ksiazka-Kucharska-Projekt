@@ -15,7 +15,7 @@ public class Frame extends JFrame {
         //setLayout(null);
         setLocationRelativeTo(null);	//null- okienko wyskakuje na srodku ekranu
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+    //asd
 
 
 
