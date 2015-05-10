@@ -20,8 +20,9 @@ public class MyScreen extends JPanel implements ActionListener {
 
     JTextField tf;
 
-    public MyScreen() {
-        //Images();
+    public MyScreen(Frame frame) {
+        Images();
+        //setPreferredSize(new Dimension(400, 400));
         Buttony();
         Tekst();
     }
@@ -56,10 +57,10 @@ public class MyScreen extends JPanel implements ActionListener {
 
     @Override
     protected void paintComponent(Graphics g) {
-
-        //Graphics2D g2d = (Graphics2D) g;
-        //g2d.drawImage(tloImage, 0, 0, this);
-        //g2d.drawImage(Image1, 0, 0, this);
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.drawImage(tloImage, 0, 0, this);
+        g2d.drawImage(Image1, 0, 0, this);
 
     }
 

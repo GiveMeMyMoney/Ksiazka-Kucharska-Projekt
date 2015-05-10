@@ -12,23 +12,34 @@ public class Frame extends JFrame {
         setTitle(title);    //tytul
         setSize(size);      //rozmiar
         setResizable(false);	//zmiana rozmiaru okienka-ustawiona na true.
+        //setLayout(null);
         setLocationRelativeTo(null);	//null- okienko wyskakuje na srodku ekranu
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
+
+
 
         init();
     }
 
     private void init() {
-        //setLayout(new FlowLayout());
-        MyScreen screen = new MyScreen();
+        setLayout(new GridLayout(1,1,0,0));
+        MyScreen screen = new MyScreen(this);
         add(screen);
+
 
         setVisible(true);	//wyswietlanie
     }
 
 
     public static void main(String[] args) {
-        Frame frame = new Frame();
+        //aby unikn¹æ zakleszczeñ tworzenie GUI zawsze zlecamy dla w¹tku obs³ugi zdarzeñ
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                Frame frame = new Frame();;
+            }
+        });
 
 
     }
