@@ -31,6 +31,8 @@ public class Frame extends JFrame {
 
 
     public static void main(String[] args) {
+        sqliteConnection.dbConnector(); // proba podlaczenia do bazy danych
+        // wyswietla na razie komunikat zeby zobaczyc czy poprawnie pdolacza
         Frame frame = new Frame();
 
 
