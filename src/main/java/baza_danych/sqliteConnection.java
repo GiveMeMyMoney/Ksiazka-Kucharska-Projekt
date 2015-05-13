@@ -1,4 +1,4 @@
-package kuchnia; /**
+package baza_danych; /**
  * Created by Wojciech Zachwieja on 2015-05-11.
  */
 import java.lang.Class;import java.lang.Exception;import java.sql.*;import java.sql.Connection;import java.sql.DriverManager;
