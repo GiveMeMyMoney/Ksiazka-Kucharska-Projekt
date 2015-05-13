@@ -1,6 +1,8 @@
 package kuchnia;
 
-import com.sun.xml.internal.bind.v2.TODO;
+import baza_danych.objectSQL;
+import baza_danych.querySQL;
+
 import javax.swing.*;
 import java.awt.*;	//grafika
 //testtest
@@ -31,8 +33,27 @@ public class Frame extends JFrame {
 
 
     public static void main(String[] args) {
-        sqliteConnection.dbConnector(); // proba podlaczenia do bazy danych
-        // wyswietla na razie komunikat zeby zobaczyc czy poprawnie pdolacza
+        querySQL query = new querySQL(); //instrukcja do polaczenia z baza i przygotowania do zapytan
+        /*
+        Dodalem nowe funkcje:
+        selectAll wyswietla wszystko co jest w bazie funckja bardziej do testowania
+        insertAll wstawia dane do bazy trzeba podac wszytskie argumenty
+        selectDishes pobiera wszystko z danej kategorii i zwraca do tablicy
+        deleteDish usuwa pozycje o zadanej nazwie
+        objectSQL ma metody do zwracania wszystkich danych
+        tutaj pokazalem przykladowe uzycie
+        wiec mozecie usunac wszystko poza
+        querySQL query = new querySQL();
+        Frame frame = new Frame();
+         */
+        query.insertAll(5.,"Salatka Grecka","Pomidory ogorki favita","Wymieszaj ladnie","Smaczna w chuj","chuj na razie z obrazkiem","Salatka");
+        objectSQL[] danie2 = query.selectDishes("Salatka");
+        for(int i = 0; i < danie2.length;++i)
+        {
+            JOptionPane.showMessageDialog(null,danie2[i].getID());
+            JOptionPane.showMessageDialog(null,danie2[i].getDescribe());
+        }
+        query.deleteDish("Salatka Grecka");
         Frame frame = new Frame();
 
 

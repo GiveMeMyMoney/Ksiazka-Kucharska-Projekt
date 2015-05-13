@@ -1,4 +1,4 @@
-package kuchnia; /**
+package baza_danych; /**
  * Created by Wojciech Zachwieja on 2015-05-11.
  */
 import java.lang.Class;import java.lang.Exception;import java.sql.*;import java.sql.Connection;import java.sql.DriverManager;
@@ -12,7 +12,7 @@ public  class sqliteConnection {
         try
         {
             Class.forName("org.sqlite.JDBC");
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\Wojciech\\IdeaProjects\\Ksiazka-Kucharska-Projekt\\DishesDataBase.sqlite");
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:DishesDataBase.sqlite");
             JOptionPane.showMessageDialog(null,"Succesful connection.");
             return conn;
         }
