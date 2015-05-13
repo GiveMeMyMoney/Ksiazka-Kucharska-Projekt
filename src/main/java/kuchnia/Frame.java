@@ -25,8 +25,8 @@ public class Frame extends JFrame {
 
     private void init() {
         //setLayout(new FlowLayout());
-        MyScreen screen = new MyScreen();
-        add(screen);
+        //MyScreen screen = new MyScreen();
+        //add(screen);
 
         setVisible(true);	//wyswietlanie
     }
@@ -54,7 +54,7 @@ public class Frame extends JFrame {
             JOptionPane.showMessageDialog(null,danie2[i].getDescribe());
         }
         query.deleteDish("Salatka Grecka");
-        Frame frame = new Frame();
+        GUI myGUI = new GUI();
 
 
     }
