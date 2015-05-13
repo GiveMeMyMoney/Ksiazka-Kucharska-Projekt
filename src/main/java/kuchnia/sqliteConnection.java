@@ -4,15 +4,16 @@ package kuchnia; /**
 import java.lang.Class;import java.lang.Exception;import java.sql.*;import java.sql.Connection;import java.sql.DriverManager;
 import javax.swing.*;import javax.swing.JOptionPane;
 
-
-public  class sqliteConnection {
+// KLASA BAZY DANYCH
+public class sqliteConnection
+{
     Connection conn = null;
     public static Connection dbConnector()
     {
         try
         {
             Class.forName("org.sqlite.JDBC");
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\Wojciech\\IdeaProjects\\Ksiazka-Kucharska-Projekt\\DishesDataBase.sqlite");
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:DishesDataBase.sqlite");
             JOptionPane.showMessageDialog(null,"Succesful connection.");
             return conn;
         }
