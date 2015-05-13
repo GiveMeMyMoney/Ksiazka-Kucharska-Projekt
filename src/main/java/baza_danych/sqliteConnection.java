@@ -4,8 +4,9 @@ package baza_danych; /**
 import java.lang.Class;import java.lang.Exception;import java.sql.*;import java.sql.Connection;import java.sql.DriverManager;
 import javax.swing.*;import javax.swing.JOptionPane;
 
-
-public  class sqliteConnection {
+// KLASA BAZY DANYCH
+public class sqliteConnection
+{
     Connection conn = null;
     public static Connection dbConnector()
     {
