@@ -1,4 +1,4 @@
-package kuchnia;
+/*package kuchnia;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -77,3 +77,4 @@ public class MyScreen extends JPanel implements ActionListener {
     }
 
 }
+*/
