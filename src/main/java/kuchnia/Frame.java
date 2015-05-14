@@ -5,6 +5,7 @@ import baza_danych.querySQL;
 
 import javax.swing.*;
 import java.awt.*;	//grafika
+import java.awt.geom.Arc2D;
 //testtest
 //class MyScreen;
 
@@ -34,29 +35,19 @@ public class Frame extends JFrame {
 
     public static void main(String[] args) {
         querySQL query = new querySQL(); //instrukcja do polaczenia z baza i przygotowania do zapytan
-        /*
-        Dodalem nowe funkcje:
-        selectAll wyswietla wszystko co jest w bazie funckja bardziej do testowania
-        insertAll wstawia dane do bazy trzeba podac wszytskie argumenty
-        selectDishes pobiera wszystko z danej kategorii i zwraca do tablicy
-        deleteDish usuwa pozycje o zadanej nazwie
-        objectSQL ma metody do zwracania wszystkich danych
-        tutaj pokazalem przykladowe uzycie
-        wiec mozecie usunac wszystko poza
-        querySQL query = new querySQL();
-        Frame frame = new Frame();
-         */
-        query.insertAll(5.,"Salatka Grecka","Pomidory ogorki favita","Wymieszaj ladnie","Smaczna w chuj","chuj na razie z obrazkiem","Salatka");
-        objectSQL[] danie2 = query.selectDishes("Salatka");
-        for(int i = 0; i < danie2.length;++i)
-        {
-            JOptionPane.showMessageDialog(null,danie2[i].getID());
-            JOptionPane.showMessageDialog(null,danie2[i].getDescribe());
-        }
-        query.deleteDish("Salatka Grecka");
+
+        Double x = 4.; /// do oceniania niezbedne sa obiekty
+        query.insertAll(5, "Salatka Grecka", "Pomidory ogorki favita", "Wymieszaj ladnie", "Smaczna w chuj", "chuj na razie z obrazkiem", "Salatka");
+        objectSQL danie1 = query.browsedDish("TITLE","Salatka Grecka");
+        query.rating(4,danie1.getID());
+        JOptionPane.showMessageDialog(null, danie1.getRate());
+        danie1 = query.browsedDish("ID", danie1.getID());
+        JOptionPane.showMessageDialog(null,danie1.getRate());
+        query.modify("Rate",x, danie1.getID());
+        JOptionPane.showMessageDialog(null, danie1.getRate());
+        query.deleteDish("TITLE","Salatka Grecka");
+
         GUI myGUI = new GUI();
-
-
     }
 
 }

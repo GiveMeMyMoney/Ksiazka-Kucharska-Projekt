@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import kuchnia.Factory;
+
 public class querySQL {
     private Connection connection;
     private Statement stat;
@@ -50,7 +51,8 @@ public class querySQL {
             prepStmt = connection.prepareStatement(
                     "insert into Dishes values (null, ?, ?, ?, ?, ?, ?, ?);");
 
-            //prepStmt.setInt(1,12);
+            rate += 0.01; // counter + 1
+
             for(int i = 1;i < 8;++i) {
                 if(i < 4)
                     prepStmt.setString(i, args[i - 1]);
@@ -91,12 +93,16 @@ public class querySQL {
         }
         return date;
     }
-    public boolean deleteDish(String Title) {
+    public <T> boolean deleteDish(String search,T type) {
         try {
             prepStmt = connection.prepareStatement(
-                    "DELETE from Dishes where title = ?;");
-
-            prepStmt.setString(1,Title);
+                    "DELETE from Dishes where " + search + " = ?;");
+            if(search.toLowerCase().equals("rate"))
+                prepStmt.setDouble(1, (Double) type);
+            else if(search.toLowerCase().equals("id"))
+                prepStmt.setInt(1, (Integer) type);
+            else
+                prepStmt.setString(1,(String) type);
             prepStmt.execute();
         } catch (SQLException e) {
             System.err.println(e);
@@ -141,5 +147,109 @@ public class querySQL {
             e.printStackTrace();
         }
         return arr_data;
+    }
+
+    public <T> objectSQL browsedDish(String search,T type)
+    {
+        ResultSet result = null;
+        try {
+            prepStmt = connection.prepareStatement(" Select * from dishes where " + search + " = ?");
+            if(search.toLowerCase().equals("rate"))
+                prepStmt.setDouble(1, (Double) type);
+            else if(search.toLowerCase().equals("id"))
+                prepStmt.setInt(1, (Integer) type);
+            else
+                prepStmt.setString(1,(String) type);
+            result = prepStmt.executeQuery();
+        } catch (SQLException e) {
+            System.err.println(e);
+            return null;
+        }
+        objectSQL date = null;
+        try {
+            date = Factory.FactoryDishes(result.getInt("ID"), result.getString("Title"), result.getString("Describe"),
+                    result.getString("Ingredients"), result.getString("Comments"), result.getString("Path"),
+                    result.getDouble("Rate"), result.getString("Type"));
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return date;
+    }
+
+    public void addComments(int id,String comments)
+    {
+        ResultSet result = null;
+        String fullComments = "";
+        try {
+            prepStmt = connection.prepareStatement(" Select comments from dishes where id = ? ");
+            prepStmt.setInt(1, id);
+            result = prepStmt.executeQuery();
+
+            fullComments += result.getString("Comments") + "\n" +comments;
+
+            result.close();
+            prepStmt.close();
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+        try {
+            prepStmt = connection.prepareStatement(" UPDATE Dishes SET Comments = ? WHERE ID = ? ;");
+            prepStmt.setString(1, fullComments);
+            prepStmt.setInt(2, id);
+            prepStmt.execute();
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+    }
+    public<T> void modify(String kol,T mod,int ID)
+    {
+        ResultSet result = null;
+        try {
+            prepStmt = connection.prepareStatement(" UPDATE Dishes SET "+ kol + " = ? WHERE ID = ? ;");
+            if(kol.toLowerCase().equals("rate"))
+                prepStmt.setDouble(1, (Double) mod + 0.1);
+            else if(kol.toLowerCase().equals("id"))
+                prepStmt.setInt(1, (Integer) mod);
+            else
+                prepStmt.setString(1,(String) mod);
+            prepStmt.setInt(2, ID);
+            prepStmt.execute();
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+    }
+
+    public void rating(int rate,int id)
+    {
+        ResultSet result = null;
+        double newrate = 0.;
+        double x = 0.01;
+        try {
+            prepStmt = connection.prepareStatement(" Select rate from dishes where id = ? ");
+            prepStmt.setInt(1, id);
+            result = prepStmt.executeQuery();
+            newrate = result.getDouble("Rate");
+            if(result.getDouble("Rate")- (int)result.getDouble("Rate") == 0.99)
+                JOptionPane.showMessageDialog(null,"Blad nie mozna dodac wiecej ocen");
+            else {
+                newrate += rate;
+                newrate += x;
+            }
+            result.close();
+            prepStmt.close();
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+        try {
+            prepStmt = connection.prepareStatement(" UPDATE Dishes SET Rate = ? WHERE ID = ? ;");
+            prepStmt.setDouble(1, newrate);
+            prepStmt.setInt(2, id);
+            prepStmt.execute();
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+
     }
 }
