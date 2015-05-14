@@ -25,6 +25,9 @@ public class querySQL {
             JOptionPane.showMessageDialog(null, e);
         }
     }
+    /*
+    Wyswietla wszystkie informacje z bazy danych
+     */
     public void selectAll() {
         try {
             ResultSet result = stat.executeQuery("SELECT * FROM Dishes");
@@ -45,7 +48,9 @@ public class querySQL {
             e.printStackTrace();
         }
     }
-
+    /*
+    Wstawianie nowych potraw ilosc argumentow musi byc zgodna tzn trzeba wpisac wszystko oprocz ID
+     */
     public boolean insertAll(double rate, String ... args) {
         try {
             prepStmt = connection.prepareStatement(
@@ -68,7 +73,9 @@ public class querySQL {
         }
         return true;
     }
-
+    /*
+    Wybieranie potrawy po tytule raczej malo uzyteczne bedzie mozna pozniej wywalic raczej
+     */
     public objectSQL selectDish(String type)
     {
         ResultSet result = null;
@@ -93,6 +100,10 @@ public class querySQL {
         }
         return date;
     }
+    /*
+    Funkcja do usuwania usuwa cos pod warunkiem czegos search to nazwa kolumny np Title a type to konkretnie np bigos
+    Wazne!! Przy wowylywaniu mozna uczywac tylko obiektow tzn nie wolno wpisac ("rate",4) trzeba u¿yæ obiektu Double a nie double !!
+     */
     public <T> boolean deleteDish(String search,T type) {
         try {
             prepStmt = connection.prepareStatement(
@@ -110,6 +121,9 @@ public class querySQL {
         }
         return true;
     }
+    /*
+    Wybiera caly dzial np Salatki i wpisuje wszystkie slaatki do tablicy obiektow
+     */
     public objectSQL[] selectDishes(String type)
     {
         ResultSet result = null;
@@ -148,7 +162,9 @@ public class querySQL {
         }
         return arr_data;
     }
-
+    /*
+    Wyszukiwarka przyjmuje po czym szukamy i konkretnie co przyjmuje tylko obiekty
+     */
     public <T> objectSQL browsedDish(String search,T type)
     {
         ResultSet result = null;
@@ -177,7 +193,9 @@ public class querySQL {
         }
         return date;
     }
-
+    /*
+    Dodawanie komentarzy po ID
+     */
     public void addComments(int id,String comments)
     {
         ResultSet result = null;
@@ -203,6 +221,9 @@ public class querySQL {
             System.err.println(e);
         }
     }
+    /*
+    Modyfikacja danych kol nazwa np title pozniej obiekt ktory chcemy wpisac i unikalne ID
+     */
     public<T> void modify(String kol,T mod,int ID)
     {
         ResultSet result = null;
@@ -220,7 +241,11 @@ public class querySQL {
             System.err.println(e);
         }
     }
-
+    /*
+    Ocena po ID
+    Tutaj zastsowa³em kodowanie do oceny wpisujemy tylko wartosci calkowite wszedzie przy wstawianiu modyfikacji itd.
+    dla oceny 10.03 oznacza ze 10 to suma a 03 to licznik czyli ocena 10/3 = 3 bo dalem calkowite
+     */
     public void rating(int rate,int id)
     {
         ResultSet result = null;
