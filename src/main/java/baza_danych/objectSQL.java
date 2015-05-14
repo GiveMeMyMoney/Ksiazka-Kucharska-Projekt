@@ -26,7 +26,6 @@ public abstract class objectSQL {
         return ID;
     }
 
-
     public String getTitle() {
         return title;
     }
@@ -47,8 +46,12 @@ public abstract class objectSQL {
         return path;
     }
 
-    public double getRate() {
-        return rate;
+    public int getRate() {
+
+        if(rate == 0.01 || rate == 0.0)
+            return 0;
+        else
+            return (int) ((int)rate / ((rate - (int)rate) * 100)); // for example 10.02 10 is sigma 02 is counter  rate = sigma / counter
     }
 }
 

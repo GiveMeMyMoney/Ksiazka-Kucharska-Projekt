@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import kuchnia.Factory;
+
 public class querySQL {
     private Connection connection;
     private Statement stat;
@@ -24,6 +25,9 @@ public class querySQL {
             JOptionPane.showMessageDialog(null, e);
         }
     }
+    /*
+    Wyswietla wszystkie informacje z bazy danych
+     */
     public void selectAll() {
         try {
             ResultSet result = stat.executeQuery("SELECT * FROM Dishes");
@@ -44,13 +48,16 @@ public class querySQL {
             e.printStackTrace();
         }
     }
-
+    /*
+    Wstawianie nowych potraw ilosc argumentow musi byc zgodna tzn trzeba wpisac wszystko oprocz ID
+     */
     public boolean insertAll(double rate, String ... args) {
         try {
             prepStmt = connection.prepareStatement(
                     "insert into Dishes values (null, ?, ?, ?, ?, ?, ?, ?);");
 
-            //prepStmt.setInt(1,12);
+            rate += 0.01; // counter + 1
+
             for(int i = 1;i < 8;++i) {
                 if(i < 4)
                     prepStmt.setString(i, args[i - 1]);
@@ -66,7 +73,9 @@ public class querySQL {
         }
         return true;
     }
-
+    /*
+    Wybieranie potrawy po tytule raczej malo uzyteczne bedzie mozna pozniej wywalic raczej
+     */
     public objectSQL selectDish(String type)
     {
         ResultSet result = null;
@@ -91,12 +100,20 @@ public class querySQL {
         }
         return date;
     }
-    public boolean deleteDish(String Title) {
+    /*
+    Funkcja do usuwania usuwa cos pod warunkiem czegos search to nazwa kolumny np Title a type to konkretnie np bigos
+    Wazne!! Przy wowylywaniu mozna uczywac tylko obiektow tzn nie wolno wpisac ("rate",4) trzeba u¿yæ obiektu Double a nie double !!
+     */
+    public <T> boolean deleteDish(String search,T type) {
         try {
             prepStmt = connection.prepareStatement(
-                    "DELETE from Dishes where title = ?;");
-
-            prepStmt.setString(1,Title);
+                    "DELETE from Dishes where " + search + " = ?;");
+            if(search.toLowerCase().equals("rate"))
+                prepStmt.setDouble(1, (Double) type);
+            else if(search.toLowerCase().equals("id"))
+                prepStmt.setInt(1, (Integer) type);
+            else
+                prepStmt.setString(1,(String) type);
             prepStmt.execute();
         } catch (SQLException e) {
             System.err.println(e);
@@ -104,6 +121,9 @@ public class querySQL {
         }
         return true;
     }
+    /*
+    Wybiera caly dzial np Salatki i wpisuje wszystkie slaatki do tablicy obiektow
+     */
     public objectSQL[] selectDishes(String type)
     {
         ResultSet result = null;
@@ -141,5 +161,120 @@ public class querySQL {
             e.printStackTrace();
         }
         return arr_data;
+    }
+    /*
+    Wyszukiwarka przyjmuje po czym szukamy i konkretnie co przyjmuje tylko obiekty
+     */
+    public <T> objectSQL browsedDish(String search,T type)
+    {
+        ResultSet result = null;
+        try {
+            prepStmt = connection.prepareStatement(" Select * from dishes where " + search + " = ?");
+            if(search.toLowerCase().equals("rate"))
+                prepStmt.setDouble(1, (Double) type);
+            else if(search.toLowerCase().equals("id"))
+                prepStmt.setInt(1, (Integer) type);
+            else
+                prepStmt.setString(1,(String) type);
+            result = prepStmt.executeQuery();
+        } catch (SQLException e) {
+            System.err.println(e);
+            return null;
+        }
+        objectSQL date = null;
+        try {
+            date = Factory.FactoryDishes(result.getInt("ID"), result.getString("Title"), result.getString("Describe"),
+                    result.getString("Ingredients"), result.getString("Comments"), result.getString("Path"),
+                    result.getDouble("Rate"), result.getString("Type"));
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return date;
+    }
+    /*
+    Dodawanie komentarzy po ID
+     */
+    public void addComments(int id,String comments)
+    {
+        ResultSet result = null;
+        String fullComments = "";
+        try {
+            prepStmt = connection.prepareStatement(" Select comments from dishes where id = ? ");
+            prepStmt.setInt(1, id);
+            result = prepStmt.executeQuery();
+
+            fullComments += result.getString("Comments") + "\n" +comments;
+
+            result.close();
+            prepStmt.close();
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+        try {
+            prepStmt = connection.prepareStatement(" UPDATE Dishes SET Comments = ? WHERE ID = ? ;");
+            prepStmt.setString(1, fullComments);
+            prepStmt.setInt(2, id);
+            prepStmt.execute();
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+    }
+    /*
+    Modyfikacja danych kol nazwa np title pozniej obiekt ktory chcemy wpisac i unikalne ID
+     */
+    public<T> void modify(String kol,T mod,int ID)
+    {
+        ResultSet result = null;
+        try {
+            prepStmt = connection.prepareStatement(" UPDATE Dishes SET "+ kol + " = ? WHERE ID = ? ;");
+            if(kol.toLowerCase().equals("rate"))
+                prepStmt.setDouble(1, (Double) mod + 0.1);
+            else if(kol.toLowerCase().equals("id"))
+                prepStmt.setInt(1, (Integer) mod);
+            else
+                prepStmt.setString(1,(String) mod);
+            prepStmt.setInt(2, ID);
+            prepStmt.execute();
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+    }
+    /*
+    Ocena po ID
+    Tutaj zastsowa³em kodowanie do oceny wpisujemy tylko wartosci calkowite wszedzie przy wstawianiu modyfikacji itd.
+    dla oceny 10.03 oznacza ze 10 to suma a 03 to licznik czyli ocena 10/3 = 3 bo dalem calkowite
+     */
+    public void rating(int rate,int id)
+    {
+        ResultSet result = null;
+        double newrate = 0.;
+        double x = 0.01;
+        try {
+            prepStmt = connection.prepareStatement(" Select rate from dishes where id = ? ");
+            prepStmt.setInt(1, id);
+            result = prepStmt.executeQuery();
+            newrate = result.getDouble("Rate");
+            if(result.getDouble("Rate")- (int)result.getDouble("Rate") == 0.99)
+                JOptionPane.showMessageDialog(null,"Blad nie mozna dodac wiecej ocen");
+            else {
+                newrate += rate;
+                newrate += x;
+            }
+            result.close();
+            prepStmt.close();
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+        try {
+            prepStmt = connection.prepareStatement(" UPDATE Dishes SET Rate = ? WHERE ID = ? ;");
+            prepStmt.setDouble(1, newrate);
+            prepStmt.setInt(2, id);
+            prepStmt.execute();
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+
     }
 }
