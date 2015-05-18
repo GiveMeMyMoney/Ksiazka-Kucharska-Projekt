@@ -16,7 +16,8 @@ public class GUI {
     Graphics gc;
     Image image;
     private static Image[] gwiazdkiSzare = new Image[5];    //TODO to na razie jest wstepne...
-    private static Image[] gwiazdkiZolte = new Image[5];
+    private static Image[] gwiazdkiZolte = new Image[5];    //gwiazdki trzeba wgrac jako tablice by je pozniej zakodzic
+    //np. najezdza kursorem na trzecia gwiazdke to pierwsze 3 zamieniaja sie na zolte itp...
 
     public GUI() {
         initialize();
