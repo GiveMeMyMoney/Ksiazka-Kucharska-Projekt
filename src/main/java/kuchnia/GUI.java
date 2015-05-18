@@ -227,9 +227,10 @@ public class GUI {
         Wyszukiwanie.add(SearchField);
         SearchField.setColumns(10);
 
-        JButton btnSzukaj = new JButton("Szukaj");
+        ImageIcon szukajImage = new ImageIcon("raki.png");  //TODO wstawiæ lupe od Jacka.
+        JButton btnSzukaj = new JButton("Szukaj", szukajImage); //moze byc tez bez napisu
         btnSzukaj.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnSzukaj.setBounds(428, 400, 98, 39);
+        btnSzukaj.setBounds(428, 400, 150, 100);  //poprzednie ustawienia: btnSzukaj.setBounds(428, 400, 98, 39);
         Wyszukiwanie.add(btnSzukaj);
 
 //=======================  Elementy w panelu Autorzy  ================================================
