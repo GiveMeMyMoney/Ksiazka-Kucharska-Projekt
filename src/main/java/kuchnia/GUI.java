@@ -4,11 +4,20 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.CropImageFilter;
+import java.awt.image.FilteredImageSource;
+
+import static com.sun.deploy.uitoolkit.impl.awt.Applet2ImageFactory.createImage;
 
 public class GUI {
 
     public JFrame frame;
     public JTextField SearchField;
+    Graphics gc;
+    Image image;
+    private static Image[] gwiazdkiSzare = new Image[5];    //TODO to na razie jest wstepne...
+    private static Image[] gwiazdkiZolte = new Image[5];
+
     public GUI() {
         initialize();
     }
@@ -25,6 +34,19 @@ public class GUI {
         MenuGlowne.setLayout(null);
         MenuGlowne.setVisible(true);
 
+/*
+        for(int i=0; i<gwiazdkiSzare.length; i++) {
+            gwiazdkiSzare[i] = new ImageIcon("raki.png").getImage();
+            //gc.drawImage(gwiazdkiSzare[i], 26*i, 26*i, null);
+        }
+*/
+
+/*
+        for(int i=0; i<gwiazdkiZolte.length; i++) {
+            gwiazdkiZolte[i] = new ImageIcon("res/tileset_air.png").getImage();
+            gwiazdkiZolte[i] = createImage(new FilteredImageSource(gwiazdkiZolte[i].getSource(), new CropImageFilter(0, 26*i, 26, 26)));
+        }
+*/
         final JPanel Kategorie = new JPanel();
         frame.getContentPane().add(Kategorie, "Kategorie");
         Kategorie.setLayout(null);
