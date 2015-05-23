@@ -6,10 +6,12 @@ import baza_danych.objectSQL;
  */
 public class Factory {
     public enum Dishes {
-
-        SALATKA,
-        DESER,
-        CIASTO,
+        SALATKA_PRZYSTAWKI,
+        CIASTA_DESERY,
+        ZUPY,
+        DANIA_MIESNE,
+        NAPOJE,
+        RYBY_OWOCE_MORZA,
     }
     public static objectSQL FactoryDishes(int ID, String title,
                                           String describe, String ingredients, String comments, String path, double rate, String type)
@@ -18,9 +20,13 @@ public class Factory {
         Dishes currentDishes = Dishes.valueOf(type.toUpperCase());
 
     switch (currentDishes) {
-        case SALATKA: return  new Salatka(ID,title, describe,  ingredients,  comments,  path,  rate,  type);
-        case DESER: return  new Deser(ID,title, describe,  ingredients,  comments,  path,  rate,  type);
-        case CIASTO: return  new Ciasto(ID,title, describe,  ingredients,  comments,  path,  rate,  type);
+        case NAPOJE: return  new Napoje(ID,title, describe,  ingredients,  comments,  path,  rate,  type);
+        case CIASTA_DESERY: return  new Ciasta_Desery(ID,title, describe,  ingredients,  comments,  path,  rate,  type);
+        case SALATKA_PRZYSTAWKI: return  new Salatka_Przystawki(ID,title, describe,  ingredients,  comments,  path,  rate,  type);
+        case ZUPY: return  new Zupy(ID,title, describe,  ingredients,  comments,  path,  rate,  type);
+        case RYBY_OWOCE_MORZA: new Ryby_Owoce_Morza(ID,title, describe,  ingredients,  comments,  path,  rate,  type);
+        case DANIA_MIESNE: new Dania_Miesne(ID,title, describe,  ingredients,  comments,  path,  rate,  type);
+
     }
         return null;
     }

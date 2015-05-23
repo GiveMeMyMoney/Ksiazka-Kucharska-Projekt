@@ -11,13 +11,14 @@ import java.sql.Statement;
 import kuchnia.Factory;
 
 public class querySQL {
+
     private Connection connection;
     private Statement stat;
     private PreparedStatement prepStmt;
     public querySQL()
     {
         try {
-            connection = sqliteConnection.dbConnector();
+            connection = SingletonsqliteConnection.getInstance().getConnInst();
             stat = connection.createStatement();
         }
         catch(Exception e)
@@ -25,11 +26,16 @@ public class querySQL {
             JOptionPane.showMessageDialog(null, e);
         }
     }
+    public Connection getConnection()
+    {
+        return connection;
+    }
     /*
     Wyswietla wszystkie informacje z bazy danych
      */
     public void selectAll() {
         try {
+            stat = connection.createStatement();
             ResultSet result = stat.executeQuery("SELECT * FROM Dishes");
             int id;
             String title, type, describe, path, comments;
@@ -80,8 +86,8 @@ public class querySQL {
     {
         ResultSet result = null;
         try {
+            PreparedStatement prepStmt;
             prepStmt = connection.prepareStatement(" Select * from dishes where title = ?");
-
             prepStmt.setString(1, type);
             result = prepStmt.executeQuery();
         } catch (SQLException e) {
@@ -98,6 +104,7 @@ public class querySQL {
         {
             JOptionPane.showMessageDialog(null, e);
         }
+
         return date;
     }
     /*
@@ -122,7 +129,7 @@ public class querySQL {
         return true;
     }
     /*
-    Wybiera caly dzial np Salatki i wpisuje wszystkie slaatki do tablicy obiektow
+    Wybiera caly dzial np Salatki i wpisuje wszystkie salatki do tablicy obiektow
      */
     public objectSQL[] selectDishes(String type)
     {

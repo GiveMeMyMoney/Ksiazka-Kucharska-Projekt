@@ -1,12 +1,12 @@
 package baza_danych.dishes;
 import baza_danych.objectSQL;
 /**
- * Created by Wojciech Zachwieja on 2015-05-13.
+ * Created by Wojciech Zachwieja on 2015-05-23.
  */
-public class Deser extends objectSQL {
+public class Napoje extends objectSQL {
     String type;
 
-    public Deser(int ID, String title, String describe, String ingredients, String comments, String path, double rate, String type) {
+    public Napoje(int ID, String title, String describe, String ingredients, String comments, String path, double rate, String type) {
         super(ID, title, describe, ingredients, comments, path, rate);
         this.type = type;
     }
