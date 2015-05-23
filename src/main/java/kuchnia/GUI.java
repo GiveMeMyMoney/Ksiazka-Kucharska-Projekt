@@ -60,6 +60,8 @@ public class GUI {
         MenuGlowne.setLayout(null);
         MenuGlowne.setVisible(true);
 
+
+
         final JPanel Kategorie = new JPanel();
         frame.getContentPane().add(Kategorie, "Kategorie");
         Kategorie.setLayout(null);
