@@ -15,6 +15,9 @@ public class GUI {
     private int width=1075, height=700;
     private int widthKlawisz=200;
     private int srodkujKlawisz=(width-widthKlawisz)/2;
+    private JTextField textFieldNazwaPrzepisu;
+    private JTextField textFieldCzasPrzygotowania;
+    private JTextField textFieldLiczbaOsob;
 
     /**
      * Launch the application.
@@ -102,9 +105,9 @@ public class GUI {
         RybyIOwoceMorza.setLayout(null);
         RybyIOwoceMorza.setVisible(false);
 
-        final JPanel DodawanieGUIisow = new JPanel();
-        frame.getContentPane().add(DodawanieGUIisow, "Dodawanie GUIisow");
-        DodawanieGUIisow.setLayout(null);
+        final JPanel DodawaniePrzepisow = new JPanel();
+        frame.getContentPane().add(DodawaniePrzepisow, "Dodawanie Przepisow");
+        DodawaniePrzepisow.setLayout(null);
 
 //======================= Elementy w panelu Menu Glowne  =========================================
 
@@ -227,19 +230,19 @@ public class GUI {
             }
         });
         btnPowrotDoMenu.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnPowrotDoMenu.setBounds(822, 582, widthKlawisz, 50);
+        btnPowrotDoMenu.setBounds(859, 611, widthKlawisz, 50);
         Kategorie.add(btnPowrotDoMenu);
 
-        JButton btnDodajGUIis = new JButton("Dodaj GUIis");
-        btnDodajGUIis.addActionListener(new ActionListener() {
+        JButton btnDodajPrzepis2 = new JButton("Dodaj Przepis");
+        btnDodajPrzepis2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Kategorie.setVisible(false);
-                DodawanieGUIisow.setVisible(true);
+                DodawaniePrzepisow.setVisible(true);
             }
         });
-        btnDodajGUIis.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnDodajGUIis.setBounds(43, 582, widthKlawisz, 50);
-        Kategorie.add(btnDodajGUIis);
+        btnDodajPrzepis2.setFont(new Font("Calibri", Font.PLAIN, 17));
+        btnDodajPrzepis2.setBounds(10, 611, widthKlawisz, 50);
+        Kategorie.add(btnDodajPrzepis2);
 
 //=======================  Elementy w panelu Wyszukiwanie  ===========================================
 
@@ -251,7 +254,7 @@ public class GUI {
             }
         });
         btnPowrotDoMenu2.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnPowrotDoMenu2.setBounds(702, 563, widthKlawisz, 50);
+        btnPowrotDoMenu2.setBounds(859, 611, widthKlawisz, 50);
         Wyszukiwanie.add(btnPowrotDoMenu2);
 
         SearchField = new JTextField();
@@ -275,7 +278,7 @@ public class GUI {
             }
         });
         btnPowrotDoMenu3.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnPowrotDoMenu3.setBounds(702, 563, widthKlawisz, 50);
+        btnPowrotDoMenu3.setBounds(859, 611, widthKlawisz, 50);
         Autorzy.add(btnPowrotDoMenu3);
         Autorzy.setVisible(false);
 
@@ -289,7 +292,7 @@ public class GUI {
             }
         });
         btnPowrotDoMenu4.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnPowrotDoMenu4.setBounds(702, 563, widthKlawisz, 50);
+        btnPowrotDoMenu4.setBounds(859, 611, widthKlawisz, 50);
         Zupy.add(btnPowrotDoMenu4);
 
         JButton btnPowrotDoKategorii = new JButton("Powr\u00F3t do kategorii");
@@ -300,7 +303,7 @@ public class GUI {
             }
         });
         btnPowrotDoKategorii.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnPowrotDoKategorii.setBounds(50, 563, widthKlawisz, 50);
+        btnPowrotDoKategorii.setBounds(10, 611, widthKlawisz, 50);
         Zupy.add(btnPowrotDoKategorii);
 
 //=======================  Elementy w panelu Dania Miesne ==============================================
@@ -313,7 +316,7 @@ public class GUI {
             }
         });
         btnPowortDoMenu5.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnPowortDoMenu5.setBounds(702, 563, widthKlawisz, 50);
+        btnPowortDoMenu5.setBounds(859, 611, widthKlawisz, 50);
         DaniaMiesne.add(btnPowortDoMenu5);
 
         JButton btnPowrotDoKategorii2 = new JButton("Powr\u00F3t do kategorii");
@@ -324,7 +327,7 @@ public class GUI {
             }
         });
         btnPowrotDoKategorii2.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnPowrotDoKategorii2.setBounds(50, 563, widthKlawisz, 50);
+        btnPowrotDoKategorii2.setBounds(10, 611, widthKlawisz, 50);
         DaniaMiesne.add(btnPowrotDoKategorii2);
 
 //=======================  Eleemnty w panelu Ciasta i desery  =============================================
@@ -337,7 +340,7 @@ public class GUI {
             }
         });
         btnPowrotDoMenu5.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnPowrotDoMenu5.setBounds(702, 563, widthKlawisz, 50);
+        btnPowrotDoMenu5.setBounds(859, 611, widthKlawisz, 50);
         CiastaIDesery.add(btnPowrotDoMenu5);
 
         JButton btnPowrotDoKategorii3 = new JButton("Powr\u00F3t do kategorii");
@@ -348,7 +351,7 @@ public class GUI {
             }
         });
         btnPowrotDoKategorii3.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnPowrotDoKategorii3.setBounds(50, 563, widthKlawisz, 50);
+        btnPowrotDoKategorii3.setBounds(10, 611, widthKlawisz, 50);
         CiastaIDesery.add(btnPowrotDoKategorii3);
 
 //=======================  Elementy w panelu Napoje  =======================================================
@@ -361,7 +364,7 @@ public class GUI {
             }
         });
         btnPowrotDoMenu6.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnPowrotDoMenu6.setBounds(702, 563, widthKlawisz, 50);
+        btnPowrotDoMenu6.setBounds(859, 611, widthKlawisz, 50);
         Napoje.add(btnPowrotDoMenu6);
 
         JButton btnPowrotDoKategorii4 = new JButton("Powr\u00F3t do kategorii");
@@ -372,7 +375,7 @@ public class GUI {
             }
         });
         btnPowrotDoKategorii4.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnPowrotDoKategorii4.setBounds(50, 563, widthKlawisz, 50);
+        btnPowrotDoKategorii4.setBounds(10, 611, widthKlawisz, 50);
         Napoje.add(btnPowrotDoKategorii4);
 
 //=======================  Elementy w panelu Ryby i owoce morza  =============================================
@@ -385,7 +388,7 @@ public class GUI {
             }
         });
         btnPowrotDoMenu7.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnPowrotDoMenu7.setBounds(702, 563, widthKlawisz, 50);
+        btnPowrotDoMenu7.setBounds(859, 611, widthKlawisz, 50);
         RybyIOwoceMorza.add(btnPowrotDoMenu7);
 
         JButton btnPowrotDoKategorii5 = new JButton("Powr\u00F3t do kategorii");
@@ -396,7 +399,7 @@ public class GUI {
             }
         });
         btnPowrotDoKategorii5.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnPowrotDoKategorii5.setBounds(50, 563, widthKlawisz, 50);
+        btnPowrotDoKategorii5.setBounds(10, 611, widthKlawisz, 50);
         RybyIOwoceMorza.add(btnPowrotDoKategorii5);
 
 //======================= Elementy w panelu Salatki i przystawki  ==============================================
@@ -409,7 +412,7 @@ public class GUI {
             }
         });
         btnPowrotDoMenu8.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnPowrotDoMenu8.setBounds(702, 563, widthKlawisz, 50);
+        btnPowrotDoMenu8.setBounds(859, 611, widthKlawisz, 50);
         SalatkiIPrzystawki.add(btnPowrotDoMenu8);
 
         JButton btnPowrotDoKategorii6 = new JButton("Powr\u00F3t do kategorii");
@@ -420,33 +423,116 @@ public class GUI {
             }
         });
         btnPowrotDoKategorii6.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnPowrotDoKategorii6.setBounds(50, 563, widthKlawisz, 50);
+        btnPowrotDoKategorii6.setBounds(10, 611, widthKlawisz, 50);
         SalatkiIPrzystawki.add(btnPowrotDoKategorii6);
 
-//=======================  Elementy w panelu Dodawanie GUIisow  ===============================================
+//=======================  Elementy w panelu Dodawanie Przepisow  ===============================================
 
         JButton btnPowrotDoMenu9 = new JButton("Powr\u00F3t do menu");
         btnPowrotDoMenu9.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                DodawanieGUIisow.setVisible(false);
+                DodawaniePrzepisow.setVisible(false);
                 MenuGlowne.setVisible(true);
             }
         });
         btnPowrotDoMenu9.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnPowrotDoMenu9.setBounds(702, 563, widthKlawisz, 50);
-        DodawanieGUIisow.add(btnPowrotDoMenu9);
+        btnPowrotDoMenu9.setBounds(859, 611, widthKlawisz, 50);
+        DodawaniePrzepisow.add(btnPowrotDoMenu9);
 
         JButton btnPowrotDoKategorii7 = new JButton("Powr\u00F3t do kategorii");
         btnPowrotDoKategorii7.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                DodawanieGUIisow.setVisible(false);
+                DodawaniePrzepisow.setVisible(false);
                 Kategorie.setVisible(true);
             }
         });
         btnPowrotDoKategorii7.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnPowrotDoKategorii7.setBounds(50, 563, widthKlawisz, 50);
-        DodawanieGUIisow.add(btnPowrotDoKategorii7);
-        DodawanieGUIisow.setVisible(false);
+        btnPowrotDoKategorii7.setBounds(10, 611, widthKlawisz, 50);
+        DodawaniePrzepisow.add(btnPowrotDoKategorii7);
+
+        JLabel lblDodawaniePrzepisu = new JLabel("Dodawanie przepisu");
+        lblDodawaniePrzepisu.setFont(new Font("Tahoma", Font.PLAIN, 39));
+        lblDodawaniePrzepisu.setBounds(315, -3, 359, 90);
+        DodawaniePrzepisow.add(lblDodawaniePrzepisu);
+
+        textFieldNazwaPrzepisu = new JTextField();
+        textFieldNazwaPrzepisu.setBounds(10, 98, 317, 28);
+        DodawaniePrzepisow.add(textFieldNazwaPrzepisu);
+        textFieldNazwaPrzepisu.setColumns(10);
+
+        JLabel lblNazwaPrzepisu = new JLabel("Nazwa przepisu:");
+        lblNazwaPrzepisu.setBounds(10, 68, 141, 37);
+        DodawaniePrzepisow.add(lblNazwaPrzepisu);
+
+        JLabel lblKategoria = new JLabel("Kategoria:");
+        lblKategoria.setBounds(10, 140, 123, 37);
+        DodawaniePrzepisow.add(lblKategoria);
+
+        JComboBox comboBoxKategorieDan = new JComboBox();
+        comboBoxKategorieDan.setBounds(10, 172, 263, 28);
+        DodawaniePrzepisow.add(comboBoxKategorieDan);
+
+        JTextArea textAreaSkladniki = new JTextArea();
+        textAreaSkladniki.setBounds(10, 257, 317, 325);
+        DodawaniePrzepisow.add(textAreaSkladniki);
+
+        JLabel lblSkladniki = new JLabel("Sk\u0142adniki:");
+        lblSkladniki.setBounds(10, 221, 98, 37);
+        DodawaniePrzepisow.add(lblSkladniki);
+
+        JDesktopPane desktopPaneZdjecieDania = new JDesktopPane();
+        desktopPaneZdjecieDania.setBounds(793, 68, 250, 250);
+        DodawaniePrzepisow.add(desktopPaneZdjecieDania);
+
+        JLabel lblZdjecieDania = new JLabel("");
+        lblZdjecieDania.setBounds(10, 11, 230, 228);
+        desktopPaneZdjecieDania.add(lblZdjecieDania);
+
+        JTextArea textAreaOpisPrzygotowania = new JTextArea();
+        textAreaOpisPrzygotowania.setBounds(362, 377, 681, 205);
+        DodawaniePrzepisow.add(textAreaOpisPrzygotowania);
+
+        JLabel lblOpisPrzygotowania = new JLabel("Opis przygotowania:");
+        lblOpisPrzygotowania.setBounds(362, 338, 179, 28);
+        DodawaniePrzepisow.add(lblOpisPrzygotowania);
+
+        JButton btnDodajZdjecie = new JButton("Dodaj zdj\u0119cie");
+        btnDodajZdjecie.setFont(new Font("Calibri", Font.PLAIN, 17));
+        btnDodajZdjecie.setBounds(847, 329, 151, 41);
+        DodawaniePrzepisow.add(btnDodajZdjecie);
+
+        textFieldCzasPrzygotowania = new JTextField();
+        textFieldCzasPrzygotowania.setBounds(400, 97, 98, 29);
+        DodawaniePrzepisow.add(textFieldCzasPrzygotowania);
+        textFieldCzasPrzygotowania.setColumns(10);
+
+        JLabel lblCzasPrzygotowania = new JLabel("Czas przygotowania:");
+        lblCzasPrzygotowania.setBounds(400, 68, 141, 37);
+        DodawaniePrzepisow.add(lblCzasPrzygotowania);
+
+        JLabel lblPoziomTrudnosci = new JLabel("Poziom trudno\u015Bci:");
+        lblPoziomTrudnosci.setBounds(608, 68, 129, 37);
+        DodawaniePrzepisow.add(lblPoziomTrudnosci);
+
+        JComboBox comboBoxPoziomTrudnosci = new JComboBox();
+        comboBoxPoziomTrudnosci.setBounds(608, 100, 101, 25);
+        DodawaniePrzepisow.add(comboBoxPoziomTrudnosci);
+
+        JLabel lblLiczbaOsob = new JLabel("Liczba os\u00F3b:");
+        lblLiczbaOsob.setBounds(400, 168, 116, 37);
+        DodawaniePrzepisow.add(lblLiczbaOsob);
+
+        textFieldLiczbaOsob = new JTextField();
+        textFieldLiczbaOsob.setBounds(400, 194, 64, 28);
+        DodawaniePrzepisow.add(textFieldLiczbaOsob);
+        textFieldLiczbaOsob.setColumns(10);
+
+        JButton btnDodajPrzepis = new JButton("Dodaj przepis");
+        btnDodajPrzepis.setFont(new Font("Calibri", Font.PLAIN, 17));
+        btnDodajPrzepis.setEnabled(true);
+        btnDodajPrzepis.setBounds(434, 611, 200, 50);
+        DodawaniePrzepisow.add(btnDodajPrzepis);
+        DodawaniePrzepisow.setVisible(false);
 
 
     }
