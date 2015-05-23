@@ -1,30 +1,52 @@
 package kuchnia;
+import java.awt.EventQueue;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
+import java.awt.CardLayout;
 import java.awt.event.ActionListener;
-import java.awt.image.CropImageFilter;
-import java.awt.image.FilteredImageSource;
+import java.awt.event.ActionEvent;
+import java.awt.Font;
 
-import static com.sun.deploy.uitoolkit.impl.awt.Applet2ImageFactory.createImage;
 
 public class GUI {
 
     public JFrame frame;
     public JTextField SearchField;
-    Graphics gc;
-    Image image;
-    private static Image[] gwiazdkiSzare = new Image[5];    //TODO to na razie jest wstepne...
-    private static Image[] gwiazdkiZolte = new Image[5];    //gwiazdki trzeba wgrac jako tablice by je pozniej zakodzic
-    //np. najezdza kursorem na trzecia gwiazdke to pierwsze 3 zamieniaja sie na zolte itp...
+    private int width=1075, height=700;
+    private int widthKlawisz=200;
+    private int srodkujKlawisz=(width-widthKlawisz)/2;
 
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    GUI window = new GUI();
+                    window.frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /**
+     * Create the application.
+     */
     public GUI() {
         initialize();
     }
+
+    /**
+     * Initialize the contents of the frame.
+     */
     private void initialize() {
         frame = new JFrame();
-        frame.setBounds(100, 100, 960, 680);
+        frame.setBounds(100, 100, width, height);
+        frame.setResizable(false);	//zmiana rozmiaru okienka-ustawiona na false.
+        frame.setLocationRelativeTo(null);    //null- okienko wyskakuje na srodku ekranu
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(new CardLayout(0, 0));
 
@@ -35,19 +57,6 @@ public class GUI {
         MenuGlowne.setLayout(null);
         MenuGlowne.setVisible(true);
 
-/*
-        for(int i=0; i<gwiazdkiSzare.length; i++) {
-            gwiazdkiSzare[i] = new ImageIcon("raki.png").getImage();
-            //gc.drawImage(gwiazdkiSzare[i], 26*i, 26*i, null);
-        }
-*/
-
-/*
-        for(int i=0; i<gwiazdkiZolte.length; i++) {
-            gwiazdkiZolte[i] = new ImageIcon("res/tileset_air.png").getImage();
-            gwiazdkiZolte[i] = createImage(new FilteredImageSource(gwiazdkiZolte[i].getSource(), new CropImageFilter(0, 26*i, 26, 26)));
-        }
-*/
         final JPanel Kategorie = new JPanel();
         frame.getContentPane().add(Kategorie, "Kategorie");
         Kategorie.setLayout(null);
@@ -93,22 +102,22 @@ public class GUI {
         RybyIOwoceMorza.setLayout(null);
         RybyIOwoceMorza.setVisible(false);
 
-        final JPanel DodawaniePrzepisow = new JPanel();
-        frame.getContentPane().add(DodawaniePrzepisow, "Dodawanie Przepisow");
-        DodawaniePrzepisow.setLayout(null);
+        final JPanel DodawanieGUIisow = new JPanel();
+        frame.getContentPane().add(DodawanieGUIisow, "Dodawanie GUIisow");
+        DodawanieGUIisow.setLayout(null);
 
 //======================= Elementy w panelu Menu Glowne  =========================================
 
-        JButton btnPrzepisy = new JButton("Przepisy");
-        btnPrzepisy.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnPrzepisy.addActionListener(new ActionListener() {
+        JButton btnGUIisy = new JButton("Przepisy");
+        btnGUIisy.setFont(new Font("Calibri", Font.PLAIN, 17));
+        btnGUIisy.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 MenuGlowne.setVisible(false);
                 Kategorie.setVisible(true);
             }
         });
-        btnPrzepisy.setBounds(385, 134, 200, 50);
-        MenuGlowne.add(btnPrzepisy);
+        btnGUIisy.setBounds(437, 240, widthKlawisz, 50);
+        MenuGlowne.add(btnGUIisy);
 
         JButton btnWyszukiwarka = new JButton("Wyszukiwarka");
         btnWyszukiwarka.addActionListener(new ActionListener() {
@@ -118,7 +127,7 @@ public class GUI {
             }
         });
         btnWyszukiwarka.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnWyszukiwarka.setBounds(385, 245, 200, 50);
+        btnWyszukiwarka.setBounds(437, 335, widthKlawisz, 50);
         MenuGlowne.add(btnWyszukiwarka);
 
         JButton btnAutorzy = new JButton("Autorzy");
@@ -129,7 +138,7 @@ public class GUI {
             }
         });
         btnAutorzy.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnAutorzy.setBounds(385, 356, 200, 50);
+        btnAutorzy.setBounds(437, 440, widthKlawisz, 50);
         MenuGlowne.add(btnAutorzy);
 
         JButton btnWyjscie = new JButton("Wyjscie");
@@ -139,7 +148,7 @@ public class GUI {
             }
         });
         btnWyjscie.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnWyjscie.setBounds(385, 467, 200, 50);
+        btnWyjscie.setBounds(437, 540, widthKlawisz, 50);
         MenuGlowne.add(btnWyjscie);
 
 //=======================  Elementy w panelu Kategorie  =============================================
@@ -152,7 +161,7 @@ public class GUI {
             }
         });
         btnZupy.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnZupy.setBounds(385, 82, 200, 50);
+        btnZupy.setBounds(437, 63, widthKlawisz, 50);
         Kategorie.add(btnZupy);
 
         JButton btnDanieMiesne = new JButton("Dania \r\nmi\u0119sne");
@@ -163,7 +172,7 @@ public class GUI {
             }
         });
         btnDanieMiesne.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnDanieMiesne.setBounds(385, 158, 200, 50);
+        btnDanieMiesne.setBounds(437, 148, widthKlawisz, 50);
         Kategorie.add(btnDanieMiesne);
 
         JButton btnCiastaIDesery = new JButton("Ciasta i desery");
@@ -174,7 +183,7 @@ public class GUI {
             }
         });
         btnCiastaIDesery.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnCiastaIDesery.setBounds(385, 234, 200, 50);
+        btnCiastaIDesery.setBounds(437, 225, widthKlawisz, 50);
         Kategorie.add(btnCiastaIDesery);
 
         JButton btnNapoje = new JButton("Napoje");
@@ -185,7 +194,7 @@ public class GUI {
             }
         });
         btnNapoje.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnNapoje.setBounds(385, 310, 200, 50);
+        btnNapoje.setBounds(437, 300, widthKlawisz, 50);
         Kategorie.add(btnNapoje);
 
         JButton btnRybyIOwoce = new JButton("Ryby i owoce morza");
@@ -196,7 +205,7 @@ public class GUI {
             }
         });
         btnRybyIOwoce.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnRybyIOwoce.setBounds(385, 386, 200, 50);
+        btnRybyIOwoce.setBounds(437, 378, widthKlawisz, 50);
         Kategorie.add(btnRybyIOwoce);
 
         JButton btnSalatkiIPrzystawki = new JButton("Sa\u0142atki i przystawki");
@@ -207,7 +216,7 @@ public class GUI {
             }
         });
         btnSalatkiIPrzystawki.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnSalatkiIPrzystawki.setBounds(385, 462, 200, 50);
+        btnSalatkiIPrzystawki.setBounds(srodkujKlawisz, 462, widthKlawisz, 50);
         Kategorie.add(btnSalatkiIPrzystawki);
 
         JButton btnPowrotDoMenu = new JButton("Powr\u00F3t do menu");
@@ -218,19 +227,19 @@ public class GUI {
             }
         });
         btnPowrotDoMenu.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnPowrotDoMenu.setBounds(702, 563, 200, 50);
+        btnPowrotDoMenu.setBounds(822, 582, widthKlawisz, 50);
         Kategorie.add(btnPowrotDoMenu);
 
-        JButton btnDodajPrzepis = new JButton("Dodaj przepis");
-        btnDodajPrzepis.addActionListener(new ActionListener() {
+        JButton btnDodajGUIis = new JButton("Dodaj GUIis");
+        btnDodajGUIis.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Kategorie.setVisible(false);
-                DodawaniePrzepisow.setVisible(true);
+                DodawanieGUIisow.setVisible(true);
             }
         });
-        btnDodajPrzepis.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnDodajPrzepis.setBounds(50, 563, 200, 50);
-        Kategorie.add(btnDodajPrzepis);
+        btnDodajGUIis.setFont(new Font("Calibri", Font.PLAIN, 17));
+        btnDodajGUIis.setBounds(43, 582, widthKlawisz, 50);
+        Kategorie.add(btnDodajGUIis);
 
 //=======================  Elementy w panelu Wyszukiwanie  ===========================================
 
@@ -242,7 +251,7 @@ public class GUI {
             }
         });
         btnPowrotDoMenu2.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnPowrotDoMenu2.setBounds(702, 563, 200, 50);
+        btnPowrotDoMenu2.setBounds(702, 563, widthKlawisz, 50);
         Wyszukiwanie.add(btnPowrotDoMenu2);
 
         SearchField = new JTextField();
@@ -250,10 +259,10 @@ public class GUI {
         Wyszukiwanie.add(SearchField);
         SearchField.setColumns(10);
 
-        ImageIcon szukajImage = new ImageIcon("Lupamala.png");  //TODO wstawiæ lupe od Jacka.
+        ImageIcon szukajImage = new ImageIcon("Lupamala.png");
         JButton btnSzukaj = new JButton("Szukaj", szukajImage); //moze byc tez bez napisu
         btnSzukaj.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnSzukaj.setBounds(428, 400, 175, 102);  //poprzednie ustawienia: btnSzukaj.setBounds(428, 400, 98, 39);
+        btnSzukaj.setBounds(428, 400, 98, 39);
         Wyszukiwanie.add(btnSzukaj);
 
 //=======================  Elementy w panelu Autorzy  ================================================
@@ -266,7 +275,7 @@ public class GUI {
             }
         });
         btnPowrotDoMenu3.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnPowrotDoMenu3.setBounds(702, 563, 200, 50);
+        btnPowrotDoMenu3.setBounds(702, 563, widthKlawisz, 50);
         Autorzy.add(btnPowrotDoMenu3);
         Autorzy.setVisible(false);
 
@@ -280,7 +289,7 @@ public class GUI {
             }
         });
         btnPowrotDoMenu4.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnPowrotDoMenu4.setBounds(702, 563, 200, 50);
+        btnPowrotDoMenu4.setBounds(702, 563, widthKlawisz, 50);
         Zupy.add(btnPowrotDoMenu4);
 
         JButton btnPowrotDoKategorii = new JButton("Powr\u00F3t do kategorii");
@@ -291,7 +300,7 @@ public class GUI {
             }
         });
         btnPowrotDoKategorii.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnPowrotDoKategorii.setBounds(50, 563, 200, 50);
+        btnPowrotDoKategorii.setBounds(50, 563, widthKlawisz, 50);
         Zupy.add(btnPowrotDoKategorii);
 
 //=======================  Elementy w panelu Dania Miesne ==============================================
@@ -304,7 +313,7 @@ public class GUI {
             }
         });
         btnPowortDoMenu5.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnPowortDoMenu5.setBounds(702, 563, 200, 50);
+        btnPowortDoMenu5.setBounds(702, 563, widthKlawisz, 50);
         DaniaMiesne.add(btnPowortDoMenu5);
 
         JButton btnPowrotDoKategorii2 = new JButton("Powr\u00F3t do kategorii");
@@ -315,7 +324,7 @@ public class GUI {
             }
         });
         btnPowrotDoKategorii2.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnPowrotDoKategorii2.setBounds(50, 563, 200, 50);
+        btnPowrotDoKategorii2.setBounds(50, 563, widthKlawisz, 50);
         DaniaMiesne.add(btnPowrotDoKategorii2);
 
 //=======================  Eleemnty w panelu Ciasta i desery  =============================================
@@ -328,7 +337,7 @@ public class GUI {
             }
         });
         btnPowrotDoMenu5.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnPowrotDoMenu5.setBounds(702, 563, 200, 50);
+        btnPowrotDoMenu5.setBounds(702, 563, widthKlawisz, 50);
         CiastaIDesery.add(btnPowrotDoMenu5);
 
         JButton btnPowrotDoKategorii3 = new JButton("Powr\u00F3t do kategorii");
@@ -339,7 +348,7 @@ public class GUI {
             }
         });
         btnPowrotDoKategorii3.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnPowrotDoKategorii3.setBounds(50, 563, 200, 50);
+        btnPowrotDoKategorii3.setBounds(50, 563, widthKlawisz, 50);
         CiastaIDesery.add(btnPowrotDoKategorii3);
 
 //=======================  Elementy w panelu Napoje  =======================================================
@@ -352,7 +361,7 @@ public class GUI {
             }
         });
         btnPowrotDoMenu6.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnPowrotDoMenu6.setBounds(702, 563, 200, 50);
+        btnPowrotDoMenu6.setBounds(702, 563, widthKlawisz, 50);
         Napoje.add(btnPowrotDoMenu6);
 
         JButton btnPowrotDoKategorii4 = new JButton("Powr\u00F3t do kategorii");
@@ -363,7 +372,7 @@ public class GUI {
             }
         });
         btnPowrotDoKategorii4.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnPowrotDoKategorii4.setBounds(50, 563, 200, 50);
+        btnPowrotDoKategorii4.setBounds(50, 563, widthKlawisz, 50);
         Napoje.add(btnPowrotDoKategorii4);
 
 //=======================  Elementy w panelu Ryby i owoce morza  =============================================
@@ -376,7 +385,7 @@ public class GUI {
             }
         });
         btnPowrotDoMenu7.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnPowrotDoMenu7.setBounds(702, 563, 200, 50);
+        btnPowrotDoMenu7.setBounds(702, 563, widthKlawisz, 50);
         RybyIOwoceMorza.add(btnPowrotDoMenu7);
 
         JButton btnPowrotDoKategorii5 = new JButton("Powr\u00F3t do kategorii");
@@ -387,7 +396,7 @@ public class GUI {
             }
         });
         btnPowrotDoKategorii5.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnPowrotDoKategorii5.setBounds(50, 563, 200, 50);
+        btnPowrotDoKategorii5.setBounds(50, 563, widthKlawisz, 50);
         RybyIOwoceMorza.add(btnPowrotDoKategorii5);
 
 //======================= Elementy w panelu Salatki i przystawki  ==============================================
@@ -400,7 +409,7 @@ public class GUI {
             }
         });
         btnPowrotDoMenu8.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnPowrotDoMenu8.setBounds(702, 563, 200, 50);
+        btnPowrotDoMenu8.setBounds(702, 563, widthKlawisz, 50);
         SalatkiIPrzystawki.add(btnPowrotDoMenu8);
 
         JButton btnPowrotDoKategorii6 = new JButton("Powr\u00F3t do kategorii");
@@ -411,33 +420,33 @@ public class GUI {
             }
         });
         btnPowrotDoKategorii6.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnPowrotDoKategorii6.setBounds(50, 563, 200, 50);
+        btnPowrotDoKategorii6.setBounds(50, 563, widthKlawisz, 50);
         SalatkiIPrzystawki.add(btnPowrotDoKategorii6);
 
-//=======================  Elementy w panelu Dodawanie przepisow  ===============================================
+//=======================  Elementy w panelu Dodawanie GUIisow  ===============================================
 
         JButton btnPowrotDoMenu9 = new JButton("Powr\u00F3t do menu");
         btnPowrotDoMenu9.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                DodawaniePrzepisow.setVisible(false);
+                DodawanieGUIisow.setVisible(false);
                 MenuGlowne.setVisible(true);
             }
         });
         btnPowrotDoMenu9.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnPowrotDoMenu9.setBounds(702, 563, 200, 50);
-        DodawaniePrzepisow.add(btnPowrotDoMenu9);
+        btnPowrotDoMenu9.setBounds(702, 563, widthKlawisz, 50);
+        DodawanieGUIisow.add(btnPowrotDoMenu9);
 
         JButton btnPowrotDoKategorii7 = new JButton("Powr\u00F3t do kategorii");
         btnPowrotDoKategorii7.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                DodawaniePrzepisow.setVisible(false);
+                DodawanieGUIisow.setVisible(false);
                 Kategorie.setVisible(true);
             }
         });
         btnPowrotDoKategorii7.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnPowrotDoKategorii7.setBounds(50, 563, 200, 50);
-        DodawaniePrzepisow.add(btnPowrotDoKategorii7);
-        DodawaniePrzepisow.setVisible(false);
+        btnPowrotDoKategorii7.setBounds(50, 563, widthKlawisz, 50);
+        DodawanieGUIisow.add(btnPowrotDoKategorii7);
+        DodawanieGUIisow.setVisible(false);
 
 
     }
