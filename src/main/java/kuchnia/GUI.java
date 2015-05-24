@@ -305,10 +305,72 @@ public class GUI {
                 MenuGlowne.setVisible(true);
             }
         });
+
+        Image marcinImage = new ImageIcon(this.getClass().getResource("/Marcin.png")).getImage();
+        Image wojtekImage = new ImageIcon(this.getClass().getResource("/Marcin.png")).getImage();
+        Image jacekImage = new ImageIcon(this.getClass().getResource("/Marcin.png")).getImage();
+        Image pawelImage = new ImageIcon(this.getClass().getResource("/Marcin.png")).getImage();
+        Image arturImage = new ImageIcon(this.getClass().getResource("/Marcin.png")).getImage();
+
         btnPowrotDoMenu3.setFont(new Font("Calibri", Font.PLAIN, 17));
         btnPowrotDoMenu3.setBounds(859, 611, widthKlawisz, 50);
         Autorzy.add(btnPowrotDoMenu3);
         Autorzy.setVisible(false);
+
+        JLabel lblWojciechZachwieja = new JLabel("");
+        lblWojciechZachwieja.setBounds(142, 53, 171, 217);
+        Autorzy.add(lblWojciechZachwieja);
+        lblWojciechZachwieja.setIcon(new ImageIcon(wojtekImage));
+
+        JLabel lblMarcinStyczen = new JLabel("");
+        lblMarcinStyczen.setBounds(751, 53, 171, 217);
+        Autorzy.add(lblMarcinStyczen);
+        lblMarcinStyczen.setIcon(new ImageIcon(marcinImage));
+
+        JLabel lblArturUrbanowicz = new JLabel("");
+        lblArturUrbanowicz.setBounds(456, 53, 171, 217);
+        Autorzy.add(lblArturUrbanowicz);
+        lblArturUrbanowicz.setIcon(new ImageIcon(arturImage));
+
+        JLabel lblJacekZawodny = new JLabel("");
+        lblJacekZawodny.setBounds(300, 323, 171, 217);
+        Autorzy.add(lblJacekZawodny);
+        lblJacekZawodny.setIcon(new ImageIcon(jacekImage));
+
+        JLabel lblPawelWilczek = new JLabel("");
+        lblPawelWilczek.setBounds(600, 323, 171, 217);
+        Autorzy.add(lblPawelWilczek);
+        lblPawelWilczek.setIcon(new ImageIcon(pawelImage));
+
+        JLabel lblJacekZawodny_1 = new JLabel("Jacek 'Niko\u015B' Zawodny");
+        lblJacekZawodny_1.setFont(new Font("Monotype Corsiva", Font.PLAIN, 24));
+        lblJacekZawodny_1.setVerticalAlignment(SwingConstants.TOP);
+        lblJacekZawodny_1.setBounds(280, 551, 215, 29);
+        Autorzy.add(lblJacekZawodny_1);
+
+        JLabel lblWojciechZachwieja_1 = new JLabel("Wojciech 'Pseudonim' Zachwieja");
+        lblWojciechZachwieja_1.setFont(new Font("Monotype Corsiva", Font.PLAIN, 24));
+        lblWojciechZachwieja_1.setVerticalAlignment(SwingConstants.TOP);
+        lblWojciechZachwieja_1.setBounds(106, 272, 278, 31);
+        Autorzy.add(lblWojciechZachwieja_1);
+
+        JLabel lblArturUrbanowicz_1 = new JLabel("Artur 'Pseudonim' Urbanowicz");
+        lblArturUrbanowicz_1.setFont(new Font("Monotype Corsiva", Font.PLAIN, 24));
+        lblArturUrbanowicz_1.setVerticalAlignment(SwingConstants.TOP);
+        lblArturUrbanowicz_1.setBounds(420, 272, 267, 29);
+        Autorzy.add(lblArturUrbanowicz_1);
+
+        JLabel lblMarcinStycze = new JLabel("Marcin 'Luter' Stycze\u0144");
+        lblMarcinStycze.setFont(new Font("Monotype Corsiva", Font.PLAIN, 24));
+        lblMarcinStycze.setVerticalAlignment(SwingConstants.TOP);
+        lblMarcinStycze.setBounds(736, 272, 256, 29);
+        Autorzy.add(lblMarcinStycze);
+
+        JLabel lblPaweWilczek = new JLabel("Pawe\u0142 'Magik' Wilczek");
+        lblPaweWilczek.setFont(new Font("Monotype Corsiva", Font.PLAIN, 24));
+        lblPaweWilczek.setVerticalAlignment(SwingConstants.TOP);
+        lblPaweWilczek.setBounds(582, 551, 306, 29);
+        Autorzy.add(lblPaweWilczek);
 
 //=======================  Elementy w panelu Zupy  ====================================================
 
