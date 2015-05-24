@@ -1,11 +1,8 @@
 package kuchnia;
-import java.awt.EventQueue;
+import java.awt.*;
 
 import javax.swing.*;
-import java.awt.CardLayout;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Font;
+import java.awt.event.*;
 //
 
 public class GUI {
@@ -18,10 +15,17 @@ public class GUI {
     private JTextField textFieldNazwaPrzepisu;
     private JTextField textFieldCzasPrzygotowania;
     private JTextField textFieldLiczbaOsob;
+    private JPanel Przepis;
+    private JLabel lblNic;
+    private Image gwSzaraImage;
+    private Image gwZoltaImage;
+    private JLabel labelGwiazdki;
+    private JLabel gwiazdka1, gwiazdka2, gwiazdka3, gwiazdka4, gwiazdka5;
 
-    /**
-     * Launch the application.
-     */
+
+    private int ocenaTemp=0;
+
+    /*----------------MAIN-----------------*/
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -34,10 +38,9 @@ public class GUI {
             }
         });
     }
+    /*----------------MAIN-----------------*/
 
-    /**
-     * Create the application.
-     */
+
     public GUI() {
         initialize();
     }
@@ -59,8 +62,6 @@ public class GUI {
         frame.getContentPane().add(MenuGlowne, "Menu Glowne");
         MenuGlowne.setLayout(null);
         MenuGlowne.setVisible(true);
-
-
 
         final JPanel Kategorie = new JPanel();
         frame.getContentPane().add(Kategorie, "Kategorie");
@@ -111,6 +112,11 @@ public class GUI {
         frame.getContentPane().add(DodawaniePrzepisow, "Dodawanie Przepisow");
         DodawaniePrzepisow.setLayout(null);
 
+        Przepis = new JPanel(); //TODO nie final bo musze sie pozniej odwolac do klasy obslugujaca myszke
+        frame.getContentPane().add(Przepis, "Przepis");
+        Przepis.setLayout(null);
+        Przepis.setVisible(false);
+
 //======================= Elementy w panelu Menu Glowne  =========================================
 
         JButton btnGUIisy = new JButton("Przepisy");
@@ -121,7 +127,7 @@ public class GUI {
                 Kategorie.setVisible(true);
             }
         });
-        btnGUIisy.setBounds(437, 240, widthKlawisz, 50);
+        btnGUIisy.setBounds(780, 156, widthKlawisz, 50);
         MenuGlowne.add(btnGUIisy);
 
         JButton btnWyszukiwarka = new JButton("Wyszukiwarka");
@@ -132,7 +138,7 @@ public class GUI {
             }
         });
         btnWyszukiwarka.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnWyszukiwarka.setBounds(437, 335, widthKlawisz, 50);
+        btnWyszukiwarka.setBounds(780, 256, widthKlawisz, 50);
         MenuGlowne.add(btnWyszukiwarka);
 
         JButton btnAutorzy = new JButton("Autorzy");
@@ -143,7 +149,7 @@ public class GUI {
             }
         });
         btnAutorzy.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnAutorzy.setBounds(437, 440, widthKlawisz, 50);
+        btnAutorzy.setBounds(780, 363, widthKlawisz, 50);
         MenuGlowne.add(btnAutorzy);
 
         JButton btnWyjscie = new JButton("Wyjscie");
@@ -153,8 +159,28 @@ public class GUI {
             }
         });
         btnWyjscie.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnWyjscie.setBounds(437, 540, widthKlawisz, 50);
+        btnWyjscie.setBounds(780, 474, widthKlawisz, 50);
         MenuGlowne.add(btnWyjscie);
+
+        //TYMCZASOWO:
+        JButton btnPrzepisyKonkretne = new JButton("PrzepisyKonkretne");
+        btnPrzepisyKonkretne.setFont(new Font("Calibri", Font.PLAIN, 17));
+        btnPrzepisyKonkretne.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                MenuGlowne.setVisible(false);
+                Przepis.setVisible(true);
+            }
+        });
+        btnPrzepisyKonkretne.setBounds(150, 156, widthKlawisz, 50);
+        MenuGlowne.add(btnPrzepisyKonkretne);
+        //TYMCZASOWO
+
+        JLabel loggo = new JLabel("");
+        Image logoImage = new ImageIcon(this.getClass().getResource("/Logo.png")).getImage();
+        loggo.setIcon(new ImageIcon(logoImage));
+        loggo.setBounds(59, 156, 619, 369);
+        MenuGlowne.add(loggo);
+
 
 //=======================  Elementy w panelu Kategorie  =============================================
 
@@ -537,5 +563,155 @@ public class GUI {
         DodawaniePrzepisow.setVisible(false);
 
 
+//=======================  Elementy w panelu PRZEPIS  ===============================================
+        /* Gwiazdki do panelu PRZEPIS */
+        gwSzaraImage = new ImageIcon(this.getClass().getResource("/Szara.png")).getImage();
+        gwZoltaImage = new ImageIcon(this.getClass().getResource("/Zolta.png")).getImage();
+
+        Handlerclass handler = new Handlerclass();
+        //Przepis.addMouseListener(handler);
+        //Przepis.addMouseMotionListener(handler);
+
+        labelGwiazdki = new JLabel("");
+        labelGwiazdki.setBounds(768, 621, 268, 40);
+        Przepis.add(labelGwiazdki);
+
+        gwiazdka1 = new JLabel("");
+        gwiazdka1.setBounds(768, 621, 52, 40);
+        Przepis.add(gwiazdka1);
+        gwiazdka1.setIcon(new ImageIcon(gwSzaraImage));
+
+        gwiazdka2 = new JLabel("");
+        gwiazdka2.setBounds(825, 621, 52, 40);
+        Przepis.add(gwiazdka2);
+        //Image gwZoltaImage = new ImageIcon(this.getClass().getResource("/Zolta.png")).getImage();
+        gwiazdka2.setIcon(new ImageIcon(gwSzaraImage));
+
+        gwiazdka3 = new JLabel("");
+        gwiazdka3.setBounds(880, 621, 52, 40);
+        Przepis.add(gwiazdka3);
+        //Image logoImage = new ImageIcon(this.getClass().getResource("/Logo.png")).getImage();
+        gwiazdka3.setIcon(new ImageIcon(gwSzaraImage));
+
+        gwiazdka4 = new JLabel("");
+        gwiazdka4.setBounds(932, 621, 52, 40);
+        Przepis.add(gwiazdka4);
+        //Image logoImage = new ImageIcon(this.getClass().getResource("/Logo.png")).getImage();
+        gwiazdka4.setIcon(new ImageIcon(gwSzaraImage));
+
+        gwiazdka5 = new JLabel("");
+        gwiazdka5.setBounds(984, 621, 52, 40);
+        Przepis.add(gwiazdka5);
+        //Image logoImage = new ImageIcon(this.getClass().getResource("/Logo.png")).getImage();
+        gwiazdka5.setIcon(new ImageIcon(gwSzaraImage));
+
+        labelGwiazdki.addMouseListener(handler);
+        labelGwiazdki.addMouseMotionListener(handler);
+
+        /* Gwiazdki do panelu PRZEPIS */
+
+        lblNic = new JLabel("\t\t\t\t\r\n\t\t\r\n\r\n\t\t\t\t\t\tNIC");     //TODO usunac pozniej
+        lblNic.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+        lblNic.setBounds(472, 188, 237, 139);
+        Przepis.add(lblNic);
+
     }
+
+    //KLASA do obs³ugi zdarzeñ MYSZKI:
+    private class Handlerclass implements MouseMotionListener, MouseListener {
+        private int gwiazdkaWys1=0, gwiazdkaWys2=40;
+        int X=0, Y=0;
+        public void mouseClicked(MouseEvent e) {    //klikniecie LPM.
+            X = e.getX();
+            System.out.println("X: " + X);
+            Y = e.getY();
+            System.out.println("Y " + Y);
+            if (X >= 0 && X <= 52 && Y >= gwiazdkaWys1 && Y <= gwiazdkaWys2) {
+                ocenaTemp += 1;
+                System.out.println("OCENA1: " + ocenaTemp);
+                lblNic.setText(String.format("Cliced at %d , %d", e.getX(), e.getY()));
+            }
+            else if (X >= 109 - 52 && X <= 109 && Y >= gwiazdkaWys1 && Y <= gwiazdkaWys2) {
+                ocenaTemp += 1;
+                System.out.println("OCENA2: " + ocenaTemp);
+                lblNic.setText(String.format("Cliced at %d , %d", e.getX(), e.getY()));
+            }
+            else if (X >= 164 - 52 && X <= 164 && Y >= gwiazdkaWys1 && Y <= gwiazdkaWys2) {
+                ocenaTemp += 1;
+                System.out.println("OCENA3: " + ocenaTemp);
+                lblNic.setText(String.format("Cliced at %d , %d", e.getX(), e.getY()));
+            }
+            else if (X >= 216 - 52 && X <= 216 && Y >= gwiazdkaWys1 && Y <= gwiazdkaWys2) {
+                ocenaTemp += 1;
+                System.out.println("OCENA4: " + ocenaTemp);
+                lblNic.setText(String.format("Cliced at %d , %d", e.getX(), e.getY()));
+            }
+            else if (X >= 268 - 52 && X <= 268 && Y >= gwiazdkaWys1 && Y <= gwiazdkaWys2) {
+                ocenaTemp += 1;
+                System.out.println("OCENA5: " + ocenaTemp);
+                lblNic.setText(String.format("Cliced at %d , %d", e.getX(), e.getY()));
+            }
+        }
+
+        public void mouseEntered(MouseEvent e) {    //wejscie przez kursor w odpowiednia strefe
+                    X = e.getX();
+                    System.out.println("X: " + X);
+                    Y = e.getY();
+                    System.out.println("Y " + Y);
+                    if (X >= 0 && X <= 52 && Y >= gwiazdkaWys1 && Y <= gwiazdkaWys2) {
+                        gwiazdka1.setIcon(new ImageIcon(gwZoltaImage));
+                        lblNic.setText("STREFA 1");
+                        System.out.println("S1");
+                        return;
+                    } else if (X >= 109 - 52 && X <= 109 && Y >= gwiazdkaWys1 && Y <= gwiazdkaWys2) {
+                        gwiazdka1.setIcon(new ImageIcon(gwZoltaImage));
+                        gwiazdka2.setIcon(new ImageIcon(gwZoltaImage));
+                        lblNic.setText("STREFA 2");
+                        System.out.println("S2");
+                    } else if (X >= 164 - 52 && X <= 164 && Y >= gwiazdkaWys1 && Y <= gwiazdkaWys2) {
+                        gwiazdka1.setIcon(new ImageIcon(gwZoltaImage));
+                        gwiazdka2.setIcon(new ImageIcon(gwZoltaImage));
+                        gwiazdka3.setIcon(new ImageIcon(gwZoltaImage));
+                        lblNic.setText("STREFA 3");
+                        System.out.println("S3");
+                    } else if (X >= 216 - 52 && X <= 216 && Y >= gwiazdkaWys1 && Y <= gwiazdkaWys2) {
+                        gwiazdka1.setIcon(new ImageIcon(gwZoltaImage));
+                        gwiazdka2.setIcon(new ImageIcon(gwZoltaImage));
+                        gwiazdka3.setIcon(new ImageIcon(gwZoltaImage));
+                        gwiazdka4.setIcon(new ImageIcon(gwZoltaImage));
+                        lblNic.setText("STREFA 4");
+                        System.out.println("S4");
+                    } else if (X >= 268 - 52 && X <= 268 && Y >= gwiazdkaWys1 && Y <= gwiazdkaWys2) {
+                        gwiazdka1.setIcon(new ImageIcon(gwZoltaImage));
+                        gwiazdka2.setIcon(new ImageIcon(gwZoltaImage));
+                        gwiazdka3.setIcon(new ImageIcon(gwZoltaImage));
+                        gwiazdka4.setIcon(new ImageIcon(gwZoltaImage));
+                        gwiazdka5.setIcon(new ImageIcon(gwZoltaImage));
+                        lblNic.setText("STREFA 5");
+                        System.out.println("S5");
+                    }
+                    System.out.println("SKONCZYLEM");
+            return;
+        }
+
+        public void mouseExited(MouseEvent e) {     //wyjscie ze kursora strefy
+            gwiazdka1.setIcon(new ImageIcon(gwSzaraImage)); gwiazdka2.setIcon(new ImageIcon(gwSzaraImage));
+            gwiazdka3.setIcon(new ImageIcon(gwSzaraImage)); gwiazdka4.setIcon(new ImageIcon(gwSzaraImage));
+            gwiazdka5.setIcon(new ImageIcon(gwSzaraImage));
+            lblNic.setText("OUT STREFA 1");
+            System.out.println("OUT S1");
+
+        }
+
+        public void mousePressed(MouseEvent e) {}   //trzymanie LPM
+        public void mouseReleased(MouseEvent e) {}  //zwolnienie(nie trzymanie) LPM
+        public void mouseDragged(MouseEvent e) {
+            //Screen.mse = new Point ((e.getX()) + ((Frame.size.width - Screen.myWidth)/2), (e.getY()) + ((Frame.size.height - (Screen.myHeight)) - (Frame.size.width - Screen.myWidth)/2));
+        }
+        public void mouseMoved(MouseEvent e) {
+            //Screen.mse = new Point ((e.getX()) - ((Frame.size.width - Screen.myWidth)/2), (e.getY()) - ((Frame.size.height - (Screen.myHeight)) - (Frame.size.width - Screen.myWidth)/2));
+        }
+
+    }
+
 }
