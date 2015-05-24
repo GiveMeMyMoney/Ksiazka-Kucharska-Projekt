@@ -354,7 +354,7 @@ public class GUI {
         lblWojciechZachwieja_1.setBounds(106, 272, 278, 31);
         Autorzy.add(lblWojciechZachwieja_1);
 
-        JLabel lblArturUrbanowicz_1 = new JLabel("Artur 'Pseudonim' Urbanowicz");
+        JLabel lblArturUrbanowicz_1 = new JLabel("Artur 'asapa' Urbanowicz");
         lblArturUrbanowicz_1.setFont(new Font("Monotype Corsiva", Font.PLAIN, 24));
         lblArturUrbanowicz_1.setVerticalAlignment(SwingConstants.TOP);
         lblArturUrbanowicz_1.setBounds(420, 272, 267, 29);
