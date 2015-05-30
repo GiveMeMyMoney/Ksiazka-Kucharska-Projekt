@@ -1,8 +1,12 @@
 package kuchnia;
 import java.awt.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 //
 
 public class GUI {
@@ -22,6 +26,7 @@ public class GUI {
     private JLabel labelGwiazdki;
     private JLabel gwiazdka1, gwiazdka2, gwiazdka3, gwiazdka4, gwiazdka5;
     private JButton btnPrzepisowy, btnPrzepisowy2;
+
 
 
     private int ocenaTemp=0;
@@ -57,7 +62,7 @@ public class GUI {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(new CardLayout(0, 0));
 
-//=======================  Panele  =============================================================
+//=======================  Panele  ============================================================//
 
         final JPanel MenuGlowne = new JPanel();
         frame.getContentPane().add(MenuGlowne, "Menu Glowne");
@@ -119,6 +124,7 @@ public class GUI {
         Przepis.setVisible(false);
 
 //======================= Elementy w panelu Menu Glowne  =========================================
+
 
         JButton btnGUIisy = new JButton("Przepisy");
         btnGUIisy.setFont(new Font("Calibri", Font.PLAIN, 17));
@@ -820,41 +826,6 @@ public class GUI {
                 System.out.println("S1");
                 return;
             }
-
-
-                  /*
-
-                } else if (X >= 109 - 52 && X <= 109 && Y >= gwiazdkaWys1 && Y <= gwiazdkaWys2) {
-                    gwiazdka1.setIcon(new ImageIcon(gwZoltaImage));
-                    gwiazdka2.setIcon(new ImageIcon(gwZoltaImage));
-                    lblNic.setText("STREFA 2");
-                    System.out.println("S2");
-                } else if (X >= 164 - 52 && X <= 164 && Y >= gwiazdkaWys1 && Y <= gwiazdkaWys2) {
-                    gwiazdka1.setIcon(new ImageIcon(gwZoltaImage));
-                    gwiazdka2.setIcon(new ImageIcon(gwZoltaImage));
-                    gwiazdka3.setIcon(new ImageIcon(gwZoltaImage));
-                    lblNic.setText("STREFA 3");
-                    System.out.println("S3");
-                } else if (X >= 216 - 52 && X <= 216 && Y >= gwiazdkaWys1 && Y <= gwiazdkaWys2) {
-                    gwiazdka1.setIcon(new ImageIcon(gwZoltaImage));
-                    gwiazdka2.setIcon(new ImageIcon(gwZoltaImage));
-                    gwiazdka3.setIcon(new ImageIcon(gwZoltaImage));
-                    gwiazdka4.setIcon(new ImageIcon(gwZoltaImage));
-                    lblNic.setText("STREFA 4");
-                    System.out.println("S4");
-                } else if (X >= 268 - 52 && X <= 268 && Y >= gwiazdkaWys1 && Y <= gwiazdkaWys2) {
-                    gwiazdka1.setIcon(new ImageIcon(gwZoltaImage));
-                    gwiazdka2.setIcon(new ImageIcon(gwZoltaImage));
-                    gwiazdka3.setIcon(new ImageIcon(gwZoltaImage));
-                    gwiazdka4.setIcon(new ImageIcon(gwZoltaImage));
-                    gwiazdka5.setIcon(new ImageIcon(gwZoltaImage));
-                    lblNic.setText("STREFA 5");
-                    System.out.println("S5");
-                }
-                System.out.println("SKONCZYLEM");
-                */
-
-            return;
         }
 
         public void mouseExited(MouseEvent e) {     //wyjscie ze kursora strefy
