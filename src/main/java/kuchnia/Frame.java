@@ -14,6 +14,7 @@ import java.awt.geom.Arc2D;
 public class Frame extends JFrame {
 
     public static void main(String[] args) {
+    /*
         querySQL[] query = new querySQL[10];
         for(int i = 0;i < 10;++i)
         {
@@ -32,7 +33,7 @@ public class Frame extends JFrame {
             while(iter2.hasNext())
             {
                 objectSQL c = iter2.next();
-              //  System.out.println(c.toString());
+                System.out.println(c.toString());
             }
             CollectionDishes CiastaDesery = new CollectionDishes(query[2].selectDishes("CIASTA_DESERY"));
             IteratorDishes iter3 = CiastaDesery.iterator(0);
@@ -56,29 +57,33 @@ public class Frame extends JFrame {
                 System.out.println(c.toString());
             }
             CollectionDishes RybyOwoceMorza = new CollectionDishes(query[5].selectDishes("RYBY_OWOCE_MORZA"));
-            IteratorDishes iter6 = RybyOwoceMorza.iterator(0);
-            while(iter6.hasNext())
+            //IteratorDishes iter6 = RybyOwoceMorza.iterator(3);
+            //while(iter6.hasNext())
             {
-                objectSQL c = iter6.next();
-                System.out.println(c.toString());
+              //  objectSQL c = iter6.next();
+             //   System.out.println(c.toString());
             }
-            EventQueue.invokeLater(new Runnable() {
-                public void run() {
+
+            //EventQueue.invokeLater(new Runnable() {
+               // public void run() {
                     try {
                         GUI window = new GUI();
                         window.frame.setVisible(true);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                }
-            });
+               // }
+           // });
         }
+
         finally
         {
             for (int i = 0;i < 10;++i)
                 if(query[i].getConnection() != null) try { query[i].getConnection().close(); } catch (Exception e) { e.printStackTrace(); }
 
         }
+        */
     }
+
 
 }

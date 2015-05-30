@@ -1,12 +1,8 @@
-package kuchnia;
-import java.awt.*;
+ package kuchnia;
+        import java.awt.*;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+        import javax.swing.*;
+        import java.awt.event.*;
 //
 
 public class GUI {
@@ -21,8 +17,8 @@ public class GUI {
     private JTextField textFieldLiczbaOsob;
     private JPanel Przepis;
     private JLabel lblNic;
-    private Image gwSzaraImage;
-    private Image gwZoltaImage;
+    private Icon gwSzaraIcon;
+    private Icon gwZoltaIcon;
     private JLabel labelGwiazdki;
     private JLabel gwiazdka1, gwiazdka2, gwiazdka3, gwiazdka4, gwiazdka5;
     private JButton btnPrzepisowy, btnPrzepisowy2;
@@ -185,8 +181,8 @@ public class GUI {
         //TYMCZASOWO
 
         JLabel loggo = new JLabel("");
-        Image logoImage = new ImageIcon(this.getClass().getResource("/Logo.png")).getImage();
-        loggo.setIcon(new ImageIcon(logoImage));
+        Icon logoIcon = new ImageIcon("Logo.png");
+        loggo.setIcon(logoIcon);
         loggo.setBounds(59, 156, 619, 369);
         MenuGlowne.add(loggo);
 
@@ -315,11 +311,11 @@ public class GUI {
             }
         });
 
-        Image marcinImage = new ImageIcon(this.getClass().getResource("/Marcin.png")).getImage();
-        Image wojtekImage = new ImageIcon(this.getClass().getResource("/Marcin.png")).getImage();
-        Image jacekImage = new ImageIcon(this.getClass().getResource("/Marcin.png")).getImage();
-        Image pawelImage = new ImageIcon(this.getClass().getResource("/Marcin.png")).getImage();
-        Image arturImage = new ImageIcon(this.getClass().getResource("/Marcin.png")).getImage();
+        Icon marcinIcon = new ImageIcon("Marcin.png");
+        Icon wojtekIcon = new ImageIcon("Marcin.png");
+        Icon jacekIcon = new ImageIcon("Marcin.png");
+        Icon pawelIcon = new ImageIcon("Marcin.png");
+        Icon arturIcon = new ImageIcon("Marcin.png");
 
         btnPowrotDoMenu3.setFont(new Font("Calibri", Font.PLAIN, 17));
         btnPowrotDoMenu3.setBounds(859, 611, widthKlawisz, 50);
@@ -329,27 +325,27 @@ public class GUI {
         JLabel lblWojciechZachwieja = new JLabel("");
         lblWojciechZachwieja.setBounds(142, 53, 171, 217);
         Autorzy.add(lblWojciechZachwieja);
-        lblWojciechZachwieja.setIcon(new ImageIcon(wojtekImage));
+        lblWojciechZachwieja.setIcon(wojtekIcon);
 
         JLabel lblMarcinStyczen = new JLabel("");
         lblMarcinStyczen.setBounds(751, 53, 171, 217);
         Autorzy.add(lblMarcinStyczen);
-        lblMarcinStyczen.setIcon(new ImageIcon(marcinImage));
+        lblMarcinStyczen.setIcon(marcinIcon);
 
         JLabel lblArturUrbanowicz = new JLabel("");
         lblArturUrbanowicz.setBounds(456, 53, 171, 217);
         Autorzy.add(lblArturUrbanowicz);
-        lblArturUrbanowicz.setIcon(new ImageIcon(arturImage));
+        lblArturUrbanowicz.setIcon(arturIcon);
 
         JLabel lblJacekZawodny = new JLabel("");
         lblJacekZawodny.setBounds(300, 323, 171, 217);
         Autorzy.add(lblJacekZawodny);
-        lblJacekZawodny.setIcon(new ImageIcon(jacekImage));
+        lblJacekZawodny.setIcon(jacekIcon);
 
         JLabel lblPawelWilczek = new JLabel("");
         lblPawelWilczek.setBounds(600, 323, 171, 217);
         Autorzy.add(lblPawelWilczek);
-        lblPawelWilczek.setIcon(new ImageIcon(pawelImage));
+        lblPawelWilczek.setIcon(pawelIcon);
 
         JLabel lblJacekZawodny_1 = new JLabel("Jacek 'Niko\u015B' Zawodny");
         lblJacekZawodny_1.setFont(new Font("Monotype Corsiva", Font.PLAIN, 24));
@@ -701,8 +697,8 @@ public class GUI {
 
 //=======================  Elementy w panelu PRZEPIS  ===============================================
         /* Gwiazdki do panelu PRZEPIS */
-        gwSzaraImage = new ImageIcon(this.getClass().getResource("/Szara.png")).getImage();
-        gwZoltaImage = new ImageIcon(this.getClass().getResource("/Zolta.png")).getImage();
+        gwSzaraIcon = new ImageIcon("Szara.png");
+        gwZoltaIcon = new ImageIcon("Zolta.png");
 
         Handlerclass handler = new Handlerclass();
         //Przepis.addMouseListener(handler);
@@ -769,33 +765,33 @@ public class GUI {
         Przepis.add(btnPowrotMenu);
 
         gwiazdka1 = new JLabel("");
-        gwiazdka1.setBounds(382, 621, 52, 40);;
+        gwiazdka1.setBounds(382, 621, 52, 40);
         Przepis.add(gwiazdka1);
-        gwiazdka1.setIcon(new ImageIcon(gwSzaraImage));
+        gwiazdka1.setIcon(gwSzaraIcon);
 
         gwiazdka2 = new JLabel("");
         gwiazdka2.setBounds(444, 621, 52, 40);
         Przepis.add(gwiazdka2);
-        //Image gwZoltaImage = new ImageIcon(this.getClass().getResource("/Zolta.png")).getImage();
-        gwiazdka2.setIcon(new ImageIcon(gwSzaraImage));
+        //Icon gwZoltaIcon = new ImageIcon("/Zolta.png");
+        gwiazdka2.setIcon(gwSzaraIcon);
 
         gwiazdka3 = new JLabel("");
         gwiazdka3.setBounds(506, 621, 52, 40);
         Przepis.add(gwiazdka3);
-        //Image logoImage = new ImageIcon(this.getClass().getResource("/Logo.png")).getImage();
-        gwiazdka3.setIcon(new ImageIcon(gwSzaraImage));
+        //Icon logoImage = new ImageIcon("/Logo.png");
+        gwiazdka3.setIcon(gwSzaraIcon);
 
         gwiazdka4 = new JLabel("");
         gwiazdka4.setBounds(568, 621, 52, 40);
         Przepis.add(gwiazdka4);
-        //Image logoImage = new ImageIcon(this.getClass().getResource("/Logo.png")).getImage();
-        gwiazdka4.setIcon(new ImageIcon(gwSzaraImage));
+        //Icon logoIcon2 = new ImageIcon("/Logo.png");
+        gwiazdka4.setIcon(gwSzaraIcon);
 
         gwiazdka5 = new JLabel("");
         gwiazdka5.setBounds(630, 621, 52, 40);
         Przepis.add(gwiazdka5);
-        //Image logoImage = new ImageIcon(this.getClass().getResource("/Logo.png")).getImage();
-        gwiazdka5.setIcon(new ImageIcon(gwSzaraImage));
+        //Icon logoIcon3 = new ImageIcon("/Logo.png");
+        gwiazdka5.setIcon(gwSzaraIcon);
 
         gwiazdka1.addMouseListener(handler);
         gwiazdka1.addMouseMotionListener(handler);
@@ -821,7 +817,7 @@ public class GUI {
 
 
 
-    //KLASA do obs³ugi zdarzeñ MYSZKI:
+    //KLASA do obs?ugi zdarze? MYSZKI:
     private class Handlerclass implements MouseMotionListener, MouseListener {
         private int gwiazdkaWys1=0, gwiazdkaWys2=40;
         int X=0, Y=0;
@@ -859,7 +855,7 @@ public class GUI {
             if(e.getSource()==gwiazdka1) {
                 X = e.getX();System.out.println("X: " + X);
                 Y = e.getY();System.out.println("Y " + Y);
-                gwiazdka1.setIcon(new ImageIcon(gwZoltaImage));
+                gwiazdka1.setIcon(gwZoltaIcon);
 
                 lblNic.setText("STREFA 1");
                 System.out.println("S1");
@@ -868,7 +864,7 @@ public class GUI {
             else if(e.getSource()==gwiazdka2) {
                 X = e.getX();System.out.println("X: " + X);
                 Y = e.getY();System.out.println("Y " + Y);
-                gwiazdka1.setIcon(new ImageIcon(gwZoltaImage));gwiazdka2.setIcon(new ImageIcon(gwZoltaImage));
+                gwiazdka1.setIcon(gwZoltaIcon);gwiazdka2.setIcon(gwZoltaIcon);
 
                 lblNic.setText("STREFA 1");
                 System.out.println("S1");
@@ -876,8 +872,8 @@ public class GUI {
             else if(e.getSource()==gwiazdka3) {
                 X = e.getX();System.out.println("X: " + X);
                 Y = e.getY();System.out.println("Y " + Y);
-                gwiazdka1.setIcon(new ImageIcon(gwZoltaImage));gwiazdka2.setIcon(new ImageIcon(gwZoltaImage));
-                gwiazdka3.setIcon(new ImageIcon(gwZoltaImage));
+                gwiazdka1.setIcon(gwZoltaIcon);gwiazdka2.setIcon(gwZoltaIcon);
+                gwiazdka3.setIcon(gwZoltaIcon);
 
                 lblNic.setText("STREFA 1");
                 System.out.println("S1");
@@ -886,8 +882,8 @@ public class GUI {
             else if(e.getSource()==gwiazdka4) {
                 X = e.getX();System.out.println("X: " + X);
                 Y = e.getY();System.out.println("Y " + Y);
-                gwiazdka1.setIcon(new ImageIcon(gwZoltaImage));gwiazdka2.setIcon(new ImageIcon(gwZoltaImage));
-                gwiazdka3.setIcon(new ImageIcon(gwZoltaImage));gwiazdka4.setIcon(new ImageIcon(gwZoltaImage));
+                gwiazdka1.setIcon(gwZoltaIcon);gwiazdka2.setIcon(gwZoltaIcon);
+                gwiazdka3.setIcon(gwZoltaIcon);gwiazdka4.setIcon(gwZoltaIcon);
 
                 lblNic.setText("STREFA 1");
                 System.out.println("S1");
@@ -896,9 +892,9 @@ public class GUI {
             else if(e.getSource()==gwiazdka5) {
                 X = e.getX();System.out.println("X: " + X);
                 Y = e.getY();System.out.println("Y " + Y);
-                gwiazdka1.setIcon(new ImageIcon(gwZoltaImage));gwiazdka2.setIcon(new ImageIcon(gwZoltaImage));
-                gwiazdka3.setIcon(new ImageIcon(gwZoltaImage));gwiazdka4.setIcon(new ImageIcon(gwZoltaImage));
-                gwiazdka5.setIcon(new ImageIcon(gwZoltaImage));
+                gwiazdka1.setIcon(gwZoltaIcon);gwiazdka2.setIcon(gwZoltaIcon);
+                gwiazdka3.setIcon(gwZoltaIcon);gwiazdka4.setIcon(gwZoltaIcon);
+                gwiazdka5.setIcon(gwZoltaIcon);
 
                 lblNic.setText("STREFA 1");
                 System.out.println("S1");
@@ -907,9 +903,9 @@ public class GUI {
         }
 
         public void mouseExited(MouseEvent e) {     //wyjscie ze kursora strefy
-            gwiazdka1.setIcon(new ImageIcon(gwSzaraImage)); gwiazdka2.setIcon(new ImageIcon(gwSzaraImage));
-            gwiazdka3.setIcon(new ImageIcon(gwSzaraImage)); gwiazdka4.setIcon(new ImageIcon(gwSzaraImage));
-            gwiazdka5.setIcon(new ImageIcon(gwSzaraImage));
+            gwiazdka1.setIcon(gwSzaraIcon); gwiazdka2.setIcon(gwSzaraIcon);
+            gwiazdka3.setIcon(gwSzaraIcon); gwiazdka4.setIcon(gwSzaraIcon);
+            gwiazdka5.setIcon(gwSzaraIcon);
             lblNic.setText("OUT STREFA 1");
             System.out.println("OUT S1");
 

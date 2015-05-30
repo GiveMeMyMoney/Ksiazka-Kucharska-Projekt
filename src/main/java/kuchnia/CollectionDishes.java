@@ -52,9 +52,17 @@ import java.util.Arrays;
             private int position;
 
             public IteratorImpl(int pos,
-                    ArrayList<objectSQL> channelsList) {
-                this.list = channelsList;
-                this.position = pos;
+                    ArrayList<objectSQL> dishesList) {
+                this.list = dishesList;
+                for(int i = 0; i < list.size();++i) {
+                    if (list.get(0).getID() == pos) {
+                        this.position = i;
+                        break;
+                    }
+                    else
+                        this.position = 0;
+                }
+
             }
 
             public boolean hasNext() {

@@ -18,14 +18,14 @@ public class Factory {
     {
 
         Dishes currentDishes = Dishes.valueOf(type.toUpperCase());
-
+        System.out.println("Fabryka" + currentDishes);
     switch (currentDishes) {
         case NAPOJE: return  new Napoje(ID,title, describe,  ingredients,  comments,  path,  rate,  type);
         case CIASTA_DESERY: return  new Ciasta_Desery(ID,title, describe,  ingredients,  comments,  path,  rate,  type);
         case SALATKA_PRZYSTAWKI: return  new Salatka_Przystawki(ID,title, describe,  ingredients,  comments,  path,  rate,  type);
-        case ZUPY: return  new Zupy(ID,title, describe,  ingredients,  comments,  path,  rate,  type);
-        case RYBY_OWOCE_MORZA: new Ryby_Owoce_Morza(ID,title, describe,  ingredients,  comments,  path,  rate,  type);
-        case DANIA_MIESNE: new Dania_Miesne(ID,title, describe,  ingredients,  comments,  path,  rate,  type);
+        case ZUPY: return new Zupy(ID,title, describe,  ingredients,  comments,  path,  rate,  type);
+        case RYBY_OWOCE_MORZA: return new Ryby_Owoce_Morza(ID,title, describe,  ingredients,  comments,  path,  rate,  type);
+        case DANIA_MIESNE: return new Dania_Miesne(ID,title, describe,  ingredients,  comments,  path,  rate,  type);
 
     }
         return null;
