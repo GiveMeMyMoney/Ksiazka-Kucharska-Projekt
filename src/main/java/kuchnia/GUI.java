@@ -431,6 +431,45 @@ public class GUI {
         btnPrzepisowy2.setBounds(199, 112, 356, 40);
         Zupy.add(btnPrzepisowy2);
 
+        JButton btnPrzepisowy3 = new JButton("Mleczna");
+        btnPrzepisowy3.setFont(new Font("BankGothic Md BT", Font.PLAIN, 17));
+        btnPrzepisowy3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                Zupy.setVisible(false);
+                Przepis.setVisible(true);
+            }
+        });
+        btnPrzepisowy3.setBorderPainted(false);
+        btnPrzepisowy3.setBackground(new Color(255, 255, 255, 0));
+        btnPrzepisowy3.setBounds(199, 163, 356, 40);
+        Zupy.add(btnPrzepisowy3);
+
+        JButton btnPrzepisowy4 = new JButton("Mozgowatowatowa");
+        btnPrzepisowy4.setFont(new Font("BankGothic Md BT", Font.PLAIN, 17));
+        btnPrzepisowy4.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                Zupy.setVisible(false);
+                Przepis.setVisible(true);
+            }
+        });
+        btnPrzepisowy4.setBorderPainted(false);
+        btnPrzepisowy4.setBackground(new Color(255, 255, 255, 0));
+        btnPrzepisowy4.setBounds(199, 214, 356, 40);
+        Zupy.add(btnPrzepisowy4);
+
+        JButton btnPrzepisowy5 = new JButton("BarSZCZY");
+        btnPrzepisowy5.setFont(new Font("BankGothic Md BT", Font.PLAIN, 17));
+        btnPrzepisowy5.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                Zupy.setVisible(false);
+                Przepis.setVisible(true);
+            }
+        });
+        btnPrzepisowy5.setBorderPainted(false);
+        btnPrzepisowy5.setBackground(new Color(255, 255, 255, 0));
+        btnPrzepisowy5.setBounds(199, 265, 356, 40);
+        Zupy.add(btnPrzepisowy5);
+
 //=======================  Elementy w panelu Dania Miesne ==============================================
 
         JButton btnPowortDoMenu5 = new JButton("Powr\u00F3t do menu");
@@ -669,35 +708,91 @@ public class GUI {
         //Przepis.addMouseListener(handler);
         //Przepis.addMouseMotionListener(handler);
 
-        labelGwiazdki = new JLabel("");
-        labelGwiazdki.setBounds(768, 621, 268, 40);
-        Przepis.add(labelGwiazdki);
+        JLabel lblNazwaKateg = new JLabel("Kategoria:");
+        lblNazwaKateg.setBounds(10, 11, 173, 64);
+        Przepis.add(lblNazwaKateg);
+
+        JLabel lblNazwaPrzepis = new JLabel("Tutaj nazwa przepisu du\u017Cymi \u0142adnymi literami");
+        lblNazwaPrzepis.setBounds(195, 11, 383, 64);
+        Przepis.add(lblNazwaPrzepis);
+
+        JLabel lblCzasPrzyg = new JLabel("Czas przyg w min.");
+        lblCzasPrzyg.setBounds(584, 11, 200, 64);
+        Przepis.add(lblCzasPrzyg);
+
+        JLabel lblOcena = new JLabel("OCENA");
+        lblOcena.setBounds(961, 11, 98, 64);
+        Przepis.add(lblOcena);
+
+        JLabel lblLiczbaOsob2 = new JLabel("Liczba Osob");
+        lblLiczbaOsob2.setBounds(857, 11, 98, 64);
+        Przepis.add(lblLiczbaOsob2);
+
+        JLabel lblPoziomTrudnoci = new JLabel("Poziom Trudno\u015Bci");
+        lblPoziomTrudnoci.setBounds(753, 11, 98, 64);
+        Przepis.add(lblPoziomTrudnoci);
+
+        JLabel lblZdjecie = new JLabel("ZDJENNNCIIEIIE");
+        lblZdjecie.setBounds(10, 81, 335, 200);
+        Przepis.add(lblZdjecie);
+
+        JLabel lblListaSkladnikow = new JLabel("Lista Skladnikow:");
+        lblListaSkladnikow.setBounds(10, 305, 335, 290);
+        Przepis.add(lblListaSkladnikow);
+
+        JLabel lblNewLabel = new JLabel("Zajebisty jest ten paszten!");
+        lblNewLabel.setFont(new Font("BankGothic Lt BT", Font.PLAIN, 61));
+        lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
+        lblNewLabel.setBounds(369, 86, 666, 509);
+        Przepis.add(lblNewLabel);
+
+        JButton btnPowrotSpisu = new JButton("Powr\u00F3t do spisu");
+        btnPowrotSpisu.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                Przepis.setVisible(false);
+                Zupy.setVisible(true);
+            }
+        });
+        btnPowrotSpisu.setFont(new Font("Calibri", Font.PLAIN, 17));
+        btnPowrotSpisu.setBounds(10, 611, 200, 50);
+        Przepis.add(btnPowrotSpisu);
+
+        JButton btnPowrotMenu = new JButton("Powr\u00F3t do menu");
+        btnPowrotMenu.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Przepis.setVisible(false);
+                MenuGlowne.setVisible(true);
+            }
+        });
+        btnPowrotMenu.setFont(new Font("Calibri", Font.PLAIN, 17));
+        btnPowrotMenu.setBounds(859, 611, 200, 50);
+        Przepis.add(btnPowrotMenu);
 
         gwiazdka1 = new JLabel("");
-        gwiazdka1.setBounds(237, 435, 52, 40);
+        gwiazdka1.setBounds(382, 621, 52, 40);;
         Przepis.add(gwiazdka1);
         gwiazdka1.setIcon(new ImageIcon(gwSzaraImage));
 
         gwiazdka2 = new JLabel("");
-        gwiazdka2.setBounds(825, 621, 52, 40);
+        gwiazdka2.setBounds(444, 621, 52, 40);
         Przepis.add(gwiazdka2);
         //Image gwZoltaImage = new ImageIcon(this.getClass().getResource("/Zolta.png")).getImage();
         gwiazdka2.setIcon(new ImageIcon(gwSzaraImage));
 
         gwiazdka3 = new JLabel("");
-        gwiazdka3.setBounds(880, 621, 52, 40);
+        gwiazdka3.setBounds(506, 621, 52, 40);
         Przepis.add(gwiazdka3);
         //Image logoImage = new ImageIcon(this.getClass().getResource("/Logo.png")).getImage();
         gwiazdka3.setIcon(new ImageIcon(gwSzaraImage));
 
         gwiazdka4 = new JLabel("");
-        gwiazdka4.setBounds(932, 621, 52, 40);
+        gwiazdka4.setBounds(568, 621, 52, 40);
         Przepis.add(gwiazdka4);
         //Image logoImage = new ImageIcon(this.getClass().getResource("/Logo.png")).getImage();
         gwiazdka4.setIcon(new ImageIcon(gwSzaraImage));
 
         gwiazdka5 = new JLabel("");
-        gwiazdka5.setBounds(984, 621, 52, 40);
+        gwiazdka5.setBounds(630, 621, 52, 40);
         Przepis.add(gwiazdka5);
         //Image logoImage = new ImageIcon(this.getClass().getResource("/Logo.png")).getImage();
         gwiazdka5.setIcon(new ImageIcon(gwSzaraImage));
@@ -721,6 +816,10 @@ public class GUI {
         Przepis.add(lblNic);
 
     }
+
+
+
+
 
     //KLASA do obs³ugi zdarzeñ MYSZKI:
     private class Handlerclass implements MouseMotionListener, MouseListener {
