@@ -727,32 +727,30 @@ public class GUI {
         private int gwiazdkaWys1=0, gwiazdkaWys2=40;
         int X=0, Y=0;
         public void mouseClicked(MouseEvent e) {    //klikniecie LPM.
-            X = e.getX();
-            System.out.println("X: " + X);
-            Y = e.getY();
-            System.out.println("Y " + Y);
-            if (X >= 0 && X <= 52 && Y >= gwiazdkaWys1 && Y <= gwiazdkaWys2) {
+            X = e.getX();System.out.println("X: " + X);
+            Y = e.getY();System.out.println("Y " + Y);
+            if(e.getSource()==gwiazdka1) {
                 ocenaTemp += 1;
                 System.out.println("OCENA1: " + ocenaTemp);
                 lblNic.setText(String.format("Cliced at %d , %d", e.getX(), e.getY()));
             }
-            else if (X >= 109 - 52 && X <= 109 && Y >= gwiazdkaWys1 && Y <= gwiazdkaWys2) {
-                ocenaTemp += 1;
+            else if(e.getSource()==gwiazdka2) {
+                ocenaTemp += 2;
                 System.out.println("OCENA2: " + ocenaTemp);
                 lblNic.setText(String.format("Cliced at %d , %d", e.getX(), e.getY()));
             }
-            else if (X >= 164 - 52 && X <= 164 && Y >= gwiazdkaWys1 && Y <= gwiazdkaWys2) {
-                ocenaTemp += 1;
+            else if(e.getSource()==gwiazdka3) {
+                ocenaTemp += 3;
                 System.out.println("OCENA3: " + ocenaTemp);
                 lblNic.setText(String.format("Cliced at %d , %d", e.getX(), e.getY()));
             }
-            else if (X >= 216 - 52 && X <= 216 && Y >= gwiazdkaWys1 && Y <= gwiazdkaWys2) {
-                ocenaTemp += 1;
+            else if(e.getSource()==gwiazdka4) {
+                ocenaTemp += 4;
                 System.out.println("OCENA4: " + ocenaTemp);
                 lblNic.setText(String.format("Cliced at %d , %d", e.getX(), e.getY()));
             }
-            else if (X >= 268 - 52 && X <= 268 && Y >= gwiazdkaWys1 && Y <= gwiazdkaWys2) {
-                ocenaTemp += 1;
+            else if(e.getSource()==gwiazdka5) {
+                ocenaTemp += 5;
                 System.out.println("OCENA5: " + ocenaTemp);
                 lblNic.setText(String.format("Cliced at %d , %d", e.getX(), e.getY()));
             }
@@ -760,71 +758,52 @@ public class GUI {
 
         public void mouseEntered(MouseEvent e) {    //wejscie przez kursor w odpowiednia strefe
             if(e.getSource()==gwiazdka1) {
-                X = e.getX();
-                System.out.println("X: " + X);
-                Y = e.getY();
-                System.out.println("Y " + Y);
-                //if (X >= 0 && X <= 30 && Y >= gwiazdkaWys1 && Y <= gwiazdkaWys2) {
+                X = e.getX();System.out.println("X: " + X);
+                Y = e.getY();System.out.println("Y " + Y);
                 gwiazdka1.setIcon(new ImageIcon(gwZoltaImage));
+
                 lblNic.setText("STREFA 1");
                 System.out.println("S1");
-                return;
+
             }
-                if(e.getSource()==gwiazdka2) {
-                    X = e.getX();
-                    System.out.println("X: " + X);
-                    Y = e.getY();
-                    System.out.println("Y " + Y);
-                    //if (X >= 0 && X <= 30 && Y >= gwiazdkaWys1 && Y <= gwiazdkaWys2) {
-                    gwiazdka1.setIcon(new ImageIcon(gwZoltaImage));
-                    gwiazdka2.setIcon(new ImageIcon(gwZoltaImage));
-                    lblNic.setText("STREFA 1");
-                    System.out.println("S1");
-                    return;
-                }
-            if(e.getSource()==gwiazdka3) {
-                X = e.getX();
-                System.out.println("X: " + X);
-                Y = e.getY();
-                System.out.println("Y " + Y);
-                //if (X >= 0 && X <= 30 && Y >= gwiazdkaWys1 && Y <= gwiazdkaWys2) {
-                gwiazdka1.setIcon(new ImageIcon(gwZoltaImage));
-                gwiazdka2.setIcon(new ImageIcon(gwZoltaImage));
+            else if(e.getSource()==gwiazdka2) {
+                X = e.getX();System.out.println("X: " + X);
+                Y = e.getY();System.out.println("Y " + Y);
+                gwiazdka1.setIcon(new ImageIcon(gwZoltaImage));gwiazdka2.setIcon(new ImageIcon(gwZoltaImage));
+
+                lblNic.setText("STREFA 1");
+                System.out.println("S1");
+            }
+            else if(e.getSource()==gwiazdka3) {
+                X = e.getX();System.out.println("X: " + X);
+                Y = e.getY();System.out.println("Y " + Y);
+                gwiazdka1.setIcon(new ImageIcon(gwZoltaImage));gwiazdka2.setIcon(new ImageIcon(gwZoltaImage));
                 gwiazdka3.setIcon(new ImageIcon(gwZoltaImage));
 
                 lblNic.setText("STREFA 1");
                 System.out.println("S1");
-                return;
+
             }
-            if(e.getSource()==gwiazdka4) {
-                X = e.getX();
-                System.out.println("X: " + X);
-                Y = e.getY();
-                System.out.println("Y " + Y);
-                //if (X >= 0 && X <= 30 && Y >= gwiazdkaWys1 && Y <= gwiazdkaWys2) {
-                gwiazdka1.setIcon(new ImageIcon(gwZoltaImage));
-                gwiazdka2.setIcon(new ImageIcon(gwZoltaImage));
-                gwiazdka3.setIcon(new ImageIcon(gwZoltaImage));
-                gwiazdka4.setIcon(new ImageIcon(gwZoltaImage));
+            else if(e.getSource()==gwiazdka4) {
+                X = e.getX();System.out.println("X: " + X);
+                Y = e.getY();System.out.println("Y " + Y);
+                gwiazdka1.setIcon(new ImageIcon(gwZoltaImage));gwiazdka2.setIcon(new ImageIcon(gwZoltaImage));
+                gwiazdka3.setIcon(new ImageIcon(gwZoltaImage));gwiazdka4.setIcon(new ImageIcon(gwZoltaImage));
 
                 lblNic.setText("STREFA 1");
                 System.out.println("S1");
-                return;
+
             }
-            if(e.getSource()==gwiazdka5) {
-                X = e.getX();
-                System.out.println("X: " + X);
-                Y = e.getY();
-                System.out.println("Y " + Y);
-                //if (X >= 0 && X <= 30 && Y >= gwiazdkaWys1 && Y <= gwiazdkaWys2) {
-                gwiazdka1.setIcon(new ImageIcon(gwZoltaImage));
-                gwiazdka2.setIcon(new ImageIcon(gwZoltaImage));
-                gwiazdka3.setIcon(new ImageIcon(gwZoltaImage));
-                gwiazdka4.setIcon(new ImageIcon(gwZoltaImage));
+            else if(e.getSource()==gwiazdka5) {
+                X = e.getX();System.out.println("X: " + X);
+                Y = e.getY();System.out.println("Y " + Y);
+                gwiazdka1.setIcon(new ImageIcon(gwZoltaImage));gwiazdka2.setIcon(new ImageIcon(gwZoltaImage));
+                gwiazdka3.setIcon(new ImageIcon(gwZoltaImage));gwiazdka4.setIcon(new ImageIcon(gwZoltaImage));
                 gwiazdka5.setIcon(new ImageIcon(gwZoltaImage));
+
                 lblNic.setText("STREFA 1");
                 System.out.println("S1");
-                return;
+
             }
         }
 
