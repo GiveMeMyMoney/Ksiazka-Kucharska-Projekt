@@ -23,6 +23,8 @@ import java.util.Arrays;
         public boolean hasNext();
 
         public objectSQL next();
+
+        public objectSQL get();
     }
 
     public class CollectionDishes implements Collection {
