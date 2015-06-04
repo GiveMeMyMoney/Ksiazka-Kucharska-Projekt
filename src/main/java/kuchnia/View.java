@@ -29,8 +29,8 @@ public class View {
     private JLabel labelGwiazdki;
     private JLabel gwiazdka1, gwiazdka2, gwiazdka3, gwiazdka4, gwiazdka5;
     private JButton btnPrzepisowy, btnPrzepisowy2;
-    Image tloGlowneImage = new ImageIcon(this.getClass().getResource("/tlo.png")).getImage();
-    Image tloImage = new ImageIcon(this.getClass().getResource("/tlo2.png")).getImage();
+    Icon tloGlowneImage = new ImageIcon("tlo.png");
+    Icon tloImage = new ImageIcon("tlo2.png");
     private JButton btnDodajPrzepis, btnDodajZdjecie;   //batony "dodaj przepis"
     private JComboBox comboBoxKategorieDan, comboBoxPoziomTrudnosci;
     private JTextArea textAreaSkladniki, textAreaOpisPrzygotowania;
@@ -176,7 +176,7 @@ public class View {
 
         JLabel lblTlo1 = new JLabel("");
         //Image tloImage = new ImageIcon(this.getClass().getResource("/tlo.png")).getImage();
-        lblTlo1.setIcon(new ImageIcon(tloGlowneImage));
+        lblTlo1.setIcon(tloGlowneImage);
         lblTlo1.setBounds(0, 0, 1069, 672);
         MenuGlowne.add(lblTlo1);
 
@@ -279,7 +279,7 @@ public class View {
         Kategorie.add(btnDodajPrzepis2);
 
         JLabel lblTlo2 = new JLabel("");
-        lblTlo2.setIcon(new ImageIcon(tloImage));
+        lblTlo2.setIcon(tloImage);
         lblTlo2.setBounds(0, 0, 1069, 672);
         Kategorie.add(lblTlo2);
 
@@ -302,14 +302,14 @@ public class View {
         Wyszukiwanie.add(SearchField);
         SearchField.setColumns(10);
 
-        ImageIcon szukajImage = new ImageIcon("Lupamala.png");
+        Icon szukajImage = new ImageIcon("Lupamala.png");
         JButton btnSzukaj = new JButton("Szukaj", szukajImage); //moze byc tez bez napisu
         btnSzukaj.setFont(new Font("Calibri", Font.PLAIN, 17));
         btnSzukaj.setBounds(428, 400, 98, 39);
         Wyszukiwanie.add(btnSzukaj);
 
         JLabel lblTlo3 = new JLabel("");
-        lblTlo3.setIcon(new ImageIcon(tloImage));
+        lblTlo3.setIcon(tloImage);
         lblTlo3.setBounds(0, 0, 1069, 672);
         Wyszukiwanie.add(lblTlo3);
 
@@ -391,7 +391,7 @@ public class View {
         Autorzy.add(lblPaweWilczek);
 
         JLabel lblTlo4 = new JLabel("");
-        lblTlo4.setIcon(new ImageIcon(tloImage));
+        lblTlo4.setIcon(tloImage);
         lblTlo4.setBounds(0, 0, 1069, 661);
         Autorzy.add(lblTlo4);
 
@@ -485,7 +485,7 @@ public class View {
         Zupy.add(btnPrzepisowy5);
 
         JLabel lblTlo5 = new JLabel("");
-        lblTlo5.setIcon(new ImageIcon(tloImage));
+        lblTlo5.setIcon(tloImage);
         lblTlo5.setBounds(0, 0, 1069, 672);
         Zupy.add(lblTlo5);
 
@@ -514,7 +514,7 @@ public class View {
         DaniaMiesne.add(btnPowrotDoKategorii2);
 
         JLabel lblTlo6 = new JLabel("");
-        lblTlo6.setIcon(new ImageIcon(tloImage));
+        lblTlo6.setIcon(tloImage);
         lblTlo6.setBounds(0, 0, 1069, 672);
         DaniaMiesne.add(lblTlo6);
 
@@ -543,7 +543,7 @@ public class View {
         CiastaIDesery.add(btnPowrotDoKategorii3);
 
         JLabel lblTlo7 = new JLabel("");
-        lblTlo7.setIcon(new ImageIcon(tloImage));
+        lblTlo7.setIcon(tloImage);
         lblTlo7.setBounds(0, 0, 1069, 672);
         CiastaIDesery.add(lblTlo7);
 
@@ -572,7 +572,7 @@ public class View {
         Napoje.add(btnPowrotDoKategorii4);
 
         JLabel lblTlo8 = new JLabel("");
-        lblTlo8.setIcon(new ImageIcon(tloImage));
+        lblTlo8.setIcon(tloImage);
         lblTlo8.setBounds(0, 0, 1069, 672);
         Napoje.add(lblTlo8);
 
@@ -601,7 +601,7 @@ public class View {
         RybyIOwoceMorza.add(btnPowrotDoKategorii5);
 
         JLabel lblTlo10 = new JLabel("");
-        lblTlo10.setIcon(new ImageIcon(tloImage));
+        lblTlo10.setIcon(tloImage);
         lblTlo10.setBounds(0, 0, 1069, 672);
         RybyIOwoceMorza.add(lblTlo10);
 
@@ -630,7 +630,7 @@ public class View {
         SalatkiIPrzystawki.add(btnPowrotDoKategorii6);
 
         JLabel lblTlo9 = new JLabel("");
-        lblTlo9.setIcon(new ImageIcon(tloImage));
+        lblTlo9.setIcon(tloImage);
         lblTlo9.setBounds(0, 0, 1069, 672);
         SalatkiIPrzystawki.add(lblTlo9);
 
@@ -750,7 +750,7 @@ public class View {
         DodawaniePrzepisow.setVisible(false);
 
         JLabel lblTlo11 = new JLabel("");
-        lblTlo11.setIcon(new ImageIcon(tloImage));
+        lblTlo11.setIcon(tloImage);
         lblTlo11.setBounds(0, 0, 1069, 675);
         DodawaniePrzepisow.add(lblTlo11);
         DodawaniePrzepisow.setVisible(false);
@@ -868,7 +868,7 @@ public class View {
         /* Gwiazdki do panelu PRZEPIS */
 
         JLabel lblTlo12 = new JLabel("");
-        lblTlo12.setIcon(new ImageIcon(tloImage));
+        lblTlo12.setIcon(tloImage);
         lblTlo12.setBounds(0, 0, 1069, 672);
         Przepis.add(lblTlo12);
 

@@ -3,6 +3,8 @@ package kuchnia;
 import baza_danych.objectSQL;
 import baza_danych.querySQL;
 
+import javax.swing.*;
+
 /**
  * Created by Wojciech on 2015-05-31.
  */
@@ -14,10 +16,9 @@ public class Model {
     private CollectionDishes SalatkaPrzystawka;
     private CollectionDishes RybyOwoceMorza;
     private IteratorDishes iter;
-
+    private querySQL query = new querySQL();
     public Model() {
-        querySQL query = new querySQL();
-        try {
+
             zupy = new CollectionDishes(query.selectDishes("ZUPY"));
             DaniaMiesne = new CollectionDishes(query.selectDishes("DANIA_MIESNE"));
             CiastaDesery = new CollectionDishes(query.selectDishes("CIASTA_DESERY"));
@@ -25,18 +26,10 @@ public class Model {
             SalatkaPrzystawka = new CollectionDishes(query.selectDishes("SALATKA_PRZYSTAWKI"));
             RybyOwoceMorza = new CollectionDishes(query.selectDishes("RYBY_OWOCE_MORZA"));
 
-        } finally {
-            if (query.getConnection() != null) try {
-                query.getConnection().close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
     }
     private void wczytaj(String o,int ID,boolean x)
     {
-        querySQL query = new querySQL();
-        try{
+        JOptionPane.showMessageDialog(null,"TUTAJ BLAD");
             if (o.toUpperCase().equals("ZUPY")) {
                 if(x) zupy = new CollectionDishes(query.selectDishes("ZUPY"));
                 iter = zupy.iterator(ID);
@@ -45,6 +38,7 @@ public class Model {
                 if(x)DaniaMiesne = new CollectionDishes(query.selectDishes("DANIA_MIESNE"));
                 iter = DaniaMiesne.iterator(ID);
             }
+
             else if(o.toUpperCase().equals("CIASTA_DESERY")) {
                 if(x)CiastaDesery = new CollectionDishes(query.selectDishes("CIASTA_DESERY"));
                 iter = CiastaDesery.iterator(ID);
@@ -61,19 +55,10 @@ public class Model {
                 if(x)RybyOwoceMorza = new CollectionDishes(query.selectDishes("RYBY_OWOCE_MORZA"));
                 iter = SalatkaPrzystawka.iterator(ID);
             }
-        }
-        finally {
-            if (query.getConnection() != null) try {
-                query.getConnection().close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+
     }
     public void dodajPrzepis(objectSQL o)
     {
-        querySQL query = new querySQL();
-        try {
             // wstawianie do bazy danych
             query.insertAll(o.getRate(), o.getTitle(),
                     o.getIngredients(), o.getDescribe(), o.getComments(),
@@ -83,14 +68,6 @@ public class Model {
               //obiektwidoku.wpisz(iter); /// wypisuje to co mamy na ekran
 
 
-        }
-        finally {
-            if (query.getConnection() != null) try {
-                query.getConnection().close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
     }
     public void setIter(objectSQL o)
     {
@@ -105,5 +82,12 @@ public class Model {
     public IteratorDishes getIter()
     {
         return iter;
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize();
+        if(query.getConnection() != null) try { query.getConnection().close(); } catch (Exception e) { e.printStackTrace(); }
+
     }
 }
