@@ -67,7 +67,7 @@ public class Frame extends JFrame {
             //EventQueue.invokeLater(new Runnable() {
                // public void run() {
                     try {
-                        GUI window = new GUI();
+                        View window = new View();
                         window.frame.setVisible(true);
                     } catch (Exception e) {
                         e.printStackTrace();

@@ -10,16 +10,17 @@ import java.awt.event.ActionListener;
 
 /**
  */
+//Stworzyc klase Model w ktorej beda collection diszes i metody je zwracajace a pozniej tylko uzywac tutaj tych metod.
 public class Controller {
 
         private Model theModel;
-        //private Viev theView;
+        private View theView;
 
         /// private Vievobject View;
-        public Controller(Model m/*,Vievobject v*/) {
+        public Controller(Model m,View v) {
             this.theModel = m;
-            //this.theView = v;
-            //this.theView.dodajPrzepisListener(new DishesListener());
+            this.theView = v;
+            this.theView.dodajPrzepisListener(new DishesListener());
             //this.theView.odczytajPrzepisListener(new DishesListener2());
         }
 
@@ -28,7 +29,7 @@ public class Controller {
             {
                 objectSQL o = null;
                 try{
-                    //o = theViev.getobjectSQL();
+                    o = theView.getobjectSQL();
                     theModel.dodajPrzepis(o);
                     //theView.setPanel(theModel.getIter());  // tutaj wstawia ci iterator nastawiony na to co ma
                     // wyswietlic

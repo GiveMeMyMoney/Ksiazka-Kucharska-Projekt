@@ -1,55 +1,50 @@
- package kuchnia;
-        import java.awt.*;
+package kuchnia;
+import java.awt.*;
 
-        import javax.swing.*;
-        import java.awt.event.*;
+import javax.swing.*;
+import java.awt.event.*;
+import java.util.ArrayList;
+
+import baza_danych.*;
+import baza_danych.dishes.Dania_Miesne;
+
+
 //
 
-public class GUI {
-
+public class View {
+    final static int iloscKategorii=6;
+    final static int odlegloscYbtn=25;
+    //final static int kategoria[iloscKategorii];
+    //TODO zmienne
     public JFrame frame;
     public JTextField SearchField;
     private int width=1075, height=700;
     private int widthKlawisz=200;
     private int srodkujKlawisz=(width-widthKlawisz)/2;
-    private JTextField textFieldNazwaPrzepisu;
-    private JTextField textFieldCzasPrzygotowania;
-    private JTextField textFieldLiczbaOsob;
-    private JPanel Przepis;
+    private JTextField textFieldNazwaPrzepisu, textFieldCzasPrzygotowania, textFieldLiczbaOsob;
+    private JPanel Przepis, Zupy, DaniaMiesne, CiastaIDesery, Napoje, SalatkiIPrzystawki, RybyIOwoceMorza;;
     private JLabel lblNic;
     private Icon gwSzaraIcon;
     private Icon gwZoltaIcon;
     private JLabel labelGwiazdki;
     private JLabel gwiazdka1, gwiazdka2, gwiazdka3, gwiazdka4, gwiazdka5;
     private JButton btnPrzepisowy, btnPrzepisowy2;
+    Image tloGlowneImage = new ImageIcon(this.getClass().getResource("/tlo.png")).getImage();
+    Image tloImage = new ImageIcon(this.getClass().getResource("/tlo2.png")).getImage();
+    private JButton btnDodajPrzepis, btnDodajZdjecie;   //batony "dodaj przepis"
+    private JComboBox comboBoxKategorieDan, comboBoxPoziomTrudnosci;
+    private JTextArea textAreaSkladniki, textAreaOpisPrzygotowania;
+    private JDesktopPane desktopPaneZdjecieDania;
+    private ArrayList<JButton> btnPrzepisowyZupy = new ArrayList<JButton>();
+
+    private int ocenaTemp=0;    //tymczasowe
 
 
-
-    private int ocenaTemp=0;
-
-    /*----------------MAIN-----------------*/
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    GUI window = new GUI();
-                    window.frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-    /*----------------MAIN-----------------*/
-
-
-    public GUI() {
+    public View() {
         initialize();
     }
 
-    /**
-     * Initialize the contents of the frame.
-     */
+
     private void initialize() {
         frame = new JFrame();
         frame.setBounds(100, 100, width, height);
@@ -80,32 +75,32 @@ public class GUI {
         Autorzy.setLayout(null);
         Autorzy.setVisible(false);
 
-        final JPanel Zupy = new JPanel();
+        Zupy = new JPanel();
         frame.getContentPane().add(Zupy, "Zupy");
         Zupy.setLayout(null);
         Zupy.setVisible(false);
 
-        final JPanel DaniaMiesne = new JPanel();
+        DaniaMiesne = new JPanel();
         frame.getContentPane().add(DaniaMiesne, "Dania Miesne");
         DaniaMiesne.setLayout(null);
         DaniaMiesne.setVisible(false);
 
-        final JPanel CiastaIDesery = new JPanel();
+        CiastaIDesery = new JPanel();
         frame.getContentPane().add(CiastaIDesery, "Ciasta i desery");
         CiastaIDesery.setLayout(null);
         CiastaIDesery.setVisible(false);
 
-        final JPanel Napoje = new JPanel();
+        Napoje = new JPanel();
         frame.getContentPane().add(Napoje, "Napoje");
         Napoje.setLayout(null);
         Napoje.setVisible(false);
 
-        final JPanel SalatkiIPrzystawki = new JPanel();
+        SalatkiIPrzystawki = new JPanel();
         frame.getContentPane().add(SalatkiIPrzystawki, "Salatki i przystawki");
         SalatkiIPrzystawki.setLayout(null);
         SalatkiIPrzystawki.setVisible(false);
 
-        final JPanel RybyIOwoceMorza = new JPanel();
+        RybyIOwoceMorza = new JPanel();
         frame.getContentPane().add(RybyIOwoceMorza, "Ryby i owoce morza");
         RybyIOwoceMorza.setLayout(null);
         RybyIOwoceMorza.setVisible(false);
@@ -120,7 +115,6 @@ public class GUI {
         Przepis.setVisible(false);
 
 //======================= Elementy w panelu Menu Glowne  =========================================
-
 
         JButton btnGUIisy = new JButton("Przepisy");
         btnGUIisy.setFont(new Font("Calibri", Font.PLAIN, 17));
@@ -180,12 +174,19 @@ public class GUI {
         MenuGlowne.add(btnPrzepisyKonkretne);
         //TYMCZASOWO
 
+        JLabel lblTlo1 = new JLabel("");
+        //Image tloImage = new ImageIcon(this.getClass().getResource("/tlo.png")).getImage();
+        lblTlo1.setIcon(new ImageIcon(tloGlowneImage));
+        lblTlo1.setBounds(0, 0, 1069, 672);
+        MenuGlowne.add(lblTlo1);
+
+        /*
         JLabel loggo = new JLabel("");
         Icon logoIcon = new ImageIcon("Logo.png");
         loggo.setIcon(logoIcon);
         loggo.setBounds(59, 156, 619, 369);
         MenuGlowne.add(loggo);
-
+        */
 
 //=======================  Elementy w panelu Kategorie  =============================================
 
@@ -277,6 +278,12 @@ public class GUI {
         btnDodajPrzepis2.setBounds(10, 611, widthKlawisz, 50);
         Kategorie.add(btnDodajPrzepis2);
 
+        JLabel lblTlo2 = new JLabel("");
+        lblTlo2.setIcon(new ImageIcon(tloImage));
+        lblTlo2.setBounds(0, 0, 1069, 672);
+        Kategorie.add(lblTlo2);
+
+
 //=======================  Elementy w panelu Wyszukiwanie  ===========================================
 
         JButton btnPowrotDoMenu2 = new JButton("Powr\u00F3t do menu");
@@ -301,7 +308,13 @@ public class GUI {
         btnSzukaj.setBounds(428, 400, 98, 39);
         Wyszukiwanie.add(btnSzukaj);
 
+        JLabel lblTlo3 = new JLabel("");
+        lblTlo3.setIcon(new ImageIcon(tloImage));
+        lblTlo3.setBounds(0, 0, 1069, 672);
+        Wyszukiwanie.add(lblTlo3);
+
 //=======================  Elementy w panelu Autorzy  ================================================
+
 
         JButton btnPowrotDoMenu3 = new JButton("Powr\u00F3t do menu");
         btnPowrotDoMenu3.addActionListener(new ActionListener() {
@@ -377,8 +390,13 @@ public class GUI {
         lblPaweWilczek.setBounds(582, 551, 306, 29);
         Autorzy.add(lblPaweWilczek);
 
-//=======================  Elementy w panelu Zupy  ====================================================
+        JLabel lblTlo4 = new JLabel("");
+        lblTlo4.setIcon(new ImageIcon(tloImage));
+        lblTlo4.setBounds(0, 0, 1069, 661);
+        Autorzy.add(lblTlo4);
 
+//=======================  Elementy w panelu Zupy  ====================================================
+//TODO zupy
         JButton btnPowrotDoMenu4 = new JButton("Powr\u00F3t do menu");
         btnPowrotDoMenu4.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
@@ -466,6 +484,11 @@ public class GUI {
         btnPrzepisowy5.setBounds(199, 265, 356, 40);
         Zupy.add(btnPrzepisowy5);
 
+        JLabel lblTlo5 = new JLabel("");
+        lblTlo5.setIcon(new ImageIcon(tloImage));
+        lblTlo5.setBounds(0, 0, 1069, 672);
+        Zupy.add(lblTlo5);
+
 //=======================  Elementy w panelu Dania Miesne ==============================================
 
         JButton btnPowortDoMenu5 = new JButton("Powr\u00F3t do menu");
@@ -489,6 +512,11 @@ public class GUI {
         btnPowrotDoKategorii2.setFont(new Font("Calibri", Font.PLAIN, 17));
         btnPowrotDoKategorii2.setBounds(10, 611, widthKlawisz, 50);
         DaniaMiesne.add(btnPowrotDoKategorii2);
+
+        JLabel lblTlo6 = new JLabel("");
+        lblTlo6.setIcon(new ImageIcon(tloImage));
+        lblTlo6.setBounds(0, 0, 1069, 672);
+        DaniaMiesne.add(lblTlo6);
 
 //=======================  Eleemnty w panelu Ciasta i desery  =============================================
 
@@ -514,6 +542,11 @@ public class GUI {
         btnPowrotDoKategorii3.setBounds(10, 611, widthKlawisz, 50);
         CiastaIDesery.add(btnPowrotDoKategorii3);
 
+        JLabel lblTlo7 = new JLabel("");
+        lblTlo7.setIcon(new ImageIcon(tloImage));
+        lblTlo7.setBounds(0, 0, 1069, 672);
+        CiastaIDesery.add(lblTlo7);
+
 //=======================  Elementy w panelu Napoje  =======================================================
 
         JButton btnPowrotDoMenu6 = new JButton("Powr\u00F3t do menu");
@@ -537,6 +570,11 @@ public class GUI {
         btnPowrotDoKategorii4.setFont(new Font("Calibri", Font.PLAIN, 17));
         btnPowrotDoKategorii4.setBounds(10, 611, widthKlawisz, 50);
         Napoje.add(btnPowrotDoKategorii4);
+
+        JLabel lblTlo8 = new JLabel("");
+        lblTlo8.setIcon(new ImageIcon(tloImage));
+        lblTlo8.setBounds(0, 0, 1069, 672);
+        Napoje.add(lblTlo8);
 
 //=======================  Elementy w panelu Ryby i owoce morza  =============================================
 
@@ -562,6 +600,11 @@ public class GUI {
         btnPowrotDoKategorii5.setBounds(10, 611, widthKlawisz, 50);
         RybyIOwoceMorza.add(btnPowrotDoKategorii5);
 
+        JLabel lblTlo10 = new JLabel("");
+        lblTlo10.setIcon(new ImageIcon(tloImage));
+        lblTlo10.setBounds(0, 0, 1069, 672);
+        RybyIOwoceMorza.add(lblTlo10);
+
 //======================= Elementy w panelu Salatki i przystawki  ==============================================
 
         JButton btnPowrotDoMenu8 = new JButton("Powr\u00F3t do menu");
@@ -586,8 +629,13 @@ public class GUI {
         btnPowrotDoKategorii6.setBounds(10, 611, widthKlawisz, 50);
         SalatkiIPrzystawki.add(btnPowrotDoKategorii6);
 
-//=======================  Elementy w panelu Dodawanie Przepisow  ===============================================
+        JLabel lblTlo9 = new JLabel("");
+        lblTlo9.setIcon(new ImageIcon(tloImage));
+        lblTlo9.setBounds(0, 0, 1069, 672);
+        SalatkiIPrzystawki.add(lblTlo9);
 
+//=======================  Elementy w panelu Dodawanie Przepisow  ===============================================
+//TODO dodawanie przepisu
         JButton btnPowrotDoMenu9 = new JButton("Powr\u00F3t do menu");
         btnPowrotDoMenu9.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -628,11 +676,18 @@ public class GUI {
         lblKategoria.setBounds(10, 140, 123, 37);
         DodawaniePrzepisow.add(lblKategoria);
 
-        JComboBox comboBoxKategorieDan = new JComboBox();
+        ///TODO comboKATEGORIE
+        comboBoxKategorieDan = new JComboBox();
+        comboBoxKategorieDan.addItem("Zupy");
+        comboBoxKategorieDan.addItem("Dania miesne");
+        comboBoxKategorieDan.addItem("Ciasta i Desery");
+        comboBoxKategorieDan.addItem("Napoje");
+        comboBoxKategorieDan.addItem("Salatki i przystawki");
+        comboBoxKategorieDan.addItem("Ryby i owoce morza");
         comboBoxKategorieDan.setBounds(10, 172, 263, 28);
         DodawaniePrzepisow.add(comboBoxKategorieDan);
 
-        JTextArea textAreaSkladniki = new JTextArea();
+        textAreaSkladniki = new JTextArea();
         textAreaSkladniki.setBounds(10, 257, 317, 325);
         DodawaniePrzepisow.add(textAreaSkladniki);
 
@@ -640,7 +695,7 @@ public class GUI {
         lblSkladniki.setBounds(10, 221, 98, 37);
         DodawaniePrzepisow.add(lblSkladniki);
 
-        JDesktopPane desktopPaneZdjecieDania = new JDesktopPane();
+        desktopPaneZdjecieDania = new JDesktopPane();
         desktopPaneZdjecieDania.setBounds(793, 68, 250, 250);
         DodawaniePrzepisow.add(desktopPaneZdjecieDania);
 
@@ -648,7 +703,7 @@ public class GUI {
         lblZdjecieDania.setBounds(10, 11, 230, 228);
         desktopPaneZdjecieDania.add(lblZdjecieDania);
 
-        JTextArea textAreaOpisPrzygotowania = new JTextArea();
+        textAreaOpisPrzygotowania = new JTextArea();
         textAreaOpisPrzygotowania.setBounds(362, 377, 681, 205);
         DodawaniePrzepisow.add(textAreaOpisPrzygotowania);
 
@@ -656,7 +711,7 @@ public class GUI {
         lblOpisPrzygotowania.setBounds(362, 338, 179, 28);
         DodawaniePrzepisow.add(lblOpisPrzygotowania);
 
-        JButton btnDodajZdjecie = new JButton("Dodaj zdj\u0119cie");
+        btnDodajZdjecie = new JButton("Dodaj zdj\u0119cie");
         btnDodajZdjecie.setFont(new Font("Calibri", Font.PLAIN, 17));
         btnDodajZdjecie.setBounds(847, 329, 151, 41);
         DodawaniePrzepisow.add(btnDodajZdjecie);
@@ -674,7 +729,7 @@ public class GUI {
         lblPoziomTrudnosci.setBounds(608, 68, 129, 37);
         DodawaniePrzepisow.add(lblPoziomTrudnosci);
 
-        JComboBox comboBoxPoziomTrudnosci = new JComboBox();
+        comboBoxPoziomTrudnosci = new JComboBox();
         comboBoxPoziomTrudnosci.setBounds(608, 100, 101, 25);
         DodawaniePrzepisow.add(comboBoxPoziomTrudnosci);
 
@@ -687,11 +742,17 @@ public class GUI {
         DodawaniePrzepisow.add(textFieldLiczbaOsob);
         textFieldLiczbaOsob.setColumns(10);
 
-        JButton btnDodajPrzepis = new JButton("Dodaj przepis");
+        btnDodajPrzepis = new JButton("Dodaj przepis");
         btnDodajPrzepis.setFont(new Font("Calibri", Font.PLAIN, 17));
         btnDodajPrzepis.setEnabled(true);
         btnDodajPrzepis.setBounds(434, 611, 200, 50);
         DodawaniePrzepisow.add(btnDodajPrzepis);
+        DodawaniePrzepisow.setVisible(false);
+
+        JLabel lblTlo11 = new JLabel("");
+        lblTlo11.setIcon(new ImageIcon(tloImage));
+        lblTlo11.setBounds(0, 0, 1069, 675);
+        DodawaniePrzepisow.add(lblTlo11);
         DodawaniePrzepisow.setVisible(false);
 
 
@@ -736,11 +797,11 @@ public class GUI {
         lblListaSkladnikow.setBounds(10, 305, 335, 290);
         Przepis.add(lblListaSkladnikow);
 
-        JLabel lblNewLabel = new JLabel("Zajebisty jest ten paszten!");
-        lblNewLabel.setFont(new Font("BankGothic Lt BT", Font.PLAIN, 61));
-        lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
-        lblNewLabel.setBounds(369, 86, 666, 509);
-        Przepis.add(lblNewLabel);
+        JLabel lblOpis = new JLabel("Zajebisty jest ten paszten!");
+        lblOpis.setFont(new Font("BankGothic Lt BT", Font.PLAIN, 61));
+        lblOpis.setVerticalAlignment(SwingConstants.TOP);
+        lblOpis.setBounds(369, 86, 666, 509);
+        Przepis.add(lblOpis);
 
         JButton btnPowrotSpisu = new JButton("Powr\u00F3t do spisu");
         btnPowrotSpisu.addActionListener(new ActionListener() {
@@ -806,10 +867,150 @@ public class GUI {
 
         /* Gwiazdki do panelu PRZEPIS */
 
-        lblNic = new JLabel("\t\t\t\t\r\n\t\t\r\n\r\n\t\t\t\t\t\tNIC");     //TODO usunac pozniej
+        JLabel lblTlo12 = new JLabel("");
+        lblTlo12.setIcon(new ImageIcon(tloImage));
+        lblTlo12.setBounds(0, 0, 1069, 672);
+        Przepis.add(lblTlo12);
+
+        lblNic = new JLabel("\t\t\t\t\r\n\t\t\r\n\r\n\t\t\t\t\t\tNIC");
         lblNic.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
         lblNic.setBounds(472, 188, 237, 139);
         Przepis.add(lblNic);
+
+    }
+
+    //TODO getobjectSQL()
+    void dodajPrzepisListener(ActionListener listenForBtnDodaj) {
+        btnDodajPrzepis.addActionListener(listenForBtnDodaj);
+    }
+
+    void odczytajPrzepisListener(ActionListener listenForBtnOdczyt) {
+      //  btnDodajPrzepis.addActionListener(listenForBtnDodaj);
+    }
+
+    public objectSQL getobjectSQL() {
+        String[] nazwa = new String[6];
+        nazwa[0] = textFieldNazwaPrzepisu.getText(); //nazwa przepisu
+        nazwa[1] = textFieldCzasPrzygotowania.getText(); //czas
+        nazwa[2] = textFieldLiczbaOsob.getText(); //liczba osob
+        nazwa[3] = textAreaSkladniki.getText(); //skladniki
+        nazwa[4] = textAreaOpisPrzygotowania.getText(); //opis
+        nazwa[5] = (String)comboBoxKategorieDan.getSelectedItem(); //typ - kategoria
+        double rate=0.0;
+        int id=0;
+
+        int[] setYbtn = new int[iloscKategorii];
+        for (int i=0; i<iloscKategorii; i++) setYbtn[i] = 45;
+
+        int poz=0;
+        if (comboBoxKategorieDan.getSelectedItem().equals("Zupy")) {
+            JButton btnPrzepisowy = new JButton(nazwa[0]);
+            btnPrzepisowy.setFont(new Font("BankGothic Md BT", Font.PLAIN, 17));
+            btnPrzepisowy.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent arg0) {
+                    Zupy.setVisible(false);
+                    Przepis.setVisible(true);
+                }
+            });
+            btnPrzepisowy.setBackground(new Color(255, 255, 255, 0));    //przezroczyste
+            btnPrzepisowy.setBorderPainted(false);  //brak obramowki buttona
+            btnPrzepisowy.setBounds(199, setYbtn[poz], 356, 40);
+            Zupy.add(btnPrzepisowy);
+            setYbtn[poz]+=odlegloscYbtn;  //25
+            btnPrzepisowyZupy.add(btnPrzepisowy);   //nie wiem czy to potrzebne ale na wszelki wypadek jest.
+        }
+        else if(comboBoxKategorieDan.getSelectedItem().equals("Dania miesne")) {
+            poz++;
+            JButton btnPrzepisowy = new JButton(nazwa[0]);
+            btnPrzepisowy.setFont(new Font("BankGothic Md BT", Font.PLAIN, 17));
+            btnPrzepisowy.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent arg0) {
+                    Zupy.setVisible(false);
+                    Przepis.setVisible(true);
+                }
+            });
+            btnPrzepisowy.setBackground(new Color(255, 255, 255, 0));    //przezroczyste
+            btnPrzepisowy.setBorderPainted(false);  //brak obramowki buttona
+            btnPrzepisowy.setBounds(199, setYbtn[poz], 356, 40);
+            DaniaMiesne.add(btnPrzepisowy);
+            setYbtn[poz]+=odlegloscYbtn;  //25
+            btnPrzepisowyZupy.add(btnPrzepisowy);
+        }
+        else if(comboBoxKategorieDan.getSelectedItem().equals("Ciasta i Desery")) {
+            poz++;
+            JButton btnPrzepisowy = new JButton(nazwa[0]);
+            btnPrzepisowy.setFont(new Font("BankGothic Md BT", Font.PLAIN, 17));
+            btnPrzepisowy.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent arg0) {
+                    Zupy.setVisible(false);
+                    Przepis.setVisible(true);
+                }
+            });
+            btnPrzepisowy.setBackground(new Color(255, 255, 255, 0));    //przezroczyste
+            btnPrzepisowy.setBorderPainted(false);  //brak obramowki buttona
+            btnPrzepisowy.setBounds(199, setYbtn[poz], 356, 40);
+            DaniaMiesne.add(btnPrzepisowy);
+            setYbtn[poz]+=odlegloscYbtn;  //25
+            btnPrzepisowyZupy.add(btnPrzepisowy);
+        }
+        else if(comboBoxKategorieDan.getSelectedItem().equals("Napoje")) {
+            poz++;
+            JButton btnPrzepisowy = new JButton(nazwa[0]);
+            btnPrzepisowy.setFont(new Font("BankGothic Md BT", Font.PLAIN, 17));
+            btnPrzepisowy.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent arg0) {
+                    Zupy.setVisible(false);
+                    Przepis.setVisible(true);
+                }
+            });
+            btnPrzepisowy.setBackground(new Color(255, 255, 255, 0));    //przezroczyste
+            btnPrzepisowy.setBorderPainted(false);  //brak obramowki buttona
+            btnPrzepisowy.setBounds(199, setYbtn[poz], 356, 40);
+            DaniaMiesne.add(btnPrzepisowy);
+            setYbtn[poz]+=odlegloscYbtn;  //25
+            btnPrzepisowyZupy.add(btnPrzepisowy);
+        }
+        else if(comboBoxKategorieDan.getSelectedItem().equals("Salatki i przystawki")) {
+            poz++;
+            JButton btnPrzepisowy = new JButton(nazwa[0]);
+            btnPrzepisowy.setFont(new Font("BankGothic Md BT", Font.PLAIN, 17));
+            btnPrzepisowy.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent arg0) {
+                    Zupy.setVisible(false);
+                    Przepis.setVisible(true);
+                }
+            });
+            btnPrzepisowy.setBackground(new Color(255, 255, 255, 0));    //przezroczyste
+            btnPrzepisowy.setBorderPainted(false);  //brak obramowki buttona
+            btnPrzepisowy.setBounds(199, setYbtn[poz], 356, 40);
+            DaniaMiesne.add(btnPrzepisowy);
+            setYbtn[poz]+=odlegloscYbtn;  //25
+            btnPrzepisowyZupy.add(btnPrzepisowy);
+        }
+        else if(comboBoxKategorieDan.getSelectedItem().equals("Ryby i owoce morza")) {
+            poz++;
+            JButton btnPrzepisowy = new JButton(nazwa[0]);
+            btnPrzepisowy.setFont(new Font("BankGothic Md BT", Font.PLAIN, 17));
+            btnPrzepisowy.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent arg0) {
+                    Zupy.setVisible(false);
+                    Przepis.setVisible(true);
+                }
+            });
+            btnPrzepisowy.setBackground(new Color(255, 255, 255, 0));    //przezroczyste
+            btnPrzepisowy.setBorderPainted(false);  //brak obramowki buttona
+            btnPrzepisowy.setBounds(199, setYbtn[poz], 356, 40);
+            DaniaMiesne.add(btnPrzepisowy);
+            setYbtn[poz]+=odlegloscYbtn;  //25
+            btnPrzepisowyZupy.add(btnPrzepisowy);
+        }
+
+
+        objectSQL przepisObject = Factory.FactoryDishes(id, nazwa[0], nazwa[4], nazwa[3], "komentarz", "sciezka", rate, nazwa[5]);
+        return przepisObject;
+    }
+
+    public void setPanel(IteratorDishes iter) {
 
     }
 
