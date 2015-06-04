@@ -31,7 +31,7 @@ public class Controller {
                 try{
                     o = theView.getobjectSQL();
                     theModel.dodajPrzepis(o);
-                    //theView.setPanel(theModel.getIter());  // tutaj wstawia ci iterator nastawiony na to co ma
+                    theView.setPanel(theModel.getIter());  // tutaj wstawia ci iterator nastawiony na to co ma
                     // wyswietlic
                 }
                 catch (NumberFormatException e)
@@ -45,7 +45,7 @@ public class Controller {
         {
             objectSQL o = null;
             try{
-                //o = theViev.getobjectSQL();
+                //o = theViev.getobjectSQL();   //TODO zrobic cos co zwroci obiekt od buttona(tego przezroczystego na ktorym bedzie nazwa).
                 theModel.setIter(o);
                 //theView.setPanel(theModel.getIter());  // tutaj wstawia ci iterator nastawiony na to co ma
                 // wyswietlic

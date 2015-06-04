@@ -14,30 +14,31 @@ import baza_danych.dishes.Dania_Miesne;
 public class View {
     final static int iloscKategorii=6;
     final static int odlegloscYbtn=25;
-    //final static int kategoria[iloscKategorii];
-    //TODO zmienne
+    //private int[] kategoria = new int[iloscKategorii];
+    //+TODO zmienne
     public JFrame frame;
     public JTextField SearchField;
     private int width=1075, height=700;
     private int widthKlawisz=200;
     private int srodkujKlawisz=(width-widthKlawisz)/2;
     private JTextField textFieldNazwaPrzepisu, textFieldCzasPrzygotowania, textFieldLiczbaOsob;
-    private JPanel MenuGlowne, Przepis, Zupy, DaniaMiesne, CiastaIDesery, Napoje, SalatkiIPrzystawki, RybyIOwoceMorza;;
+    private JPanel MenuGlowne, Przepis, DodawaniePrzepisow, Zupy, DaniaMiesne, CiastaIDesery, Napoje, SalatkiIPrzystawki, RybyIOwoceMorza;;
     private JLabel lblNic;
     private Icon gwSzaraIcon;
     private Icon gwZoltaIcon;
     private JLabel labelGwiazdki;
     private JLabel gwiazdka1, gwiazdka2, gwiazdka3, gwiazdka4, gwiazdka5;
     private JButton btnPrzepisowy, btnPrzepisowy2;
-    Icon tloGlowneImage = new ImageIcon("tlo.png");
-    Icon tloImage = new ImageIcon("tlo2.png");
     private JButton btnDodajPrzepis, btnDodajZdjecie;   //batony "dodaj przepis"
     private JComboBox comboBoxKategorieDan, comboBoxPoziomTrudnosci;
     private JTextArea textAreaSkladniki, textAreaOpisPrzygotowania;
     private JDesktopPane desktopPaneZdjecieDania;
     private ArrayList<JButton> btnPrzepisowyZupy = new ArrayList<JButton>();
 
-    private int ocenaTemp=0;    //tymczasowe
+    Icon tloGlowneImage = new ImageIcon("tlo.png");
+    Icon tloImage = new ImageIcon("tlo2.png");
+
+    private double rate=0.0;    //tymczasowe
 
 
     public View() {
@@ -105,11 +106,9 @@ public class View {
         RybyIOwoceMorza.setLayout(null);
         RybyIOwoceMorza.setVisible(false);
 
-        final JPanel DodawaniePrzepisow = new JPanel();
+        DodawaniePrzepisow = new JPanel();
         frame.getContentPane().add(DodawaniePrzepisow, "Dodawanie Przepisow");
         DodawaniePrzepisow.setLayout(null);
-
-
 
 //======================= Elementy w panelu Menu Glowne  =========================================
 
@@ -416,6 +415,7 @@ public class View {
         btnPowrotDoKategorii.setBounds(10, 611, widthKlawisz, 50);
         Zupy.add(btnPowrotDoKategorii);
 
+        /*
         btnPrzepisowy = new JButton("Pomidorowa o smaku koksu");
         btnPrzepisowy.setFont(new Font("BankGothic Md BT", Font.PLAIN, 17));
         btnPrzepisowy.addActionListener(new ActionListener() {
@@ -480,6 +480,7 @@ public class View {
         btnPrzepisowy5.setBackground(new Color(255, 255, 255, 0));
         btnPrzepisowy5.setBounds(199, 265, 356, 40);
         Zupy.add(btnPrzepisowy5);
+        */
 
         JLabel lblTlo5 = new JLabel("");
         lblTlo5.setIcon(tloImage);
@@ -708,6 +709,7 @@ public class View {
         lblOpisPrzygotowania.setBounds(362, 338, 179, 28);
         DodawaniePrzepisow.add(lblOpisPrzygotowania);
 
+        ///TODO btnDODAJzdjecie
         btnDodajZdjecie = new JButton("Dodaj zdj\u0119cie");
         btnDodajZdjecie.setFont(new Font("Calibri", Font.PLAIN, 17));
         btnDodajZdjecie.setBounds(847, 329, 151, 41);
@@ -727,6 +729,9 @@ public class View {
         DodawaniePrzepisow.add(lblPoziomTrudnosci);
 
         comboBoxPoziomTrudnosci = new JComboBox();
+        comboBoxPoziomTrudnosci.addItem("latwe");
+        comboBoxPoziomTrudnosci.addItem("srednie");
+        comboBoxPoziomTrudnosci.addItem("trudne");
         comboBoxPoziomTrudnosci.setBounds(608, 100, 101, 25);
         DodawaniePrzepisow.add(comboBoxPoziomTrudnosci);
 
@@ -755,8 +760,7 @@ public class View {
 
 //=======================  Elementy w panelu PRZEPIS  ===============================================
 ///TODO przepis-----------------
-        gwSzaraIcon = new ImageIcon("Szara.png");
-        gwZoltaIcon = new ImageIcon("Zolta.png");
+
         //Przepis.addMouseListener(handler);
         //Przepis.addMouseMotionListener(handler);
 
@@ -770,30 +774,34 @@ public class View {
     }
 
     void odczytajPrzepisListener(ActionListener listenForBtnOdczyt) {
-      //  btnDodajPrzepis.addActionListener(listenForBtnDodaj);
+        for(int i=0; i<btnPrzepisowyZupy.size(); i++) {
+            btnPrzepisowyZupy.get(i).addActionListener(listenForBtnOdczyt);
+        }
     }
 
     public void setPanel(IteratorDishes iter) {
         String[] nazwa = new String[6];
-        nazwa[0] = textFieldNazwaPrzepisu.getText(); //nazwa przepisu
+        nazwa[0] = iter.get().getTitle(); //nazwa przepisu
         nazwa[1] = textFieldCzasPrzygotowania.getText(); //czas -dorobic
         nazwa[2] = textFieldLiczbaOsob.getText(); //liczba osob -dorobic
-        nazwa[3] = textAreaSkladniki.getText(); //skladniki
-        nazwa[4] = textAreaOpisPrzygotowania.getText(); //opis
-        nazwa[5] = (String)comboBoxKategorieDan.getSelectedItem(); //typ - kategoria
-        double rate=0.0;
-        int id=0;
+        nazwa[3] = iter.get().getIngredients(); //skladniki
+        nazwa[4] = iter.get().getDescribe(); //opis
+        nazwa[5] = iter.get().toString(); //typ - kategoria
+        rate=iter.get().getRate();
+        //int id=0;
 
         Przepis = new JPanel();
         frame.getContentPane().add(Przepis, "Przepis");
         Przepis.setLayout(null);
-        Przepis.setVisible(false);
+        DodawaniePrzepisow.setVisible(false);
+        MenuGlowne.setVisible(false);
+        Przepis.setVisible(true);
 
-        JLabel lblNazwaKateg = new JLabel("Kategoria:");
+        JLabel lblNazwaKateg = new JLabel(nazwa[5]);
         lblNazwaKateg.setBounds(10, 11, 173, 64);
         Przepis.add(lblNazwaKateg);
 
-        JLabel lblNazwaPrzepis = new JLabel("Tutaj nazwa przepisu du\u017Cymi \u0142adnymi literami");
+        JLabel lblNazwaPrzepis = new JLabel(nazwa[0]);
         lblNazwaPrzepis.setBounds(195, 11, 383, 64);
         Przepis.add(lblNazwaPrzepis);
 
@@ -801,7 +809,7 @@ public class View {
         lblCzasPrzyg.setBounds(584, 11, 200, 64);
         Przepis.add(lblCzasPrzyg);
 
-        JLabel lblOcena = new JLabel("OCENA");
+        JLabel lblOcena = new JLabel("" + rate);
         lblOcena.setBounds(961, 11, 98, 64);
         Przepis.add(lblOcena);
 
@@ -817,11 +825,11 @@ public class View {
         lblZdjecie.setBounds(10, 81, 335, 200);
         Przepis.add(lblZdjecie);
 
-        JLabel lblListaSkladnikow = new JLabel("Lista Skladnikow:");
+        JLabel lblListaSkladnikow = new JLabel(nazwa[3]);
         lblListaSkladnikow.setBounds(10, 305, 335, 290);
         Przepis.add(lblListaSkladnikow);
 
-        JLabel lblOpis = new JLabel("Zajebisty jest ten paszten!");
+        JLabel lblOpis = new JLabel(nazwa[4]);
         lblOpis.setFont(new Font("BankGothic Lt BT", Font.PLAIN, 61));
         lblOpis.setVerticalAlignment(SwingConstants.TOP);
         lblOpis.setBounds(369, 86, 666, 509);
@@ -854,31 +862,43 @@ public class View {
         gwiazdka1 = new JLabel("");
         gwiazdka1.setBounds(382, 621, 52, 40);
         Przepis.add(gwiazdka1);
-        gwiazdka1.setIcon(gwSzaraIcon);
+        gwiazdka1.setIcon(gwZoltaIcon);
 
         gwiazdka2 = new JLabel("");
         gwiazdka2.setBounds(444, 621, 52, 40);
         Przepis.add(gwiazdka2);
         //Icon gwZoltaIcon = new ImageIcon("/Zolta.png");
-        gwiazdka2.setIcon(gwSzaraIcon);
+        if(rate>1.0)
+            gwiazdka2.setIcon(gwZoltaIcon);
+        else
+            gwiazdka2.setIcon(gwSzaraIcon);
 
         gwiazdka3 = new JLabel("");
         gwiazdka3.setBounds(506, 621, 52, 40);
         Przepis.add(gwiazdka3);
         //Icon logoImage = new ImageIcon("/Logo.png");
-        gwiazdka3.setIcon(gwSzaraIcon);
+        if(rate>2.0)
+            gwiazdka3.setIcon(gwZoltaIcon);
+        else
+            gwiazdka3.setIcon(gwSzaraIcon);
 
         gwiazdka4 = new JLabel("");
         gwiazdka4.setBounds(568, 621, 52, 40);
         Przepis.add(gwiazdka4);
         //Icon logoIcon2 = new ImageIcon("/Logo.png");
-        gwiazdka4.setIcon(gwSzaraIcon);
+        if(rate>3.0)
+            gwiazdka4.setIcon(gwZoltaIcon);
+        else
+            gwiazdka4.setIcon(gwSzaraIcon);
 
         gwiazdka5 = new JLabel("");
         gwiazdka5.setBounds(630, 621, 52, 40);
         Przepis.add(gwiazdka5);
         //Icon logoIcon3 = new ImageIcon("/Logo.png");
-        gwiazdka5.setIcon(gwSzaraIcon);
+        if(rate>4.0)
+            gwiazdka5.setIcon(gwZoltaIcon);
+        else
+            gwiazdka5.setIcon(gwSzaraIcon);
 
         gwiazdka1.addMouseListener(handler);
         gwiazdka1.addMouseMotionListener(handler);
@@ -902,7 +922,11 @@ public class View {
         lblNic.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
         lblNic.setBounds(472, 188, 237, 139);
         Przepis.add(lblNic);
+
+
     }
+
+    ///JButton.getBounds().x and JButton.getBounds().y
 
     public objectSQL getobjectSQL() {
         String[] nazwa = new String[6];
@@ -912,7 +936,7 @@ public class View {
         nazwa[3] = textAreaSkladniki.getText(); //skladniki
         nazwa[4] = textAreaOpisPrzygotowania.getText(); //opis
         nazwa[5] = (String)comboBoxKategorieDan.getSelectedItem(); //typ - kategoria
-        double rate=0.0;
+        rate=0.0;
         int id=0;
 
         int[] setYbtn = new int[iloscKategorii];
@@ -941,7 +965,7 @@ public class View {
             btnPrzepisowy.setFont(new Font("BankGothic Md BT", Font.PLAIN, 17));
             btnPrzepisowy.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent arg0) {
-                    Zupy.setVisible(false);
+                    DaniaMiesne.setVisible(false);
                     Przepis.setVisible(true);
                 }
             });
@@ -958,14 +982,14 @@ public class View {
             btnPrzepisowy.setFont(new Font("BankGothic Md BT", Font.PLAIN, 17));
             btnPrzepisowy.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent arg0) {
-                    Zupy.setVisible(false);
+                    CiastaIDesery.setVisible(false);
                     Przepis.setVisible(true);
                 }
             });
             btnPrzepisowy.setBackground(new Color(255, 255, 255, 0));    //przezroczyste
             btnPrzepisowy.setBorderPainted(false);  //brak obramowki buttona
             btnPrzepisowy.setBounds(199, setYbtn[poz], 356, 40);
-            DaniaMiesne.add(btnPrzepisowy);
+            CiastaIDesery.add(btnPrzepisowy);
             setYbtn[poz]+=odlegloscYbtn;  //25
             btnPrzepisowyZupy.add(btnPrzepisowy);
         }
@@ -975,14 +999,14 @@ public class View {
             btnPrzepisowy.setFont(new Font("BankGothic Md BT", Font.PLAIN, 17));
             btnPrzepisowy.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent arg0) {
-                    Zupy.setVisible(false);
+                    Napoje.setVisible(false);
                     Przepis.setVisible(true);
                 }
             });
             btnPrzepisowy.setBackground(new Color(255, 255, 255, 0));    //przezroczyste
             btnPrzepisowy.setBorderPainted(false);  //brak obramowki buttona
             btnPrzepisowy.setBounds(199, setYbtn[poz], 356, 40);
-            DaniaMiesne.add(btnPrzepisowy);
+            Napoje.add(btnPrzepisowy);
             setYbtn[poz]+=odlegloscYbtn;  //25
             btnPrzepisowyZupy.add(btnPrzepisowy);
         }
@@ -992,14 +1016,14 @@ public class View {
             btnPrzepisowy.setFont(new Font("BankGothic Md BT", Font.PLAIN, 17));
             btnPrzepisowy.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent arg0) {
-                    Zupy.setVisible(false);
+                    SalatkiIPrzystawki.setVisible(false);
                     Przepis.setVisible(true);
                 }
             });
             btnPrzepisowy.setBackground(new Color(255, 255, 255, 0));    //przezroczyste
             btnPrzepisowy.setBorderPainted(false);  //brak obramowki buttona
             btnPrzepisowy.setBounds(199, setYbtn[poz], 356, 40);
-            DaniaMiesne.add(btnPrzepisowy);
+            SalatkiIPrzystawki.add(btnPrzepisowy);
             setYbtn[poz]+=odlegloscYbtn;  //25
             btnPrzepisowyZupy.add(btnPrzepisowy);
         }
@@ -1009,26 +1033,29 @@ public class View {
             btnPrzepisowy.setFont(new Font("BankGothic Md BT", Font.PLAIN, 17));
             btnPrzepisowy.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent arg0) {
-                    Zupy.setVisible(false);
+                    RybyIOwoceMorza.setVisible(false);
                     Przepis.setVisible(true);
                 }
             });
             btnPrzepisowy.setBackground(new Color(255, 255, 255, 0));    //przezroczyste
             btnPrzepisowy.setBorderPainted(false);  //brak obramowki buttona
             btnPrzepisowy.setBounds(199, setYbtn[poz], 356, 40);
-            DaniaMiesne.add(btnPrzepisowy);
+            RybyIOwoceMorza.add(btnPrzepisowy);
             setYbtn[poz]+=odlegloscYbtn;  //25
             btnPrzepisowyZupy.add(btnPrzepisowy);
         }
 
-
         objectSQL przepisObject = Factory.FactoryDishes(id, nazwa[0], nazwa[4], nazwa[3], "komentarz", "sciezka", rate, nazwa[5]);
         return przepisObject;
+
     }
 
-
-
-
+    private void updateRate(double ocena) {
+        if(rate<1.0)
+            rate=ocena;
+        else
+            rate=(rate+ocena)/2.0;
+    }
 
 
 
@@ -1037,39 +1064,38 @@ public class View {
         //private int gwiazdkaWys1=0, gwiazdkaWys2=40;
         int X=0, Y=0;
         public void mouseClicked(MouseEvent e) {    //klikniecie LPM.
-            X = e.getX();System.out.println("X: " + X);
-            Y = e.getY();System.out.println("Y " + Y);
             if(e.getSource()==gwiazdka1) {
-                ocenaTemp += 1;
-                System.out.println("OCENA1: " + ocenaTemp);
-                lblNic.setText(String.format("Cliced at %d , %d", e.getX(), e.getY()));
+                updateRate(1.0);
+                //System.out.println("OCENA1: " + ocenaTemp);
+                //lblNic.setText(String.format("Cliced at %d , %d", e.getX(), e.getY()));
             }
             else if(e.getSource()==gwiazdka2) {
-                ocenaTemp += 2;
-                System.out.println("OCENA2: " + ocenaTemp);
-                lblNic.setText(String.format("Cliced at %d , %d", e.getX(), e.getY()));
+                updateRate(2.0);
+                //System.out.println("OCENA2: " + ocenaTemp);
+                //lblNic.setText(String.format("Cliced at %d , %d", e.getX(), e.getY()));
             }
             else if(e.getSource()==gwiazdka3) {
-                ocenaTemp += 3;
-                System.out.println("OCENA3: " + ocenaTemp);
-                lblNic.setText(String.format("Cliced at %d , %d", e.getX(), e.getY()));
+                updateRate(3.0);
+                //System.out.println("OCENA3: " + ocenaTemp);
+                //lblNic.setText(String.format("Cliced at %d , %d", e.getX(), e.getY()));
             }
             else if(e.getSource()==gwiazdka4) {
-                ocenaTemp += 4;
-                System.out.println("OCENA4: " + ocenaTemp);
-                lblNic.setText(String.format("Cliced at %d , %d", e.getX(), e.getY()));
+                updateRate(4.0);
+                //System.out.println("OCENA4: " + ocenaTemp);
+                //lblNic.setText(String.format("Cliced at %d , %d", e.getX(), e.getY()));
             }
             else if(e.getSource()==gwiazdka5) {
-                ocenaTemp += 5;
-                System.out.println("OCENA5: " + ocenaTemp);
-                lblNic.setText(String.format("Cliced at %d , %d", e.getX(), e.getY()));
+                updateRate(5.0);
+                //System.out.println("OCENA5: " + ocenaTemp);
+                //lblNic.setText(String.format("Cliced at %d , %d", e.getX(), e.getY()));
             }
         }
 
         public void mouseEntered(MouseEvent e) {    //wejscie przez kursor w odpowiednia strefe
+            gwiazdka1.setIcon(gwSzaraIcon); gwiazdka2.setIcon(gwSzaraIcon);
+            gwiazdka3.setIcon(gwSzaraIcon); gwiazdka4.setIcon(gwSzaraIcon);
+            gwiazdka5.setIcon(gwSzaraIcon);
             if(e.getSource()==gwiazdka1) {
-                X = e.getX();System.out.println("X: " + X);
-                Y = e.getY();System.out.println("Y " + Y);
                 gwiazdka1.setIcon(gwZoltaIcon);
 
                 lblNic.setText("STREFA 1");
@@ -1077,16 +1103,12 @@ public class View {
 
             }
             else if(e.getSource()==gwiazdka2) {
-                X = e.getX();System.out.println("X: " + X);
-                Y = e.getY();System.out.println("Y " + Y);
                 gwiazdka1.setIcon(gwZoltaIcon);gwiazdka2.setIcon(gwZoltaIcon);
 
                 lblNic.setText("STREFA 1");
                 System.out.println("S1");
             }
             else if(e.getSource()==gwiazdka3) {
-                X = e.getX();System.out.println("X: " + X);
-                Y = e.getY();System.out.println("Y " + Y);
                 gwiazdka1.setIcon(gwZoltaIcon);gwiazdka2.setIcon(gwZoltaIcon);
                 gwiazdka3.setIcon(gwZoltaIcon);
 
@@ -1095,8 +1117,6 @@ public class View {
 
             }
             else if(e.getSource()==gwiazdka4) {
-                X = e.getX();System.out.println("X: " + X);
-                Y = e.getY();System.out.println("Y " + Y);
                 gwiazdka1.setIcon(gwZoltaIcon);gwiazdka2.setIcon(gwZoltaIcon);
                 gwiazdka3.setIcon(gwZoltaIcon);gwiazdka4.setIcon(gwZoltaIcon);
 
@@ -1105,8 +1125,6 @@ public class View {
 
             }
             else if(e.getSource()==gwiazdka5) {
-                X = e.getX();System.out.println("X: " + X);
-                Y = e.getY();System.out.println("Y " + Y);
                 gwiazdka1.setIcon(gwZoltaIcon);gwiazdka2.setIcon(gwZoltaIcon);
                 gwiazdka3.setIcon(gwZoltaIcon);gwiazdka4.setIcon(gwZoltaIcon);
                 gwiazdka5.setIcon(gwZoltaIcon);
