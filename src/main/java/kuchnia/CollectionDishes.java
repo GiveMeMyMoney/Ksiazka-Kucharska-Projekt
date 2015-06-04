@@ -77,6 +77,10 @@ import java.util.Arrays;
                 position++;
                 return c;
             }
+
+            public objectSQL get(){
+                return list.get(position);
+            }
         }
     }
 
