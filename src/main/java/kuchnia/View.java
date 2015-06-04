@@ -22,7 +22,7 @@ public class View {
     private int widthKlawisz=200;
     private int srodkujKlawisz=(width-widthKlawisz)/2;
     private JTextField textFieldNazwaPrzepisu, textFieldCzasPrzygotowania, textFieldLiczbaOsob;
-    private JPanel Przepis, Zupy, DaniaMiesne, CiastaIDesery, Napoje, SalatkiIPrzystawki, RybyIOwoceMorza;;
+    private JPanel MenuGlowne, Przepis, Zupy, DaniaMiesne, CiastaIDesery, Napoje, SalatkiIPrzystawki, RybyIOwoceMorza;;
     private JLabel lblNic;
     private Icon gwSzaraIcon;
     private Icon gwZoltaIcon;
@@ -55,7 +55,7 @@ public class View {
 
 //=======================  Panele  ============================================================//
 
-        final JPanel MenuGlowne = new JPanel();
+        MenuGlowne = new JPanel();
         frame.getContentPane().add(MenuGlowne, "Menu Glowne");
         MenuGlowne.setLayout(null);
         MenuGlowne.setVisible(true);
@@ -109,10 +109,7 @@ public class View {
         frame.getContentPane().add(DodawaniePrzepisow, "Dodawanie Przepisow");
         DodawaniePrzepisow.setLayout(null);
 
-        Przepis = new JPanel(); //TODO nie final bo musze sie pozniej odwolac do klasy obslugujaca myszke
-        frame.getContentPane().add(Przepis, "Przepis");
-        Przepis.setLayout(null);
-        Przepis.setVisible(false);
+
 
 //======================= Elementy w panelu Menu Glowne  =========================================
 
@@ -678,12 +675,12 @@ public class View {
 
         ///TODO comboKATEGORIE
         comboBoxKategorieDan = new JComboBox();
-        comboBoxKategorieDan.addItem("Zupy");
-        comboBoxKategorieDan.addItem("Dania miesne");
-        comboBoxKategorieDan.addItem("Ciasta i Desery");
-        comboBoxKategorieDan.addItem("Napoje");
-        comboBoxKategorieDan.addItem("Salatki i przystawki");
-        comboBoxKategorieDan.addItem("Ryby i owoce morza");
+        comboBoxKategorieDan.addItem("ZUPY");
+        comboBoxKategorieDan.addItem("DANIA_MIESNE");
+        comboBoxKategorieDan.addItem("CIASTA_DESERY");
+        comboBoxKategorieDan.addItem("NAPOJE");
+        comboBoxKategorieDan.addItem("SALATKA_PRZYSTAWKI");
+        comboBoxKategorieDan.addItem("RYBY_OWOCE_MORZA");
         comboBoxKategorieDan.setBounds(10, 172, 263, 28);
         DodawaniePrzepisow.add(comboBoxKategorieDan);
 
@@ -757,13 +754,40 @@ public class View {
 
 
 //=======================  Elementy w panelu PRZEPIS  ===============================================
-        /* Gwiazdki do panelu PRZEPIS */
+///TODO przepis-----------------
         gwSzaraIcon = new ImageIcon("Szara.png");
         gwZoltaIcon = new ImageIcon("Zolta.png");
-
-        Handlerclass handler = new Handlerclass();
         //Przepis.addMouseListener(handler);
         //Przepis.addMouseMotionListener(handler);
+
+
+
+    }
+
+    //TODO getobjectSQL()
+    void dodajPrzepisListener(ActionListener listenForBtnDodaj) {
+        btnDodajPrzepis.addActionListener(listenForBtnDodaj);
+    }
+
+    void odczytajPrzepisListener(ActionListener listenForBtnOdczyt) {
+      //  btnDodajPrzepis.addActionListener(listenForBtnDodaj);
+    }
+
+    public void setPanel(IteratorDishes iter) {
+        String[] nazwa = new String[6];
+        nazwa[0] = textFieldNazwaPrzepisu.getText(); //nazwa przepisu
+        nazwa[1] = textFieldCzasPrzygotowania.getText(); //czas -dorobic
+        nazwa[2] = textFieldLiczbaOsob.getText(); //liczba osob -dorobic
+        nazwa[3] = textAreaSkladniki.getText(); //skladniki
+        nazwa[4] = textAreaOpisPrzygotowania.getText(); //opis
+        nazwa[5] = (String)comboBoxKategorieDan.getSelectedItem(); //typ - kategoria
+        double rate=0.0;
+        int id=0;
+
+        Przepis = new JPanel();
+        frame.getContentPane().add(Przepis, "Przepis");
+        Przepis.setLayout(null);
+        Przepis.setVisible(false);
 
         JLabel lblNazwaKateg = new JLabel("Kategoria:");
         lblNazwaKateg.setBounds(10, 11, 173, 64);
@@ -825,6 +849,8 @@ public class View {
         btnPowrotMenu.setBounds(859, 611, 200, 50);
         Przepis.add(btnPowrotMenu);
 
+        Handlerclass handler = new Handlerclass();
+
         gwiazdka1 = new JLabel("");
         gwiazdka1.setBounds(382, 621, 52, 40);
         Przepis.add(gwiazdka1);
@@ -876,23 +902,13 @@ public class View {
         lblNic.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
         lblNic.setBounds(472, 188, 237, 139);
         Przepis.add(lblNic);
-
-    }
-
-    //TODO getobjectSQL()
-    void dodajPrzepisListener(ActionListener listenForBtnDodaj) {
-        btnDodajPrzepis.addActionListener(listenForBtnDodaj);
-    }
-
-    void odczytajPrzepisListener(ActionListener listenForBtnOdczyt) {
-      //  btnDodajPrzepis.addActionListener(listenForBtnDodaj);
     }
 
     public objectSQL getobjectSQL() {
         String[] nazwa = new String[6];
         nazwa[0] = textFieldNazwaPrzepisu.getText(); //nazwa przepisu
-        nazwa[1] = textFieldCzasPrzygotowania.getText(); //czas
-        nazwa[2] = textFieldLiczbaOsob.getText(); //liczba osob
+        nazwa[1] = textFieldCzasPrzygotowania.getText(); //czas -dorobic
+        nazwa[2] = textFieldLiczbaOsob.getText(); //liczba osob -dorobic
         nazwa[3] = textAreaSkladniki.getText(); //skladniki
         nazwa[4] = textAreaOpisPrzygotowania.getText(); //opis
         nazwa[5] = (String)comboBoxKategorieDan.getSelectedItem(); //typ - kategoria
@@ -1010,9 +1026,7 @@ public class View {
         return przepisObject;
     }
 
-    public void setPanel(IteratorDishes iter) {
 
-    }
 
 
 
@@ -1020,7 +1034,7 @@ public class View {
 
     //KLASA do obs?ugi zdarze? MYSZKI:
     private class Handlerclass implements MouseMotionListener, MouseListener {
-        private int gwiazdkaWys1=0, gwiazdkaWys2=40;
+        //private int gwiazdkaWys1=0, gwiazdkaWys2=40;
         int X=0, Y=0;
         public void mouseClicked(MouseEvent e) {    //klikniecie LPM.
             X = e.getX();System.out.println("X: " + X);
