@@ -8,8 +8,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- */
 //Stworzyc klase Model w ktorej beda collection diszes i metody je zwracajace a pozniej tylko uzywac tutaj tych metod.
 public class Controller {
 
@@ -22,7 +20,7 @@ public class Controller {
             this.theView = v;
             this.theView.dodajPrzepisListener(new DishesListener());
             //this.theView.odczytajPrzepisListener(new DishesListener2());
-            //this.theView.odczytajPrzepisListener(new DishesListener3());
+            this.theView.wczytajPrzepisyListener(new DishesListener3());
         }
 
         class DishesListener implements ActionListener{
@@ -60,10 +58,11 @@ public class Controller {
         public void actionPerformed(ActionEvent arg0)
         {
             objectSQL o = null;
+            String type;
             try{
-                //o = theViev.getobjectSQL();   //TODO zrobic cos co zwroci obiekt od buttona(tego przezroczystego na ktorym bedzie nazwa).
-                theModel.setIterForType(o.toString());
-                //theView.setPanel(theModel.getIter());  // tutaj wstawia ci iterator nastawiony na to co ma
+                type = theView.getType();   //TODO zrobic cos co zwroci obiekt od buttona(tego przezroczystego na ktorym bedzie nazwa).
+                theModel.setIterForType(type);
+                theView.setPrzepisy(theModel.getIter());  // tutaj wstawia ci iterator nastawiony na to co ma
                 // wyswietlic
             }
             catch (NumberFormatException e)
