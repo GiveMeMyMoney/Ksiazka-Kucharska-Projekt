@@ -13,13 +13,15 @@ public class Controller {
 
         private Model theModel;
         private View theView;
+        private String type;
+        private int pozycja=0;
 
         /// private Vievobject View;
         public Controller(Model m,View v) {
             this.theModel = m;
             this.theView = v;
             this.theView.dodajPrzepisListener(new DishesListener());
-            //this.theView.odczytajPrzepisListener(new DishesListener2());
+            this.theView.odczytajPrzepisListener(new DishesListener2());
             this.theView.wczytajPrzepisyListener(new DishesListener3());
         }
 
@@ -43,9 +45,10 @@ public class Controller {
         public void actionPerformed(ActionEvent arg0)
         {
             try{
-                //o = theViev.getobjectSQL();   //TODO zrobic cos co zwroci obiekt od buttona(tego przezroczystego na ktorym bedzie nazwa).
-                //theModel.setIter();
-                //theView.setPanel(theModel.getIter());  // tutaj wstawia ci iterator nastawiony na to co ma
+                pozycja = theView.getPozycja();
+                System.out.println(type + " " + pozycja);
+                theModel.setIter(type, pozycja);
+                theView.setPanel(theModel.getIter());  // tutaj wstawia ci iterator nastawiony na to co ma
                 // wyswietlic
             }
             catch (NumberFormatException e)
@@ -57,11 +60,10 @@ public class Controller {
     class DishesListener3 implements ActionListener{
         public void actionPerformed(ActionEvent arg0)
         {
-            objectSQL o = null;
-            String type;
+            //objectSQL o = null;
             try{
                 type = theView.getType();   //TODO zrobic cos co zwroci obiekt od buttona(tego przezroczystego na ktorym bedzie nazwa).
-                System.out.println(type);
+                System.out.println("" + type);
                 theModel.setIterForType(type);
                 theView.setPrzepisy(theModel.getIter());  // tutaj wstawia ci iterator nastawiony na to co ma
                 // wyswietlic
@@ -73,3 +75,12 @@ public class Controller {
         }
     }
 }
+
+/*
+String name;
+try{
+        name = theView.getName();   //TODO zrobic cos co zwroci obiekt od buttona(tego przezroczystego na ktorym bedzie nazwa).
+        System.out.println(name);   //dla sprawdzenia
+        theModel.setIterForNAME(name);  //ustawia iterator odpowiednio od przepisu
+        theView.setPanel(theModel.getIter());   //przekazuje juz ten konkretny iterator i moja metoda rysuje przepis
+        */
