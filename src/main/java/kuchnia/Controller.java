@@ -22,6 +22,7 @@ public class Controller {
             this.theView = v;
             this.theView.dodajPrzepisListener(new DishesListener());
             //this.theView.odczytajPrzepisListener(new DishesListener2());
+            //this.theView.odczytajPrzepisListener(new DishesListener3());
         }
 
         class DishesListener implements ActionListener{
@@ -43,10 +44,9 @@ public class Controller {
     class DishesListener2 implements ActionListener{
         public void actionPerformed(ActionEvent arg0)
         {
-            objectSQL o = null;
             try{
                 //o = theViev.getobjectSQL();   //TODO zrobic cos co zwroci obiekt od buttona(tego przezroczystego na ktorym bedzie nazwa).
-                theModel.setIter(o);
+                //theModel.setIter();
                 //theView.setPanel(theModel.getIter());  // tutaj wstawia ci iterator nastawiony na to co ma
                 // wyswietlic
             }
@@ -56,5 +56,20 @@ public class Controller {
             }
         }
     }
-
+    class DishesListener3 implements ActionListener{
+        public void actionPerformed(ActionEvent arg0)
+        {
+            objectSQL o = null;
+            try{
+                //o = theViev.getobjectSQL();   //TODO zrobic cos co zwroci obiekt od buttona(tego przezroczystego na ktorym bedzie nazwa).
+                theModel.setIterForType(o.toString());
+                //theView.setPanel(theModel.getIter());  // tutaj wstawia ci iterator nastawiony na to co ma
+                // wyswietlic
+            }
+            catch (NumberFormatException e)
+            {
+                JOptionPane.showMessageDialog(null,"Blad w kontrolerze");
+            }
+        }
+    }
 }

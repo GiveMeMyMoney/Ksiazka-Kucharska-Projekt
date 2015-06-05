@@ -29,7 +29,6 @@ public class Model {
     }
     private void wczytaj(String o,int ID,boolean x)
     {
-        JOptionPane.showMessageDialog(null,"TUTAJ BLAD");
             if (o.toUpperCase().equals("ZUPY")) {
                 if(x) zupy = new CollectionDishes(query.selectDishes("ZUPY"));
                 iter = zupy.iterator(ID);
@@ -64,20 +63,25 @@ public class Model {
                     o.getIngredients(), o.getDescribe(), o.getComments(),
                     o.getPath(),o.toString());
             // wczytuje dane do obiektu
-            this.wczytaj(o.toString(),o.getID(),true);
+            this.wczytaj(o.toString(), o.getID(), true);
               //obiektwidoku.wpisz(iter); /// wypisuje to co mamy na ekran
 
 
     }
-    public void setIter(objectSQL o)
+    public void setIter(String Type,int pos)
     {
-        this.wczytaj(o.toString(),o.getID(),false);
+        this.wczytaj(Type,pos,false);
+    }
+    public void setIterForType(String Type)
+    {
+        this.wczytaj(Type,0,false);
     }
     public IteratorDishes getNextIter()
     {
         iter.next(); // przestawia iterator o jeden dalej
         return iter;
     }
+
 
     public IteratorDishes getIter()
     {

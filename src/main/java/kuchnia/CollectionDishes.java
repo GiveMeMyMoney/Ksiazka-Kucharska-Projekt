@@ -56,15 +56,10 @@ import java.util.Arrays;
             public IteratorImpl(int pos,
                     ArrayList<objectSQL> dishesList) {
                 this.list = dishesList;
-                for(int i = 0; i < list.size();++i) {
-                    if (list.get(0).getID() == pos) {
-                        this.position = i;
-                        break;
-                    }
+                    if (pos >= 0 && pos <= list.size())
+                        this.position = pos;
                     else
                         this.position = 0;
-                }
-
             }
 
             public boolean hasNext() {
