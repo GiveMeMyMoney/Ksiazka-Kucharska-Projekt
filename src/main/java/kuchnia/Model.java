@@ -85,7 +85,7 @@ public class Model {
             // wstawianie do bazy danych
             query.insertAll(o.getRate(), o.getTitle(),
                     o.getIngredients(), o.getDescribe(), o.getComments(),
-                    o.getPath(),o.toString());
+                    o.getPath(), o.toString());
             // wczytuje dane do obiektu
             this.wczytaj(o.toString(), o.getID(), true);
               //obiektwidoku.wpisz(iter); /// wypisuje to co mamy na ekran
