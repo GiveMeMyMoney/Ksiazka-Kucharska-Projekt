@@ -14,8 +14,9 @@ import java.util.Arrays;
 
         public void removeChannel(objectSQL c);
 
-        public IteratorDishes iterator(int ID);
+        public IteratorDishes iteratorID(int ID);
 
+        public IteratorDishes iteratorPos(int Pos);
     }
 
     interface IteratorDishes {
@@ -43,23 +44,39 @@ import java.util.Arrays;
             this.dishesList.remove(c);
         }
 
-        public IteratorDishes iterator(int pos) {
-            return new IteratorImpl(pos,dishesList);
+        public IteratorDishes iteratorID(int ID) {
+            return new IteratorImpl(ID,dishesList);
         }
 
-
+        public IteratorDishes iteratorPos(int Pos)  {
+            return new IteratorImpl(dishesList,Pos);
+        }
         private class IteratorImpl implements IteratorDishes {
 
             private ArrayList<objectSQL> list;
             private int position;
 
-            public IteratorImpl(int pos,
+            public IteratorImpl(int ID,
                     ArrayList<objectSQL> dishesList) {
                 this.list = dishesList;
-                    if (pos >= 0 && pos <= list.size())
-                        this.position = pos;
+                for(int i = 0; i < list.size();++i) {
+                    if (list.get(0).getID() == ID) {
+                        this.position = i;
+                        break;
+                    }
                     else
                         this.position = 0;
+                }
+
+            }
+
+            public IteratorImpl(ArrayList<objectSQL> dishesList
+                                ,int pos) {
+                this.list = dishesList;
+                if(pos >= 0 && pos <= list.size())
+                    this.position = pos;
+                else
+                    this.position = 0;
             }
 
             public boolean hasNext() {

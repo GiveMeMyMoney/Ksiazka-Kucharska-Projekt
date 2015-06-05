@@ -27,32 +27,56 @@ public class Model {
             RybyOwoceMorza = new CollectionDishes(query.selectDishes("RYBY_OWOCE_MORZA"));
 
     }
-    private void wczytaj(String o,int ID,boolean x)
+    private void wczytaj(String o,int n,boolean x)
     {
             if (o.toUpperCase().equals("ZUPY")) {
-                if(x) zupy = new CollectionDishes(query.selectDishes("ZUPY"));
-                iter = zupy.iterator(ID);
+                if(x) {
+                    zupy = new CollectionDishes(query.selectDishes("ZUPY"));
+                    iter = zupy.iteratorID(n);
+                }
+                else
+                    iter = zupy.iteratorPos(n);
             }
             else if(o.toUpperCase().equals("DANIA_MIESNE")) {
-                if(x)DaniaMiesne = new CollectionDishes(query.selectDishes("DANIA_MIESNE"));
-                iter = DaniaMiesne.iterator(ID);
+                if(x) {
+                    DaniaMiesne = new CollectionDishes(query.selectDishes("DANIA_MIESNE"));
+                    iter = DaniaMiesne.iteratorID(n);
+                }
+                else
+                    iter = DaniaMiesne.iteratorPos(n);
             }
 
             else if(o.toUpperCase().equals("CIASTA_DESERY")) {
-                if(x)CiastaDesery = new CollectionDishes(query.selectDishes("CIASTA_DESERY"));
-                iter = CiastaDesery.iterator(ID);
+                if(x) {
+                    CiastaDesery = new CollectionDishes(query.selectDishes("CIASTA_DESERY"));
+                    iter = CiastaDesery.iteratorID(n);
+                }
+                else
+                    iter = CiastaDesery.iteratorPos(n);
             }
             else if(o.toUpperCase().equals("NAPOJE")) {
-                if(x)Napoje = new CollectionDishes(query.selectDishes("NAPOJE"));
-                iter = Napoje.iterator(ID);
+                if(x) {
+                    Napoje = new CollectionDishes(query.selectDishes("NAPOJE"));
+                    iter = Napoje.iteratorID(n);
+                }
+                else
+                    iter = Napoje.iteratorPos(n);
             }
             else if(o.toUpperCase().equals("SALATKA_PRZYSTAWKI")) {
-                if(x)SalatkaPrzystawka = new CollectionDishes(query.selectDishes("SALATKA_PRZYSTAWKI"));
-                iter = SalatkaPrzystawka.iterator(ID);
+                if(x) {
+                    SalatkaPrzystawka = new CollectionDishes(query.selectDishes("SALATKA_PRZYSTAWKI"));
+                    iter = SalatkaPrzystawka.iteratorID(n);
+                }
+                else
+                    iter = SalatkaPrzystawka.iteratorPos(n);
             }
             else if(o.toUpperCase().equals("RYBY_OWOCE_MORZA")) {
-                if(x)RybyOwoceMorza = new CollectionDishes(query.selectDishes("RYBY_OWOCE_MORZA"));
-                iter = SalatkaPrzystawka.iterator(ID);
+                if(x) {
+                    RybyOwoceMorza = new CollectionDishes(query.selectDishes("RYBY_OWOCE_MORZA"));
+                    iter = SalatkaPrzystawka.iteratorID(n);
+                }
+                else
+                    iter = SalatkaPrzystawka.iteratorPos(n);
             }
 
     }
