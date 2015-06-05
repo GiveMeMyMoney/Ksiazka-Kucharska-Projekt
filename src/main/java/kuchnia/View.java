@@ -13,7 +13,7 @@ import baza_danych.dishes.Dania_Miesne;
 
 public class View {
     final static int iloscKategorii=6;
-    final static int odlegloscYbtn=25;
+    final static int odlegloscYbtn=50;
     //private int[] kategoria = new int[iloscKategorii];
     //+TODO zmienne
     public JFrame frame;
@@ -45,7 +45,8 @@ public class View {
     Icon tloGlowneImage = new ImageIcon("tlo.png");
     Icon tloImage = new ImageIcon("tlo2.png");
 
-    private double rate=0.0;    //tymczasowe
+    private double rate=0.0;
+    private String typ;
 
 
     public View() {
@@ -193,11 +194,13 @@ public class View {
 
 //=======================  Elementy w panelu Kategorie  =============================================
 ///TODO kategorie
+
         btnZupy = new JButton("Zupy");
         btnZupy.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Kategorie.setVisible(false);
                 Zupy.setVisible(true);
+                typ="ZUPY";
             }
         });
         btnZupy.setFont(new Font("Calibri", Font.PLAIN, 17));
@@ -209,6 +212,7 @@ public class View {
             public void actionPerformed(ActionEvent e) {
                 Kategorie.setVisible(false);
                 DaniaMiesne.setVisible(true);
+                typ="DANIA_MIESNE";
             }
         });
         btnDanieMiesne.setFont(new Font("Calibri", Font.PLAIN, 17));
@@ -220,6 +224,7 @@ public class View {
             public void actionPerformed(ActionEvent e) {
                 Kategorie.setVisible(false);
                 CiastaIDesery.setVisible(true);
+                typ="DANIA_MIESNE";
             }
         });
         btnCiastaIDesery.setFont(new Font("Calibri", Font.PLAIN, 17));
@@ -231,6 +236,7 @@ public class View {
             public void actionPerformed(ActionEvent e) {
                 Kategorie.setVisible(false);
                 Napoje.setVisible(true);
+                typ="NAPOJE";
             }
         });
         btnNapoje.setFont(new Font("Calibri", Font.PLAIN, 17));
@@ -242,6 +248,7 @@ public class View {
             public void actionPerformed(ActionEvent e) {
                 Kategorie.setVisible(false);
                 RybyIOwoceMorza.setVisible(true);
+                typ="RYBY_OWOCE_MORZA";
             }
         });
         btnRybyIOwoce.setFont(new Font("Calibri", Font.PLAIN, 17));
@@ -253,6 +260,7 @@ public class View {
             public void actionPerformed(ActionEvent e) {
                 Kategorie.setVisible(false);
                 SalatkiIPrzystawki.setVisible(true);
+                typ="SALATKA_PRZYSTAWKI";
             }
         });
         btnSalatkiIPrzystawki.setFont(new Font("Calibri", Font.PLAIN, 17));
@@ -797,46 +805,10 @@ public class View {
         btnRybyIOwoce.addActionListener(listenForBtnKategoria);
     }
 
-    private String typ;
+
     /* ------------------LISTENER III ------------------*/
     public String getType() {
-        btnZupy.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                typ="ZUPY";
-            }
-        });
-
-        btnCiastaIDesery.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                typ="CIASTA_DESERY";
-            }
-        });
-
-        btnDanieMiesne.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                typ="DANIA_MIESNE";
-            }
-        });
-
-        btnNapoje.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                typ="NAPOJE";
-            }
-        });
-
-        btnSalatkiIPrzystawki.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                typ="SALATKA_PRZYSTAWKI";
-            }
-        });
-
-        btnRybyIOwoce.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                typ="RYBY_OWOCE_MORZA";
-            }
-        });
-
-    return typ;
+        return typ;
     }
 
     public void setPrzepisy(IteratorDishes iter) {
@@ -844,114 +816,138 @@ public class View {
         int[] setYbtn = new int[iloscKategorii];
         for (int i=0; i<iloscKategorii; i++) setYbtn[i] = 45;
 
-        while(iter.hasNext()){
-            nazwa=iter.get().getTitle(); //nazwa przepisu
-
             int poz=0;
             if (iter.get().toString().toUpperCase().equals("ZUPY")) {
-                JButton btnPrzepisowy = new JButton(nazwa);
-                btnPrzepisowy.setFont(new Font("BankGothic Md BT", Font.PLAIN, 17));
-                btnPrzepisowy.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent arg0) {
-                        Zupy.setVisible(false);
-                        Przepis.setVisible(true);
-                    }
-                });
-                btnPrzepisowy.setBackground(new Color(255, 255, 255/*, 0*/));    //przezroczyste
-                //btnPrzepisowy.setBorderPainted(false);  //brak obramowki buttona
-                btnPrzepisowy.setBounds(199, setYbtn[poz], 356, 40);
-                Zupy.add(btnPrzepisowy);
-                setYbtn[poz]+=odlegloscYbtn;  //25
-                btnPrzepisowyZupy.add(btnPrzepisowy);   //nie wiem czy to potrzebne ale na wszelki wypadek jest.
+                Zupy.setVisible(true);
+                while(iter.hasNext()) {
+                    nazwa = iter.get().getTitle();
+                    JButton btnPrzepisowy = new JButton(nazwa);
+                    btnPrzepisowy.setFont(new Font("BankGothic Md BT", Font.PLAIN, 17));
+                    btnPrzepisowy.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent arg0) {
+                            Zupy.setVisible(false);
+                            Przepis.setVisible(true);
+                        }
+                    });
+                    btnPrzepisowy.setBackground(new Color(255, 255, 255/*, 0*/));    //przezroczyste
+                    //btnPrzepisowy.setBorderPainted(false);  //brak obramowki buttona
+                    btnPrzepisowy.setBounds(199, setYbtn[poz], 356, 40);
+                    Zupy.add(btnPrzepisowy);
+                    setYbtn[poz] += odlegloscYbtn;  //25
+                    btnPrzepisowyZupy.add(btnPrzepisowy);   //nie wiem czy to potrzebne ale na wszelki wypadek jest.
+                iter.next();
+                }
             }
             else if(iter.get().toString().toUpperCase().equals("DANIA_MIESNE")) {
                 poz++;
-                JButton btnPrzepisowy = new JButton(nazwa);
-                btnPrzepisowy.setFont(new Font("BankGothic Md BT", Font.PLAIN, 17));
-                btnPrzepisowy.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent arg0) {
-                        DaniaMiesne.setVisible(false);
-                        Przepis.setVisible(true);
-                    }
-                });
-                btnPrzepisowy.setBackground(new Color(255, 255, 255, 0));    //przezroczyste
-                btnPrzepisowy.setBorderPainted(false);  //brak obramowki buttona
-                btnPrzepisowy.setBounds(199, setYbtn[poz], 356, 40);
-                DaniaMiesne.add(btnPrzepisowy);
-                setYbtn[poz]+=odlegloscYbtn;  //25
-                btnPrzepisowyDaniaMiesne.add(btnPrzepisowy);
+                DaniaMiesne.setVisible(true);
+                while(iter.hasNext()) {
+                    nazwa = iter.get().getTitle();
+                    JButton btnPrzepisowy = new JButton(nazwa);
+                    btnPrzepisowy.setFont(new Font("BankGothic Md BT", Font.PLAIN, 17));
+                    btnPrzepisowy.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent arg0) {
+                            DaniaMiesne.setVisible(false);
+                            Przepis.setVisible(true);
+                        }
+                    });
+                    btnPrzepisowy.setBackground(new Color(255, 255, 255, 0));    //przezroczyste
+                    btnPrzepisowy.setBorderPainted(false);  //brak obramowki buttona
+                    btnPrzepisowy.setBounds(199, setYbtn[poz], 356, 40);
+                    DaniaMiesne.add(btnPrzepisowy);
+                    setYbtn[poz] += odlegloscYbtn;  //25
+                    btnPrzepisowyDaniaMiesne.add(btnPrzepisowy);
+                    iter.next();
+                }
             }
             else if(iter.get().toString().toUpperCase().equals("CIASTA_DESERY")) {
                 poz++;
-                JButton btnPrzepisowy = new JButton(nazwa);
-                btnPrzepisowy.setFont(new Font("BankGothic Md BT", Font.PLAIN, 17));
-                btnPrzepisowy.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent arg0) {
-                        CiastaIDesery.setVisible(false);
-                        Przepis.setVisible(true);
-                    }
-                });
-                btnPrzepisowy.setBackground(new Color(255, 255, 255, 0));    //przezroczyste
-                btnPrzepisowy.setBorderPainted(false);  //brak obramowki buttona
-                btnPrzepisowy.setBounds(199, setYbtn[poz], 356, 40);
-                CiastaIDesery.add(btnPrzepisowy);
-                setYbtn[poz]+=odlegloscYbtn;  //25
-                btnPrzepisowyCiastaIDesery.add(btnPrzepisowy);
+                CiastaIDesery.setVisible(true);
+                while(iter.hasNext()) {
+                    nazwa = iter.get().getTitle();
+                    JButton btnPrzepisowy = new JButton(nazwa);
+                    btnPrzepisowy.setFont(new Font("BankGothic Md BT", Font.PLAIN, 17));
+                    btnPrzepisowy.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent arg0) {
+                            CiastaIDesery.setVisible(false);
+                            Przepis.setVisible(true);
+                        }
+                    });
+                    btnPrzepisowy.setBackground(new Color(255, 255, 255, 0));    //przezroczyste
+                    btnPrzepisowy.setBorderPainted(false);  //brak obramowki buttona
+                    btnPrzepisowy.setBounds(199, setYbtn[poz], 356, 40);
+                    CiastaIDesery.add(btnPrzepisowy);
+                    setYbtn[poz] += odlegloscYbtn;  //25
+                    btnPrzepisowyCiastaIDesery.add(btnPrzepisowy);
+                    iter.next();
+                }
             }
             else if(iter.get().toString().toUpperCase().equals("NAPOJE")) {
                 poz++;
-                JButton btnPrzepisowy = new JButton(nazwa);
-                btnPrzepisowy.setFont(new Font("BankGothic Md BT", Font.PLAIN, 17));
-                btnPrzepisowy.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent arg0) {
-                        Napoje.setVisible(false);
-                        Przepis.setVisible(true);
-                    }
-                });
-                btnPrzepisowy.setBackground(new Color(255, 255, 255, 0));    //przezroczyste
-                btnPrzepisowy.setBorderPainted(false);  //brak obramowki buttona
-                btnPrzepisowy.setBounds(199, setYbtn[poz], 356, 40);
-                Napoje.add(btnPrzepisowy);
-                setYbtn[poz]+=odlegloscYbtn;  //25
-                btnPrzepisowyNapoje.add(btnPrzepisowy);
+                Napoje.setVisible(true);
+                while(iter.hasNext()) {
+                    nazwa = iter.get().getTitle();
+                    JButton btnPrzepisowy = new JButton(nazwa);
+                    btnPrzepisowy.setFont(new Font("BankGothic Md BT", Font.PLAIN, 17));
+                    btnPrzepisowy.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent arg0) {
+                            Napoje.setVisible(false);
+                            Przepis.setVisible(true);
+                        }
+                    });
+                    btnPrzepisowy.setBackground(new Color(255, 255, 255, 0));    //przezroczyste
+                    btnPrzepisowy.setBorderPainted(false);  //brak obramowki buttona
+                    btnPrzepisowy.setBounds(199, setYbtn[poz], 356, 40);
+                    Napoje.add(btnPrzepisowy);
+                    setYbtn[poz] += odlegloscYbtn;  //25
+                    btnPrzepisowyNapoje.add(btnPrzepisowy);
+                    iter.next();
+                }
             }
             else if(iter.get().toString().toUpperCase().equals("SALATKA_PRZYSTAWKI")) {
                 poz++;
-                JButton btnPrzepisowy = new JButton(nazwa);
-                btnPrzepisowy.setFont(new Font("BankGothic Md BT", Font.PLAIN, 17));
-                btnPrzepisowy.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent arg0) {
-                        SalatkiIPrzystawki.setVisible(false);
-                        Przepis.setVisible(true);
-                    }
-                });
-                btnPrzepisowy.setBackground(new Color(255, 255, 255, 0));    //przezroczyste
-                btnPrzepisowy.setBorderPainted(false);  //brak obramowki buttona
-                btnPrzepisowy.setBounds(199, setYbtn[poz], 356, 40);
-                SalatkiIPrzystawki.add(btnPrzepisowy);
-                setYbtn[poz]+=odlegloscYbtn;  //25
-                btnPrzepisowySalatkiIPrzystawki.add(btnPrzepisowy);
+                SalatkiIPrzystawki.setVisible(true);
+                while(iter.hasNext()) {
+                    nazwa = iter.get().getTitle();
+                    JButton btnPrzepisowy = new JButton(nazwa);
+                    btnPrzepisowy.setFont(new Font("BankGothic Md BT", Font.PLAIN, 17));
+                    btnPrzepisowy.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent arg0) {
+                            SalatkiIPrzystawki.setVisible(false);
+                            Przepis.setVisible(true);
+                        }
+                    });
+                    btnPrzepisowy.setBackground(new Color(255, 255, 255, 0));    //przezroczyste
+                    btnPrzepisowy.setBorderPainted(false);  //brak obramowki buttona
+                    btnPrzepisowy.setBounds(199, setYbtn[poz], 356, 40);
+                    SalatkiIPrzystawki.add(btnPrzepisowy);
+                    setYbtn[poz] += odlegloscYbtn;  //25
+                    btnPrzepisowySalatkiIPrzystawki.add(btnPrzepisowy);
+                    iter.next();
+                }
             }
             else if(iter.get().toString().toUpperCase().equals("RYBY_OWOCE_MORZA")) {
                 poz++;
-                JButton btnPrzepisowy = new JButton(nazwa);
-                btnPrzepisowy.setFont(new Font("BankGothic Md BT", Font.PLAIN, 17));
-                btnPrzepisowy.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent arg0) {
-                        RybyIOwoceMorza.setVisible(false);
-                        Przepis.setVisible(true);
-                    }
-                });
-                btnPrzepisowy.setBackground(new Color(255, 255, 255, 0));    //przezroczyste
-                btnPrzepisowy.setBorderPainted(false);  //brak obramowki buttona
-                btnPrzepisowy.setBounds(199, setYbtn[poz], 356, 40);
-                RybyIOwoceMorza.add(btnPrzepisowy);
-                setYbtn[poz]+=odlegloscYbtn;  //25
-                btnPrzepisowyRybyIOwoceMorza.add(btnPrzepisowy);
+                SalatkiIPrzystawki.setVisible(true);
+                while(iter.hasNext()) {
+                    nazwa = iter.get().getTitle();
+                    JButton btnPrzepisowy = new JButton(nazwa);
+                    btnPrzepisowy.setFont(new Font("BankGothic Md BT", Font.PLAIN, 17));
+                    btnPrzepisowy.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent arg0) {
+                            RybyIOwoceMorza.setVisible(false);
+                            Przepis.setVisible(true);
+                        }
+                    });
+                    btnPrzepisowy.setBackground(new Color(255, 255, 255, 0));    //przezroczyste
+                    btnPrzepisowy.setBorderPainted(false);  //brak obramowki buttona
+                    btnPrzepisowy.setBounds(199, setYbtn[poz], 356, 40);
+                    RybyIOwoceMorza.add(btnPrzepisowy);
+                    setYbtn[poz] += odlegloscYbtn;  //25
+                    btnPrzepisowyRybyIOwoceMorza.add(btnPrzepisowy);
+                    iter.next();
+                }
             }
-
-        //iter.next();
-        }
 
     }
 

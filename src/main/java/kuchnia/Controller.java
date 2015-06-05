@@ -61,6 +61,7 @@ public class Controller {
             String type;
             try{
                 type = theView.getType();   //TODO zrobic cos co zwroci obiekt od buttona(tego przezroczystego na ktorym bedzie nazwa).
+                System.out.println(type);
                 theModel.setIterForType(type);
                 theView.setPrzepisy(theModel.getIter());  // tutaj wstawia ci iterator nastawiony na to co ma
                 // wyswietlic
