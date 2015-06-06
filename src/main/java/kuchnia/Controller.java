@@ -32,6 +32,7 @@ public class Controller {
                 try{
                     System.out.println("WCHODZE LISTENER1");
                     o = theView.getobjectSQL();
+                    theModel.setID();
                     theModel.dodajPrzepis(o);
                     //zle jest ustawianie iteratora!!! na pewno zawsze zwraca id rowne 0
                     theView.setPanel(theModel.getIter());  // tutaj wstawia ci iterator nastawiony na to co ma

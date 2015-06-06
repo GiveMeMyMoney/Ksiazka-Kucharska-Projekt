@@ -30,13 +30,11 @@ public class Model {
     }
     private void wczytaj(String o,int n,boolean x)
     {
-        int numerID=0;  //pozmienialem
             if (o.toUpperCase().equals("ZUPY")) {
                 if (x) {
                     zupy = new CollectionDishes(query.selectDishes("ZUPY"));
-                    numerID = zupy.ustawID(); //
-                    iter = zupy.iteratorPos(numerID);   //wczesniej iteratorID
-                    System.out.println("Iteartor if" + numerID);  //zawsze zwraca id rowne 0. Miales sam sztywno ustawiac id.
+                    iter = zupy.iteratorID(n);   //wczesniej iteratorID
+                    System.out.println("Iteartor if" + n);  //zawsze zwraca id rowne 0. Miales sam sztywno ustawiac id.
                 } else {
                     iter = zupy.iteratorPos(n);
                     System.out.println("Iteartor else" + iter);
@@ -92,6 +90,7 @@ public class Model {
                     o.getIngredients(), o.getDescribe(), o.getComments(),
                     o.getPath(), o.toString());
             // wczytuje dane do obiektu
+        JOptionPane.showMessageDialog(null,lastID);
             this.wczytaj(o.toString(), lastID, true);
               //obiektwidoku.wpisz(iter); /// wypisuje to co mamy na ekran
 
@@ -110,9 +109,9 @@ public class Model {
         iter.next(); // przestawia iterator o jeden dalej
         return iter;
     }
-    public void setID(String Title)
+    public void setID()
     {
-        this.lastID = query.browsedDish("Title",Title).getID();
+        this.lastID = query.lastID();
     }
     public int getID()
     {

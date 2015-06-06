@@ -1,6 +1,7 @@
 package kuchnia;
 import baza_danych.objectSQL;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -72,6 +73,7 @@ import java.util.Arrays;
                 for(int i = 0; i < list.size();++i) {
                     if (list.get(0).getID() == ID) {
                         this.position = i;
+                        JOptionPane.showMessageDialog(null,i );
                         break;
                     }
                     else

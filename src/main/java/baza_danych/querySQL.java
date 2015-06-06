@@ -109,7 +109,7 @@ public class querySQL {
     }
     /*
     Funkcja do usuwania usuwa cos pod warunkiem czegos search to nazwa kolumny np Title a type to konkretnie np bigos
-    Wazne!! Przy wowylywaniu mozna uczywac tylko obiektow tzn nie wolno wpisac ("rate",4) trzeba u¿yæ obiektu Double a nie double !!
+    Wazne!! Przy wowylywaniu mozna uczywac tylko obiektow tzn nie wolno wpisac ("rate",4) trzeba uï¿½yï¿½ obiektu Double a nie double !!
      */
     public <T> boolean deleteDish(String search,T type) {
         try {
@@ -200,6 +200,23 @@ public class querySQL {
         }
         return date;
     }
+
+    public int lastID()
+    {
+        int id;
+        try {
+            stat = connection.createStatement();
+            ResultSet result = stat.executeQuery("SELECT ID FROM Dishes order by ID DESC");
+            id = result.getInt("ID");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            id = 0;
+        }
+        JOptionPane.showMessageDialog(null,id + " TO jest ID");
+        return id;
+    }
+
     /*
     Dodawanie komentarzy po ID
      */
@@ -250,7 +267,7 @@ public class querySQL {
     }
     /*
     Ocena po ID
-    Tutaj zastsowa³em kodowanie do oceny wpisujemy tylko wartosci calkowite wszedzie przy wstawianiu modyfikacji itd.
+    Tutaj zastsowaï¿½em kodowanie do oceny wpisujemy tylko wartosci calkowite wszedzie przy wstawianiu modyfikacji itd.
     dla oceny 10.03 oznacza ze 10 to suma a 03 to licznik czyli ocena 10/3 = 3 bo dalem calkowite
      */
     public void rating(int rate,int id)
