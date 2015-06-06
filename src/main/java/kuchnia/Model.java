@@ -17,6 +17,7 @@ public class Model {
     private CollectionDishes RybyOwoceMorza;
     private IteratorDishes iter;
     private querySQL query = new querySQL();
+    private int lastID;
     public Model() {
 
             zupy = new CollectionDishes(query.selectDishes("ZUPY"));
@@ -91,7 +92,7 @@ public class Model {
                     o.getIngredients(), o.getDescribe(), o.getComments(),
                     o.getPath(), o.toString());
             // wczytuje dane do obiektu
-            this.wczytaj(o.toString(), o.getID(), true);
+            this.wczytaj(o.toString(), lastID, true);
               //obiektwidoku.wpisz(iter); /// wypisuje to co mamy na ekran
 
 
@@ -109,8 +110,14 @@ public class Model {
         iter.next(); // przestawia iterator o jeden dalej
         return iter;
     }
-
-
+    public void setID(String Title)
+    {
+        this.lastID = query.browsedDish("Title",Title).getID();
+    }
+    public int getID()
+    {
+        return lastID;
+    }
     public IteratorDishes getIter()
     {
         return iter;
