@@ -115,6 +115,13 @@ public class View {
         frame.getContentPane().add(DodawaniePrzepisow, "Dodawanie Przepisow");
         DodawaniePrzepisow.setLayout(null);
 
+        /*
+        Przepis = new JPanel();
+        frame.getContentPane().add(Przepis, "Przepis");
+        Przepis.setLayout(null);
+        Przepis.setVisible(false);
+        */
+
 //======================= Elementy w panelu Menu Glowne  =========================================
 
         JButton btnGUIisy = new JButton("Przepisy");
@@ -125,7 +132,7 @@ public class View {
                 Kategorie.setVisible(true);
             }
         });
-        btnGUIisy.setBounds(780, 156, widthKlawisz, 50);
+        btnGUIisy.setBounds(751, 156, widthKlawisz, 50);;
         MenuGlowne.add(btnGUIisy);
 
         JButton btnWyszukiwarka = new JButton("Wyszukiwarka");
@@ -136,7 +143,7 @@ public class View {
             }
         });
         btnWyszukiwarka.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnWyszukiwarka.setBounds(780, 256, widthKlawisz, 50);
+        btnWyszukiwarka.setBounds(751, 267, widthKlawisz, 50);
         MenuGlowne.add(btnWyszukiwarka);
 
         JButton btnAutorzy = new JButton("Autorzy");
@@ -147,7 +154,7 @@ public class View {
             }
         });
         btnAutorzy.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnAutorzy.setBounds(780, 363, widthKlawisz, 50);
+        btnAutorzy.setBounds(751, 380, widthKlawisz, 50);
         MenuGlowne.add(btnAutorzy);
 
         JButton btnWyjscie = new JButton("Wyjscie");
@@ -157,23 +164,9 @@ public class View {
             }
         });
         btnWyjscie.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnWyjscie.setBounds(780, 474, widthKlawisz, 50);
+        btnWyjscie.setBounds(751, 495, widthKlawisz, 50);
         MenuGlowne.add(btnWyjscie);
 
-        //TYMCZASOWO:
-        JButton btnPrzepisyKonkretne = new JButton("PrzepisyKonkretne");
-        btnPrzepisyKonkretne.setFont(new Font("Calibri", Font.PLAIN, 17));
-        btnPrzepisyKonkretne.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                MenuGlowne.setVisible(false);
-                Przepis.setVisible(true);
-            }
-        });
-        btnPrzepisyKonkretne.setBackground(new Color(255, 255, 255, 0));    //przezroczyste
-        btnPrzepisyKonkretne.setBounds(150, 156, widthKlawisz, 50);
-        //btnPrzepisyKonkretne.setBorderPainted( false );
-        MenuGlowne.add(btnPrzepisyKonkretne);
-        //TYMCZASOWO
 
         JLabel lblTlo1 = new JLabel("");
         //Image tloImage = new ImageIcon(this.getClass().getResource("/tlo.png")).getImage();
@@ -785,30 +778,33 @@ public class View {
 
 
     void odczytajPrzepisListener(ActionListener listenForBtnOdczyt) {
+        //cos jest chyba to zle.
+        System.out.println("JESTEM W ListenerVIEW2 ");
         for(int i=0; i<btnPrzepisowyZupy.size(); i++) {
             pozycja=i;
             btnPrzepisowyZupy.get(i).addActionListener(listenForBtnOdczyt);
         }
         for(int i=0; i<btnPrzepisowyDaniaMiesne.size(); i++) {
             pozycja=i;
-            btnPrzepisowyZupy.get(i).addActionListener(listenForBtnOdczyt);
+            btnPrzepisowyDaniaMiesne.get(i).addActionListener(listenForBtnOdczyt);
         }
         for(int i=0; i<btnPrzepisowyCiastaIDesery.size(); i++) {
             pozycja=i;
-            btnPrzepisowyZupy.get(i).addActionListener(listenForBtnOdczyt);
+            btnPrzepisowyCiastaIDesery.get(i).addActionListener(listenForBtnOdczyt);
         }
         for(int i=0; i<btnPrzepisowyNapoje.size(); i++) {
-            btnPrzepisowyZupy.get(i).addActionListener(listenForBtnOdczyt);
+            btnPrzepisowyNapoje.get(i).addActionListener(listenForBtnOdczyt);
             pozycja=i;
         }
         for(int i=0; i<btnPrzepisowySalatkiIPrzystawki.size(); i++) {
             pozycja=i;
-            btnPrzepisowyZupy.get(i).addActionListener(listenForBtnOdczyt);
+            btnPrzepisowySalatkiIPrzystawki.get(i).addActionListener(listenForBtnOdczyt);
         }
         for(int i=0; i<btnPrzepisowyRybyIOwoceMorza.size(); i++) {
             pozycja=i;
-            btnPrzepisowyZupy.get(i).addActionListener(listenForBtnOdczyt);
+            btnPrzepisowyRybyIOwoceMorza.get(i).addActionListener(listenForBtnOdczyt);
         }
+        System.out.println("WYCHODZE Z ListenerVIEW2 ");
     }
 
     void wczytajPrzepisyListener(ActionListener listenForBtnKategoria) {
@@ -854,6 +850,22 @@ public class View {
                     btnPrzepisowyZupy.add(btnPrzepisowy);   //nie wiem czy to potrzebne ale na wszelki wypadek jest.
                 iter.next();
                 }
+
+                nazwa = iter.get().getTitle();
+                JButton btnPrzepisowy = new JButton(nazwa);
+                btnPrzepisowy.setFont(new Font("BankGothic Md BT", Font.PLAIN, 17));
+                btnPrzepisowy.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent arg0) {
+                        Zupy.setVisible(false);
+                        Przepis.setVisible(true);
+                    }
+                });
+                btnPrzepisowy.setBackground(new Color(22, 255, 255/*, 0*/));    //przezroczyste
+                //btnPrzepisowy.setBorderPainted(false);  //brak obramowki buttona
+                btnPrzepisowy.setBounds(199, setYbtn[poz], 356, 40);
+                Zupy.add(btnPrzepisowy);
+                setYbtn[poz] += odlegloscYbtn;  //25
+                btnPrzepisowyZupy.add(btnPrzepisowy);   //nie wiem czy to potrzebne ale na wszelki wypadek jest.
             }
             else if(iter.get().toString().toUpperCase().equals("DANIA_MIESNE")) {
                 poz++;
@@ -1133,7 +1145,7 @@ public class View {
         nazwa[4] = textAreaOpisPrzygotowania.getText(); //opis
         nazwa[5] = (String)comboBoxKategorieDan.getSelectedItem(); //typ - kategoria
         rate=0.0;
-        int id=0;
+        int id=3;   //zawsze zwraca id=0.
 
         /*
         int[] setYbtn = new int[iloscKategorii];
@@ -1243,7 +1255,7 @@ public class View {
         }
         */
 
-        objectSQL przepisObject = Factory.FactoryDishes(id, nazwa[0], nazwa[4], nazwa[3], "komentarz", "sciezka", rate, nazwa[5]);
+        objectSQL przepisObject = Factory.FactoryDishes(0, nazwa[0], nazwa[4], nazwa[3], "komentarz", "sciezka", rate, nazwa[5]);
         return przepisObject;
 
     }

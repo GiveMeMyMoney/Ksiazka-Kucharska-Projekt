@@ -36,6 +36,16 @@ import java.util.Arrays;
             dishesList = new ArrayList<objectSQL>(Arrays.asList(arr));
         }
 
+        /* to DODALEM */
+        public int ustawID() {
+            //this.dishesList = dishesList;
+            for(int i = 0; i < dishesList.size(); ++i) {
+                System.out.println("i: " + i);
+            }
+            return dishesList.size()-1; //zwraca ostatni ID.
+        }
+        /* to DODALEM */
+
         public void addChannel(objectSQL c) {
             this.dishesList.add(c);
         }
@@ -67,7 +77,6 @@ import java.util.Arrays;
                     else
                         this.position = 0;
                 }
-
             }
 
             public IteratorImpl(ArrayList<objectSQL> dishesList

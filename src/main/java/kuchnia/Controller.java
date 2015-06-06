@@ -30,10 +30,13 @@ public class Controller {
             {
                 objectSQL o = null;
                 try{
+                    System.out.println("WCHODZE LISTENER1");
                     o = theView.getobjectSQL();
                     theModel.dodajPrzepis(o);
+                    //zle jest ustawianie iteratora!!! na pewno zawsze zwraca id rowne 0
                     theView.setPanel(theModel.getIter());  // tutaj wstawia ci iterator nastawiony na to co ma
                     // wyswietlic
+                    System.out.println("WYCHODZE Z LISTENER1 CONTROLLER");
                 }
                 catch (NumberFormatException e)
                 {
@@ -45,11 +48,14 @@ public class Controller {
         public void actionPerformed(ActionEvent arg0)
         {
             try{
+                System.out.println("WCHODZE LISTENER2");
+                //ERROR w ogole nie wchodzi do listener2
                 pozycja = theView.getPozycja();
-                System.out.println(type + " " + pozycja);
+                System.out.println("typ: " + type + " " + pozycja);
                 theModel.setIter(type, pozycja);
                 theView.setPanel(theModel.getIter());  // tutaj wstawia ci iterator nastawiony na to co ma
                 // wyswietlic
+                System.out.println("WYCHODZE Z LISTENER2 CONTROLLER");
             }
             catch (NumberFormatException e)
             {
@@ -62,11 +68,14 @@ public class Controller {
         {
             //objectSQL o = null;
             try{
+                System.out.println("WCHODZE LISTENER3");
                 type = theView.getType();   //TODO zrobic cos co zwroci obiekt od buttona(tego przezroczystego na ktorym bedzie nazwa).
-                System.out.println("" + type);
+                System.out.println("to jest TYP: " + type);
                 theModel.setIterForType(type);
+                theView.setPanel(theModel.getIter());   //zeby widzial przy 1 uruchomieniu :D
                 theView.setPrzepisy(theModel.getIter());  // tutaj wstawia ci iterator nastawiony na to co ma
                 // wyswietlic
+                System.out.println("WYCHODZE Z LISTENER3 CONTROLLER");
             }
             catch (NumberFormatException e)
             {

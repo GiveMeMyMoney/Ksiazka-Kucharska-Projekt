@@ -29,13 +29,17 @@ public class Model {
     }
     private void wczytaj(String o,int n,boolean x)
     {
+        int numerID=0;  //pozmienialem
             if (o.toUpperCase().equals("ZUPY")) {
-                if(x) {
+                if (x) {
                     zupy = new CollectionDishes(query.selectDishes("ZUPY"));
-                    iter = zupy.iteratorID(n);
-                }
-                else
+                    numerID = zupy.ustawID(); //
+                    iter = zupy.iteratorPos(numerID);   //wczesniej iteratorID
+                    System.out.println("Iteartor if" + numerID);  //zawsze zwraca id rowne 0. Miales sam sztywno ustawiac id.
+                } else {
                     iter = zupy.iteratorPos(n);
+                    System.out.println("Iteartor else" + iter);
+                }
             }
             else if(o.toUpperCase().equals("DANIA_MIESNE")) {
                 if(x) {
