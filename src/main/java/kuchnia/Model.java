@@ -37,7 +37,7 @@ public class Model {
                     System.out.println("Iteartor if" + n);  //zawsze zwraca id rowne 0. Miales sam sztywno ustawiac id.
                 } else {
                     iter = zupy.iteratorPos(n);
-                    System.out.println("Iteartor else" + iter);
+                    System.out.println("Iteartor else" + iter.get().getID());
                 }
             }
             else if(o.toUpperCase().equals("DANIA_MIESNE")) {
@@ -91,7 +91,7 @@ public class Model {
                     o.getPath(), o.toString());
             // wczytuje dane do obiektu
         JOptionPane.showMessageDialog(null,lastID);
-            this.wczytaj(o.toString(), lastID, true);
+            this.wczytaj(o.toString(), lastID + 1, true);
               //obiektwidoku.wpisz(iter); /// wypisuje to co mamy na ekran
 
 
@@ -111,6 +111,7 @@ public class Model {
     }
     public void setID()
     {
+        System.out.println("ostatnie dodane ID " + query.lastID());
         this.lastID = query.lastID();
     }
     public int getID()

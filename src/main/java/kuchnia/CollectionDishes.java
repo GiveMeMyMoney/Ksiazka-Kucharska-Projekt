@@ -71,7 +71,7 @@ import java.util.Arrays;
                     ArrayList<objectSQL> dishesList) {
                 this.list = dishesList;
                 for(int i = 0; i < list.size();++i) {
-                    if (list.get(0).getID() == ID) {
+                    if (list.get(i).getID() == ID) {
                         this.position = i;
                         JOptionPane.showMessageDialog(null,i );
                         break;

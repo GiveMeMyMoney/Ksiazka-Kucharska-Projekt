@@ -35,6 +35,7 @@ public class Controller {
                     theModel.setID();
                     theModel.dodajPrzepis(o);
                     //zle jest ustawianie iteratora!!! na pewno zawsze zwraca id rowne 0
+                    System.out.println("Id CONTROLLER" + theModel.getIter().get().getID());
                     theView.setPanel(theModel.getIter());  // tutaj wstawia ci iterator nastawiony na to co ma
                     // wyswietlic
                     System.out.println("WYCHODZE Z LISTENER1 CONTROLLER");
