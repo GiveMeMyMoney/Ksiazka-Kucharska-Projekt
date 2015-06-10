@@ -23,6 +23,7 @@ public class Controller {
             this.theView.dodajPrzepisListener(new DishesListener());
             this.theView.odczytajPrzepisListener(new DishesListener2());
             this.theView.wczytajPrzepisyListener(new DishesListener3());
+            this.theView.wyszukajPrzepisListener(new DishesListener4());
         }
 
         class DishesListener implements ActionListener{
@@ -46,7 +47,7 @@ public class Controller {
                 }
             }
         }
-    class DishesListener2 implements ActionListener{
+    class DishesListener2 implements ActionListener{    //zle dziala wchodzenie do listenera z mojego VIEW
         public void actionPerformed(ActionEvent arg0)
         {
             try{
@@ -70,13 +71,31 @@ public class Controller {
         {
             //objectSQL o = null;
             try{
+                if(arg0.getSource()==theView.btnZupy) {
+                    type="ZUPY";
+                }
+                else if(arg0.getSource()==theView.btnDanieMiesne) {
+                    type="DANIA_MIESNE";
+                }
+                else if(arg0.getSource()==theView.btnCiastaIDesery) {
+                    type="CIASTA_DESERY";
+                }
+                else if(arg0.getSource()==theView.btnNapoje) {
+                    type="NAPOJE";
+                }
+                else if(arg0.getSource()==theView.btnRybyIOwoce) {
+                    type="RYBY_OWOCE_MORZA";
+                }
+                else if(arg0.getSource()==theView.btnSalatkiIPrzystawki) {
+                    type="SALATKA_PRZYSTAWKI";
+                }
                 System.out.println("WCHODZE LISTENER3");
-                type = theView.getType();   //TODO zrobic cos co zwroci obiekt od buttona(tego przezroczystego na ktorym bedzie nazwa).
                 System.out.println("to jest TYP: " + type);
                 theModel.setIterForType(type);
                 theView.setPanel(theModel.getIter());   //zeby widzial przy 1 uruchomieniu :D
                 theView.setPrzepisy(theModel.getIter());  // tutaj wstawia ci iterator nastawiony na to co ma
                 // wyswietlic
+                //theView.sprawdzArrayListyButtonow();    //Arraye dzialaja ok.
                 System.out.println("WYCHODZE Z LISTENER3 CONTROLLER");
             }
             catch (NumberFormatException e)
@@ -85,6 +104,22 @@ public class Controller {
             }
         }
     }
+    class DishesListener4 implements ActionListener{
+        public void actionPerformed(ActionEvent arg0)
+        {
+            //objectSQL o = null;
+            try{
+
+                System.out.println("WCHODZE LISTENER4");
+
+            }
+            catch (NumberFormatException e)
+            {
+                JOptionPane.showMessageDialog(null,"Blad w kontrolerze");
+            }
+        }
+    }
+
 }
 
 /*

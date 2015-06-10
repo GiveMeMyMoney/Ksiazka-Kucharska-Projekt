@@ -9,105 +9,105 @@ import java.util.Arrays;
  * Created by Wojciech on 2015-05-23.
  */
 
-    interface Collection {
+interface Collection {
 
-        public void addChannel(objectSQL c);
+    public void addChannel(objectSQL c);
 
-        public void removeChannel(objectSQL c);
+    public void removeChannel(objectSQL c);
 
-        public IteratorDishes iteratorID(int ID);
+    public IteratorDishes iteratorID(int ID);
 
-        public IteratorDishes iteratorPos(int Pos);
+    public IteratorDishes iteratorPos(int Pos);
+}
+
+interface IteratorDishes {
+
+    public boolean hasNext();
+
+    public objectSQL next();
+
+    public objectSQL get();
+}
+
+public class CollectionDishes implements Collection {
+
+    private ArrayList<objectSQL> dishesList;
+
+    public CollectionDishes(objectSQL[] arr) {
+        dishesList = new ArrayList<objectSQL>(Arrays.asList(arr));
     }
 
-    interface IteratorDishes {
+    /* to DODALEM */
+    public int ustawID() {
+        //this.dishesList = dishesList;
+        for(int i = 0; i < dishesList.size(); ++i) {
+            System.out.println("i: " + i);
+        }
+        return dishesList.size()-1; //zwraca ostatni ID.
+    }
+        /* to DODALEM */
 
-        public boolean hasNext();
-
-        public objectSQL next();
-
-        public objectSQL get();
+    public void addChannel(objectSQL c) {
+        this.dishesList.add(c);
     }
 
-    public class CollectionDishes implements Collection {
+    public void removeChannel(objectSQL c) {
+        this.dishesList.remove(c);
+    }
 
-        private ArrayList<objectSQL> dishesList;
+    public IteratorDishes iteratorID(int ID) {
+        return new IteratorImpl(ID,dishesList);
+    }
 
-        public CollectionDishes(objectSQL[] arr) {
-            dishesList = new ArrayList<objectSQL>(Arrays.asList(arr));
-        }
+    public IteratorDishes iteratorPos(int Pos)  {
+        return new IteratorImpl(dishesList,Pos);
+    }
+    private class IteratorImpl implements IteratorDishes {
 
-        /* to DODALEM */
-        public int ustawID() {
-            //this.dishesList = dishesList;
-            for(int i = 0; i < dishesList.size(); ++i) {
-                System.out.println("i: " + i);
-            }
-            return dishesList.size()-1; //zwraca ostatni ID.
-        }
-        /* to DODALEM */
+        private ArrayList<objectSQL> list;
+        private int position;
 
-        public void addChannel(objectSQL c) {
-            this.dishesList.add(c);
-        }
-
-        public void removeChannel(objectSQL c) {
-            this.dishesList.remove(c);
-        }
-
-        public IteratorDishes iteratorID(int ID) {
-            return new IteratorImpl(ID,dishesList);
-        }
-
-        public IteratorDishes iteratorPos(int Pos)  {
-            return new IteratorImpl(dishesList,Pos);
-        }
-        private class IteratorImpl implements IteratorDishes {
-
-            private ArrayList<objectSQL> list;
-            private int position;
-
-            public IteratorImpl(int ID,
-                    ArrayList<objectSQL> dishesList) {
-                this.list = dishesList;
-                for(int i = 0; i < list.size();++i) {
-                    if (list.get(i).getID() == ID) {
-                        this.position = i;
-                        JOptionPane.showMessageDialog(null,i );
-                        break;
-                    }
-                    else
-                        this.position = 0;
+        public IteratorImpl(int ID,
+                            ArrayList<objectSQL> dishesList) {
+            this.list = dishesList;
+            for(int i = 0; i < list.size();++i) {
+                if (list.get(i).getID() == ID) {
+                    this.position = i;
+                    JOptionPane.showMessageDialog(null,i );
+                    break;
                 }
-            }
-
-            public IteratorImpl(ArrayList<objectSQL> dishesList
-                                ,int pos) {
-                this.list = dishesList;
-                if(pos >= 0 && pos <= list.size())
-                    this.position = pos;
                 else
                     this.position = 0;
             }
+        }
 
-            public boolean hasNext() {
-                if(position+1 < list.size())
-                    return true;
-                else
-                    return false;
-            }
+        public IteratorImpl(ArrayList<objectSQL> dishesList
+                ,int pos) {
+            this.list = dishesList;
+            if(pos >= 0 && pos <= list.size())
+                this.position = pos;
+            else
+                this.position = 0;
+        }
 
-            public objectSQL next() {
-                objectSQL c = list.get(position);
-                position++;
-                return c;
-            }
+        public boolean hasNext() {
+            if(position+1 < list.size())
+                return true;
+            else
+                return false;
+        }
 
-            public objectSQL get(){
-                return list.get(position);
-            }
+        public objectSQL next() {
+            objectSQL c = list.get(position);
+            position++;
+            return c;
+        }
+
+        public objectSQL get(){
+            return list.get(position);
         }
     }
+}
 
 
 
