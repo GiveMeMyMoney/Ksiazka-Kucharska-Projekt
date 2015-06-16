@@ -75,11 +75,12 @@ public class Model {
             }
             else if(o.toUpperCase().equals("RYBY_OWOCE_MORZA")) {
                 if(x) {
+                    System.out.println("RYBKI W IFIE: " + o.toString());
                     RybyOwoceMorza = new CollectionDishes(query.selectDishes("RYBY_OWOCE_MORZA"));
-                    iter = SalatkaPrzystawka.iteratorID(n);
+                    iter = RybyOwoceMorza.iteratorID(n);
                 }
                 else
-                    iter = SalatkaPrzystawka.iteratorPos(n);
+                    iter = RybyOwoceMorza.iteratorPos(n);
             }
 
     }

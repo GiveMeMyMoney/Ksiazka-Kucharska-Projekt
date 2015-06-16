@@ -989,6 +989,8 @@ public class View {
     /* ------------------LISTENER I ------------------*/
     public void setPanel(IteratorDishes iter) {
         String[] nazwa = new String[6];
+        System.out.println("w listenerze I iter : " + iter.get().getDescribe());
+
         nazwa[0] = iter.get().getTitle(); //nazwa przepisu
         nazwa[1] = textFieldCzasPrzygotowania.getText(); //czas -dorobic
         nazwa[2] = textFieldLiczbaOsob.getText(); //liczba osob -dorobic
@@ -1254,7 +1256,7 @@ public class View {
             btnPrzepisowyRybyIOwoceMorza.add(btnPrzepisowy);
         }
         */
-
+        System.out.println("przy dodawaniu w widoku : " + nazwa[5]);
         objectSQL przepisObject = Factory.FactoryDishes(0, nazwa[0], nazwa[4], nazwa[3], "komentarz", "sciezka", rate, nazwa[5]);
         return przepisObject;
 
