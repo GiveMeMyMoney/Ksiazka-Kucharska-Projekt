@@ -11,11 +11,11 @@ import javax.swing.*;
 public class Model {
     public CollectionDishes zupy;
     public CollectionDishes DaniaMiesne;
-    private CollectionDishes CiastaDesery;
+    public CollectionDishes CiastaDesery;
     public CollectionDishes Napoje;
-    private CollectionDishes SalatkaPrzystawka;
-    private CollectionDishes RybyOwoceMorza;
-    private IteratorDishes iter;
+    public CollectionDishes SalatkaPrzystawka;
+    public CollectionDishes RybyOwoceMorza;
+    public IteratorDishes iter;
     private querySQL query = new querySQL();
     private int lastID;
     public Model() {

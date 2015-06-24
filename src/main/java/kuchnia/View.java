@@ -1367,29 +1367,13 @@ public class View {
 
     public boolean usunPrzepis() {
         boolean ret=false;
-        //
-        //
-        //
-        //
         ret=true;
-        //
-        //
-        //
-        //
         return ret;
     }
 
     public boolean modyfikPrzepis() {
         boolean ret=false;
-        //
-        //
-        //
-        //
         ret=true;
-        //
-        //
-        //
-        //
         return ret;
     }
 

@@ -13,6 +13,9 @@ public class test3 {
         assertNotNull(m.zupy);
         assertNotNull(m.Napoje);
         assertNotNull(m.DaniaMiesne);
+        assertNotNull(m.CiastaDesery);
+        assertNotNull(m.SalatkaPrzystawka);
+        assertNotNull(m.RybyOwoceMorza);
         System.out.println("Inicjalizacja poprawna");
     }
 }
