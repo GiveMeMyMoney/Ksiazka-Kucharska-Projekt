@@ -29,20 +29,20 @@ public class View {
     private JComboBox comboBoxKategorieDan, comboBoxPoziomTrudnosci;
     private JTextArea textAreaSkladniki, textAreaOpisPrzygotowania;
     private JDesktopPane desktopPaneZdjecieDania;
-    private ArrayList<JButton> btnPrzepisowyZupy = new ArrayList<JButton>();
-    private ArrayList<JButton> btnPrzepisowyDaniaMiesne = new ArrayList<JButton>();
-    private ArrayList<JButton> btnPrzepisowyCiastaIDesery = new ArrayList<JButton>();
-    private ArrayList<JButton> btnPrzepisowyNapoje = new ArrayList<JButton>();
-    private ArrayList<JButton> btnPrzepisowySalatkiIPrzystawki = new ArrayList<JButton>();
-    private ArrayList<JButton> btnPrzepisowyRybyIOwoceMorza = new ArrayList<JButton>();
-    private JButton btnZupy, btnDanieMiesne, btnCiastaIDesery, btnNapoje, btnRybyIOwoce, btnSalatkiIPrzystawki;
+    private ArrayList<JButton> btnPrzepisowyZupy;
+    private ArrayList<JButton> btnPrzepisowyDaniaMiesne;
+    private ArrayList<JButton> btnPrzepisowyCiastaIDesery;
+    private ArrayList<JButton> btnPrzepisowyNapoje;
+    private ArrayList<JButton> btnPrzepisowySalatkiIPrzystawki;
+    private ArrayList<JButton> btnPrzepisowyRybyIOwoceMorza;
+    public JButton btnZupy, btnDanieMiesne, btnCiastaIDesery, btnNapoje, btnRybyIOwoce, btnSalatkiIPrzystawki;
+    private JButton btnPrzepisowy, btnSzukaj;
 
 
     Icon tloGlowneImage = new ImageIcon("tlo.png");
     Icon tloImage = new ImageIcon("tlo2.png");
 
     private double rate=0.0;
-    private StringBuffer typ = new StringBuffer();
     private int pozycja=0;
 
 
@@ -52,6 +52,7 @@ public class View {
 
 
     private void initialize() {
+
         frame = new JFrame();
         frame.setBounds(100, 100, width, height);
         frame.setResizable(false);	//zmiana rozmiaru okienka-ustawiona na false.
@@ -121,6 +122,13 @@ public class View {
         Przepis.setLayout(null);
         Przepis.setVisible(false);
         */
+
+        btnPrzepisowyZupy = new ArrayList<JButton>();
+        btnPrzepisowyDaniaMiesne = new ArrayList<JButton>();
+        btnPrzepisowyCiastaIDesery = new ArrayList<JButton>();
+        btnPrzepisowyNapoje = new ArrayList<JButton>();
+        btnPrzepisowySalatkiIPrzystawki = new ArrayList<JButton>();
+        btnPrzepisowyRybyIOwoceMorza = new ArrayList<JButton>();
 
 //======================= Elementy w panelu Menu Glowne  =========================================
 
@@ -195,7 +203,6 @@ public class View {
         btnDanieMiesne = new JButton("Dania \r\nmi\u0119sne");
         btnDanieMiesne.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                typ.append("DANIA_MIESNE");
                 Kategorie.setVisible(false);
                 DaniaMiesne.setVisible(true);
             }
@@ -207,7 +214,6 @@ public class View {
         btnCiastaIDesery = new JButton("Ciasta i desery");
         btnCiastaIDesery.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                typ.append("CIASTA_DESERY");
                 Kategorie.setVisible(false);
                 CiastaIDesery.setVisible(true);
             }
@@ -219,7 +225,6 @@ public class View {
         btnNapoje = new JButton("Napoje");
         btnNapoje.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                typ.append("NAPOJE");
                 Kategorie.setVisible(false);
                 Napoje.setVisible(true);
             }
@@ -231,7 +236,6 @@ public class View {
         btnRybyIOwoce = new JButton("Ryby i owoce morza");
         btnRybyIOwoce.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                typ.append("RYBY_OWOCE_MORZA");
                 Kategorie.setVisible(false);
                 RybyIOwoceMorza.setVisible(true);
             }
@@ -243,7 +247,6 @@ public class View {
         btnSalatkiIPrzystawki = new JButton("Sa\u0142atki i przystawki");
         btnSalatkiIPrzystawki.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //typ="SALATKA_PRZYSTAWKI";
                 Kategorie.setVisible(false);
                 SalatkiIPrzystawki.setVisible(true);
             }
@@ -302,7 +305,7 @@ public class View {
         SearchField.setColumns(10);
 
         Icon szukajImage = new ImageIcon("Lupamala.png");
-        JButton btnSzukaj = new JButton("Szukaj", szukajImage); //moze byc tez bez napisu
+        btnSzukaj = new JButton("Szukaj", szukajImage); //moze byc tez bez napisu
         btnSzukaj.setFont(new Font("Calibri", Font.PLAIN, 17));
         btnSzukaj.setBounds(428, 400, 98, 39);
         Wyszukiwanie.add(btnSzukaj);
@@ -772,15 +775,16 @@ public class View {
     }
 
     //TODO getobjectSQL()
-    void dodajPrzepisListener(ActionListener listenForBtnDodaj) {
+    void dodajPrzepisListener(ActionListener listenForBtnDodaj) { //Listener I.
         btnDodajPrzepis.addActionListener(listenForBtnDodaj);
     }
 
 
-    void odczytajPrzepisListener(ActionListener listenForBtnOdczyt) {
+    void odczytajPrzepisListener(ActionListener listenForBtnOdczyt) { //Listener II.
         //cos jest chyba to zle.
-        System.out.println("JESTEM W ListenerVIEW2 ");
+        //System.out.println("JESTEM W ListenerVIEW2 ");
         for(int i=0; i<btnPrzepisowyZupy.size(); i++) {
+            //System.out.println("JESTEM W ListenerVIEW2 petla numer 1");
             pozycja=i;
             btnPrzepisowyZupy.get(i).addActionListener(listenForBtnOdczyt);
         }
@@ -804,16 +808,25 @@ public class View {
             pozycja=i;
             btnPrzepisowyRybyIOwoceMorza.get(i).addActionListener(listenForBtnOdczyt);
         }
-        System.out.println("WYCHODZE Z ListenerVIEW2 ");
+        //System.out.println("WYCHODZE Z ListenerVIEW2 ");
     }
 
-    void wczytajPrzepisyListener(ActionListener listenForBtnKategoria) {
+    void wczytajPrzepisyListener(ActionListener listenForBtnKategoria) { //Listener III.
         btnZupy.addActionListener(listenForBtnKategoria);
         btnCiastaIDesery.addActionListener(listenForBtnKategoria);
         btnDanieMiesne.addActionListener(listenForBtnKategoria);
         btnNapoje.addActionListener(listenForBtnKategoria);
         btnSalatkiIPrzystawki.addActionListener(listenForBtnKategoria);
         btnRybyIOwoce.addActionListener(listenForBtnKategoria);
+    }
+
+    void wyszukajPrzepisListener(ActionListener listenForBtnWyszukaj) { //Listener IV.
+        btnSzukaj.addActionListener(listenForBtnWyszukaj);
+    }
+
+    public void sprawdzArrayListyButtonow() {
+        System.out.println("SIZE: " + btnPrzepisowyZupy.size());
+
     }
 
 
@@ -824,17 +837,21 @@ public class View {
         return "ZUPY"; //typ.toString();
     }
 
-    public void setPrzepisy(IteratorDishes iter) {
+
+    public boolean setPrzepisy(IteratorDishes iter) {
+        boolean ret=false;
         String nazwa;
         int[] setYbtn = new int[iloscKategorii];
         for (int i=0; i<iloscKategorii; i++) setYbtn[i] = 35;
 
             int poz=0;
             if (iter.get().toString().toUpperCase().equals("ZUPY")) {
+                sprawdzArrayListyButtonow();
                 //Zupy.setVisible(true);
+                ret=true;
                 while(iter.hasNext()) {
                     nazwa = iter.get().getTitle();
-                    JButton btnPrzepisowy = new JButton(nazwa);
+                    btnPrzepisowy = new JButton(nazwa);
                     btnPrzepisowy.setFont(new Font("BankGothic Md BT", Font.PLAIN, 17));
                     btnPrzepisowy.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent arg0) {
@@ -852,7 +869,7 @@ public class View {
                 }
 
                 nazwa = iter.get().getTitle();
-                JButton btnPrzepisowy = new JButton(nazwa);
+                btnPrzepisowy = new JButton(nazwa);
                 btnPrzepisowy.setFont(new Font("BankGothic Md BT", Font.PLAIN, 17));
                 btnPrzepisowy.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent arg0) {
@@ -866,13 +883,16 @@ public class View {
                 Zupy.add(btnPrzepisowy);
                 setYbtn[poz] += odlegloscYbtn;  //25
                 btnPrzepisowyZupy.add(btnPrzepisowy);   //nie wiem czy to potrzebne ale na wszelki wypadek jest.
+
+                sprawdzArrayListyButtonow();
             }
             else if(iter.get().toString().toUpperCase().equals("DANIA_MIESNE")) {
                 poz++;
+                ret=true;
                 //DaniaMiesne.setVisible(true);
                 while(iter.hasNext()) {
                     nazwa = iter.get().getTitle();
-                    JButton btnPrzepisowy = new JButton(nazwa);
+                    btnPrzepisowy = new JButton(nazwa);
                     btnPrzepisowy.setFont(new Font("BankGothic Md BT", Font.PLAIN, 17));
                     btnPrzepisowy.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent arg0) {
@@ -880,7 +900,7 @@ public class View {
                             Przepis.setVisible(true);
                         }
                     });
-                    btnPrzepisowy.setBackground(new Color(255, 255, 255, 0));    //przezroczyste
+                    btnPrzepisowy.setBackground(new Color(255, 255, 255));    //przezroczyste
                     btnPrzepisowy.setBorderPainted(false);  //brak obramowki buttona
                     btnPrzepisowy.setBounds(199, setYbtn[poz], 356, 40);
                     DaniaMiesne.add(btnPrzepisowy);
@@ -888,9 +908,26 @@ public class View {
                     btnPrzepisowyDaniaMiesne.add(btnPrzepisowy);
                     iter.next();
                 }
+                nazwa = iter.get().getTitle();
+                btnPrzepisowy = new JButton(nazwa);
+                btnPrzepisowy.setFont(new Font("BankGothic Md BT", Font.PLAIN, 17));
+                btnPrzepisowy.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent arg0) {
+                        DaniaMiesne.setVisible(false);
+                        Przepis.setVisible(true);
+                    }
+                });
+                btnPrzepisowy.setBackground(new Color(255, 255, 255));    //przezroczyste
+                btnPrzepisowy.setBorderPainted(false);  //brak obramowki buttona
+                btnPrzepisowy.setBounds(199, setYbtn[poz], 356, 40);
+                DaniaMiesne.add(btnPrzepisowy);
+                setYbtn[poz] += odlegloscYbtn;  //25
+                btnPrzepisowyDaniaMiesne.add(btnPrzepisowy);
+                iter.next();
             }
             else if(iter.get().toString().toUpperCase().equals("CIASTA_DESERY")) {
                 poz++;
+                ret=true;
                 //CiastaIDesery.setVisible(true);
                 while(iter.hasNext()) {
                     nazwa = iter.get().getTitle();
@@ -902,7 +939,7 @@ public class View {
                             Przepis.setVisible(true);
                         }
                     });
-                    btnPrzepisowy.setBackground(new Color(255, 255, 255, 0));    //przezroczyste
+                    btnPrzepisowy.setBackground(new Color(255, 255, 255));    //przezroczyste
                     btnPrzepisowy.setBorderPainted(false);  //brak obramowki buttona
                     btnPrzepisowy.setBounds(199, setYbtn[poz], 356, 40);
                     CiastaIDesery.add(btnPrzepisowy);
@@ -910,9 +947,26 @@ public class View {
                     btnPrzepisowyCiastaIDesery.add(btnPrzepisowy);
                     iter.next();
                 }
+                nazwa = iter.get().getTitle();
+                JButton btnPrzepisowy = new JButton(nazwa);
+                btnPrzepisowy.setFont(new Font("BankGothic Md BT", Font.PLAIN, 17));
+                btnPrzepisowy.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent arg0) {
+                        CiastaIDesery.setVisible(false);
+                        Przepis.setVisible(true);
+                    }
+                });
+                btnPrzepisowy.setBackground(new Color(255, 255, 255));    //przezroczyste
+                btnPrzepisowy.setBorderPainted(false);  //brak obramowki buttona
+                btnPrzepisowy.setBounds(199, setYbtn[poz], 356, 40);
+                CiastaIDesery.add(btnPrzepisowy);
+                setYbtn[poz] += odlegloscYbtn;  //25
+                btnPrzepisowyCiastaIDesery.add(btnPrzepisowy);
+                iter.next();
             }
             else if(iter.get().toString().toUpperCase().equals("NAPOJE")) {
                 poz++;
+                ret=true;
                 //Napoje.setVisible(true);
                 while(iter.hasNext()) {
                     nazwa = iter.get().getTitle();
@@ -924,7 +978,7 @@ public class View {
                             Przepis.setVisible(true);
                         }
                     });
-                    btnPrzepisowy.setBackground(new Color(255, 255, 255, 0));    //przezroczyste
+                    btnPrzepisowy.setBackground(new Color(255, 255, 255));    //przezroczyste
                     btnPrzepisowy.setBorderPainted(false);  //brak obramowki buttona
                     btnPrzepisowy.setBounds(199, setYbtn[poz], 356, 40);
                     Napoje.add(btnPrzepisowy);
@@ -932,9 +986,26 @@ public class View {
                     btnPrzepisowyNapoje.add(btnPrzepisowy);
                     iter.next();
                 }
+                nazwa = iter.get().getTitle();
+                JButton btnPrzepisowy = new JButton(nazwa);
+                btnPrzepisowy.setFont(new Font("BankGothic Md BT", Font.PLAIN, 17));
+                btnPrzepisowy.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent arg0) {
+                        Napoje.setVisible(false);
+                        Przepis.setVisible(true);
+                    }
+                });
+                btnPrzepisowy.setBackground(new Color(255, 255, 255));    //przezroczyste
+                btnPrzepisowy.setBorderPainted(false);  //brak obramowki buttona
+                btnPrzepisowy.setBounds(199, setYbtn[poz], 356, 40);
+                Napoje.add(btnPrzepisowy);
+                setYbtn[poz] += odlegloscYbtn;  //25
+                btnPrzepisowyNapoje.add(btnPrzepisowy);
+                iter.next();
             }
             else if(iter.get().toString().toUpperCase().equals("SALATKA_PRZYSTAWKI")) {
                 poz++;
+                ret=true;
                 //SalatkiIPrzystawki.setVisible(true);
                 while(iter.hasNext()) {
                     nazwa = iter.get().getTitle();
@@ -946,7 +1017,7 @@ public class View {
                             Przepis.setVisible(true);
                         }
                     });
-                    btnPrzepisowy.setBackground(new Color(255, 255, 255, 0));    //przezroczyste
+                    btnPrzepisowy.setBackground(new Color(255, 255, 255));    //przezroczyste
                     btnPrzepisowy.setBorderPainted(false);  //brak obramowki buttona
                     btnPrzepisowy.setBounds(199, setYbtn[poz], 356, 40);
                     SalatkiIPrzystawki.add(btnPrzepisowy);
@@ -954,9 +1025,26 @@ public class View {
                     btnPrzepisowySalatkiIPrzystawki.add(btnPrzepisowy);
                     iter.next();
                 }
+                nazwa = iter.get().getTitle();
+                JButton btnPrzepisowy = new JButton(nazwa);
+                btnPrzepisowy.setFont(new Font("BankGothic Md BT", Font.PLAIN, 17));
+                btnPrzepisowy.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent arg0) {
+                        SalatkiIPrzystawki.setVisible(false);
+                        Przepis.setVisible(true);
+                    }
+                });
+                btnPrzepisowy.setBackground(new Color(255, 255, 255));    //przezroczyste
+                btnPrzepisowy.setBorderPainted(false);  //brak obramowki buttona
+                btnPrzepisowy.setBounds(199, setYbtn[poz], 356, 40);
+                SalatkiIPrzystawki.add(btnPrzepisowy);
+                setYbtn[poz] += odlegloscYbtn;  //25
+                btnPrzepisowySalatkiIPrzystawki.add(btnPrzepisowy);
+                iter.next();
             }
             else if(iter.get().toString().toUpperCase().equals("RYBY_OWOCE_MORZA")) {
                 poz++;
+                ret=true;
                 //SalatkiIPrzystawki.setVisible(true);
                 while(iter.hasNext()) {
                     nazwa = iter.get().getTitle();
@@ -968,7 +1056,7 @@ public class View {
                             Przepis.setVisible(true);
                         }
                     });
-                    btnPrzepisowy.setBackground(new Color(255, 255, 255, 0));    //przezroczyste
+                    btnPrzepisowy.setBackground(new Color(255, 255, 255));    //przezroczyste
                     btnPrzepisowy.setBorderPainted(false);  //brak obramowki buttona
                     btnPrzepisowy.setBounds(199, setYbtn[poz], 356, 40);
                     RybyIOwoceMorza.add(btnPrzepisowy);
@@ -976,8 +1064,24 @@ public class View {
                     btnPrzepisowyRybyIOwoceMorza.add(btnPrzepisowy);
                     iter.next();
                 }
+                nazwa = iter.get().getTitle();
+                JButton btnPrzepisowy = new JButton(nazwa);
+                btnPrzepisowy.setFont(new Font("BankGothic Md BT", Font.PLAIN, 17));
+                btnPrzepisowy.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent arg0) {
+                        RybyIOwoceMorza.setVisible(false);
+                        Przepis.setVisible(true);
+                    }
+                });
+                btnPrzepisowy.setBackground(new Color(255, 255, 255));    //przezroczyste
+                btnPrzepisowy.setBorderPainted(false);  //brak obramowki buttona
+                btnPrzepisowy.setBounds(199, setYbtn[poz], 356, 40);
+                RybyIOwoceMorza.add(btnPrzepisowy);
+                setYbtn[poz] += odlegloscYbtn;  //25
+                btnPrzepisowyRybyIOwoceMorza.add(btnPrzepisowy);
+                iter.next();
             }
-
+        return ret;
     }
 
     /* ------------------LISTENER II ------------------*/
@@ -1259,8 +1363,13 @@ public class View {
         System.out.println("przy dodawaniu w widoku : " + nazwa[5]);
         objectSQL przepisObject = Factory.FactoryDishes(0, nazwa[0], nazwa[4], nazwa[3], "komentarz", "sciezka", rate, nazwa[5]);
         return przepisObject;
-
     }
+
+    ///TODO WYSZUKAJ
+    /* ------------------LISTENER IV ------------------*/
+
+
+
 
     private void updateRate(double ocena) {
         if(rate<1.0)
@@ -1273,10 +1382,9 @@ public class View {
     private class Buttonclass implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             if(e.getSource()==btnZupy) {
-                typ.append("ZUPY");
                 Kategorie.setVisible(false);
                 Zupy.setVisible(true);
-                System.out.println("WYYYYYK");
+                System.out.println("BUTON btnZupy ActionListener");
             }
         }
     }

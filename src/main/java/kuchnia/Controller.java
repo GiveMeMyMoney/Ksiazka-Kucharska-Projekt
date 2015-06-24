@@ -75,7 +75,12 @@ public class Controller {
                 System.out.println("to jest TYP: " + type);
                 theModel.setIterForType(type);
                 theView.setPanel(theModel.getIter());   //zeby widzial przy 1 uruchomieniu :D
-                theView.setPrzepisy(theModel.getIter());  // tutaj wstawia ci iterator nastawiony na to co ma
+                if(theView.setPrzepisy(theModel.getIter())==true)  // tutaj wstawia ci iterator nastawiony na to co ma
+                    System.out.println("WSZYSTKO OK W setPrzepisy");
+                else
+                    System.out.println("BLAD W setPrzepisy");
+                //przekazac do Listenera2 z View zaktualizowane ArrayListy...
+
                 // wyswietlic
                 System.out.println("WYCHODZE Z LISTENER3 CONTROLLER");
             }
