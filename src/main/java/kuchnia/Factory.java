@@ -18,7 +18,7 @@ public class Factory {
     {
 
         Dishes currentDishes = Dishes.valueOf(type.toUpperCase());
-        System.out.println("Fabryka" + currentDishes);
+        //System.out.println("Fabryka" + currentDishes);
     switch (currentDishes) {
         case NAPOJE: return  new Napoje(ID,title, describe,  ingredients,  comments,  path,  rate,  type);
         case CIASTA_DESERY: return  new Ciasta_Desery(ID,title, describe,  ingredients,  comments,  path,  rate,  type);
