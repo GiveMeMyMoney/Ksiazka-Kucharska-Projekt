@@ -9,10 +9,10 @@ import javax.swing.*;
  * Created by Wojciech on 2015-05-31.
  */
 public class Model {
-    private CollectionDishes zupy;
-    private CollectionDishes DaniaMiesne;
+    public CollectionDishes zupy;
+    public CollectionDishes DaniaMiesne;
     private CollectionDishes CiastaDesery;
-    private CollectionDishes Napoje;
+    public CollectionDishes Napoje;
     private CollectionDishes SalatkaPrzystawka;
     private CollectionDishes RybyOwoceMorza;
     private IteratorDishes iter;
