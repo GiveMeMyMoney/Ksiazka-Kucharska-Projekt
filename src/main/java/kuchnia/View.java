@@ -1365,6 +1365,36 @@ public class View {
         return przepisObject;
     }
 
+    public boolean usunPrzepis() {
+        boolean ret=false;
+        //
+        //
+        //
+        //
+        ret=true;
+        //
+        //
+        //
+        //
+        return ret;
+    }
+
+    public boolean modyfikPrzepis() {
+        boolean ret=false;
+        //
+        //
+        //
+        //
+        ret=true;
+        //
+        //
+        //
+        //
+        return ret;
+    }
+
+
+
     ///TODO WYSZUKAJ
     /* ------------------LISTENER IV ------------------*/
 
